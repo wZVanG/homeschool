@@ -1,0 +1,378 @@
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+  /**
+   * Sample JavaScript code for search.cse.list
+   * See instructions for running APIs Explorer code samples locally:
+   * https://developers.google.com/explorer-help/guides/code_samples#javascript
+   */
+
+  function loadClient() {
+    gapi.client.setApiKey("YOUR_API_KEY");
+    return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/customsearch/v1/rest")
+        .then(function() { console.log("GAPI client loaded for API"); },
+              function(err) { console.error("Error loading GAPI client for API", err); });
+  }
+  // Make sure the client is loaded before calling this method.
+  function execute() {
+    return gapi.client.search.cse.list({
+      "cx": "017576662512468239146",
+      "q": "3465000399153"
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
+  gapi.load("client");
+</script>
+<button onclick="loadClient()">load</button>
+<button onclick="execute()">execute</button>
+
+<form name="formulario" ng-submit="guardar()" novalidate>
+    <md-content layout-padding class="no-scroll">
+        
+        
+        <div layout-padding layout-align="center center" layout="row">
+            
+            <md-radio-group flex="50" layout="row" ng-model="registro_info.id_servicio" flex class="ml-10" ng-disabled="!seleccionar_tipo_origen">
+
+                <md-radio-button value="1" class="md-primary" ng-style="{'font-weight': registro_info.id_servicio == 1 ? 'bold' : 'normal'}" ng-show="seleccionar_tipo_origen || (!seleccionar_tipo_origen && registro_info.id_servicio == 1)">Silver</md-radio-button>
+                <md-radio-button value="2" class="md-accent" ng-style="{'font-weight': registro_info.id_servicio == 2 ? 'bold' : 'normal'}" ng-show="seleccionar_tipo_origen || (!seleccionar_tipo_origen && registro_info.id_servicio == 2)">Gold</md-radio-button>
+
+            </md-radio-group>
+
+            <div flex="50" layout="column">
+                <md-autocomplete ng-show="registro_info.id_servicio == 2" flex="100"
+                md-input-icon="business"
+                ng-required="registro_info.id_servicio == 2"
+                md-input-name="id_persona"
+                md-selected-item="BuscarTemp.id_persona"
+                md-search-text="BuscarTextos.id_persona"
+                md-items="acItem in BuscarFn.personas({term: BuscarTextos.id_persona})"
+                md-item-text="acItem.nombre_completo"
+                md-floating-label="Emp. / Persona" 
+                md-autoselect="true"
+                md-menu-class="md-autocomplete-card md-3-line">
+                <md-item-template>
+                    <div layout="row" layout-fill layout-align="start center">
+                        <div class="md-autocomplete-card-avatar">
+                            <md-icon>{{acItem.tipo_persona == 1 ? 'person' : 'business'}}</md-icon> 
+                        </div>
+                        <div class="md-autocomplete-card-content">
+                            <p md-highlight-text="BuscarTextos.id_persona" md-highlight-flags="i">{{acItem.nombre_completo}}</p>
+                            <div><small md-highlight-text="BuscarTextos.id_persona" md-highlight-flags="i">{{acItem.numero_documento}}</small></div>
+                        </div>
+                    </div>
+                </md-item-template>
+                <div class="hint">Seleccione empresa o persona de origen</div>
+            
+                </md-autocomplete>
+
+                <div flex="100" layout="row" ng-show="registro_info.id_servicio == 2">
+                    <md-input-container flex="70">
+                        <md-icon>mail</md-icon>
+                        <label for="">E-mail</label>
+                        <input autocomplete="off" type="email"
+                            ng-model="registro_info.email">
+                        <div class="hint">Correo electrónico de Origen</div>
+                    </md-input-container>
+                    <md-input-container>
+                        <md-icon>file_copy</md-icon>
+                        <label for="">N° de Folios</label>
+                        <input autocomplete="off" type="number"
+                            ng-model="registro_info.numero_folios">
+                    </md-input-container>
+                </div>
+                
+            </div>
+            
+        </div>
+        <md-card>
+            <md-card-content>
+
+                <div layout="row">
+                    <md-autocomplete flex class="no-margin"
+                    md-input-icon="assignment_ind"
+                    md-no-asterisk
+                    ng-required="false"
+                    md-input-name="CLI_IdCliente_0"
+                    md-selected-item="BuscarTemp.clientes"
+                    md-search-text="BuscarTextos.clientes"
+                    md-items="acItem in BuscarFn.clientes({term: BuscarTextos.clientes})"
+                    md-item-text="acItem.nombre_completo"
+                    md-floating-label="Cliente" md-require-match 
+                    md-autoselect="true"
+                    md-menu-class="md-autocomplete-card md-3-line">
+                        <md-item-template>
+                            <div layout="row" layout-fill layout-align="start center">
+                                <div class="md-autocomplete-card-avatar">
+                                    <!--<md-icon>assignment_ind</md-icon> -->
+                                    <div avatar avatar-url="acItem.foto ? './uploads/clientes/' + acItem.foto : './assets/images/no_avatar.png'"></div>
+                                </div>
+                                <div class="md-autocomplete-card-content">
+                                    <p md-highlight-text="BuscarTextos.clientes" md-highlight-flags="i">{{acItem.nombre_completo}}</p>
+                                    <div><small md-highlight-text="BuscarTextos.clientes" md-highlight-flags="i">{{acItem.numero_documento}}</small></div>
+                                </div>
+                            </div>
+                        </md-item-template>											
+                    </md-autocomplete>
+
+                    <div>
+                        <div class="cliente-botones-full">
+                            <md-button class="md-raised" ng-disabled="!BuscarTemp.clientes" ng-click="crud_cliente.agregar($event, BuscarTemp.clientes.id_cliente, true, crud_cliente_callbacks, [0])">
+                                <md-icon>assignment_ind</md-icon> Cliente
+                            </md-button>
+                            <md-button  class="md-raised md-primary" ng-click="crud_cliente.agregar($event, undefined, true, crud_cliente_callbacks, [0])">
+                                <md-icon>add</md-icon> Nuevo Cliente
+                            </md-button>
+                        </div>
+                        <div class="cliente-botones-small">
+                            <md-button class="md-icon-button md-raised" ng-disabled="!BuscarTemp.clientes" ng-click="crud_cliente.agregar($event, BuscarTemp.clientes.id_cliente, true, crud_cliente_callbacks, [0])">
+                                <md-icon>assignment_ind</md-icon>
+                            </md-button>
+                            <md-button  class="md-icon-button md-raised" ng-click="crud_cliente.agregar($event, undefined, true, crud_cliente_callbacks, [0])">
+                                <md-icon>add</md-icon>
+                            </md-button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div layout="row" layout-xs="column">
+
+                    <div flex="50" flex-xs="100" layout="column" layout-padding>
+                        <md-input-container>
+                            <md-icon>card_travel</md-icon>
+                            <label>Recepción</label>
+                            <md-select ng-required="true" ng-model="registro_info.id_servicio">
+                                <md-option ng-repeat="param in WAI.parametros.servicios  | filter:{estado: 1} | orderBy: 'name'"
+                                    ng-value="+param.id_servicio">{{param.name}}</md-option>
+                            </md-select>
+                            <!--<md-select ng-required="true" ng-model="registro_info.id_tipo_documento">
+                                <md-option ng-repeat="param in WAI.parametros.tipos_documento  | filter:{estado: 1} | orderBy: 'nombre'"
+                                    ng-value="+param.id_tipo_documento">{{param.nombre}}</md-option>
+                            </md-select>-->
+                            <div class="hint">Seleccione una acción</div>
+                        </md-input-container>
+                        <md-input-container>
+                            <md-icon>insert_drive_file</md-icon>
+                            <label for="">Documento</label>
+                            <input autocomplete="off" md-autofocus type="text" ng-required="true"
+                                ng-model="registro_info.documento">
+                            <div class="hint">N° de Documento a enviar</div>
+                        </md-input-container>
+                        <md-input-container>
+                            <md-icon>title</md-icon>
+                            <label for="">Asunto</label>
+                            <input autocomplete="off" md-maxlength="128" md-autofocus type="text" ng-required="true"
+                                ng-model="registro_info.asunto">
+                            <div class="hint">Motivo por lo que se envía el documento</div>
+                        </md-input-container>
+                        <md-input-container>
+                            <md-icon>short_text</md-icon>
+                            <label for="">Mensaje</label>
+                            <textarea autocomplete="off" rows="2" ng-model="registro_info.mensaje"></textarea>
+                            <div class="hint">Escribe un detalle del documento a enviar</div>
+                        </md-input-container>
+                        <div layout="row">
+                            <md-input-container flex="60">
+                                <md-icon>compare_arrows</md-icon>
+                                <label>Acción</label>
+                                <md-select ng-required="true" ng-model="registro_info.id_accion">
+                                    <md-option ng-repeat="param in WAI.parametros.acciones  | filter:{tipo: 1} | orderBy: 'nombre'"
+                                        ng-value="+param.id_accion" ng-if="param.id_accion != 1">{{param.nombre}}</md-option>
+                                </md-select>
+                                <div class="hint">Seleccione una acción</div>
+                            </md-input-container>
+                            <md-input-container flex="60">
+                                <md-icon>priority_high</md-icon>
+                                <label>Prioridad</label>
+                                <md-select ng-required="true" ng-model="registro_info.prioridad">
+                                    <md-option ng-repeat="param in WAI.config.parametros.PRIORI  | orderBy: 'codigo'"
+                                        ng-value="+param.codigo"><span class="movimiento-prioridad-select-option" ng-style="{backgroundColor: '#' + param.codigo_hex}"></span> {{param.descripcion}}</md-option>
+                                </md-select>
+                                
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div flex="50" flex-xs="100" layout="column">
+                        <div>
+                            <div layout="row" layout-align="end center">
+                                <div flex>
+                                    <md-subheader class="md-no-sticky no-background" >Archivo Adjunto ({{uploaders.length}})</md-subheader>
+                                </div>
+                                
+                                <div>
+                                    <md-button class="md-icon-button" ng-click="makeUploader()"><md-icon>add</md-icon></md-button>
+                                </div>
+                            </div>
+        
+                            <div layout="column" layout-padding>
+                                <div layout="row" ng-repeat="uploader in uploaders">
+                                    <div flex md-truncate>
+                                        <div><input type="file" num="{{$index}}" id="archivo_{{$index}}" onchange="var el = this; setTimeout(function(){angular.element(el).scope().uploaders[el.getAttribute('num')].queue[0].upload()},100)" ng-disabled="!registro_info.flag_adjunto || uploader.queue.length" nv-file-select="" uploader="uploader" /></div>
+                                        <div ng-if="uploader.queue.length">
+                                            
+                                            <md-progress-circular ng-show="uploader.queue[0].progress" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+        
+                                            <span ng-if="uploader.queue[0].isSuccess">{{registro_info.archivos[$index]}}</span>
+        
+                                            <md-icon ng-show="uploader.queue[0].isSuccess" class="text-success">check</md-icon>
+                                            <md-icon ng-show="uploader.queue[0].isCancel" class="text-warning">block</md-icon>
+                                            <md-icon ng-show="uploader.queue[0].isError" class="text-danger">close</md-icon>
+        
+                                            <!--{{ uploader.queue[0].file.name }} {{ uploader.queue[0].file.size/1024/1024|number:2 }} MB-->
+                                        </div>
+                                        <div ng-if="registro_info['archivos'][$index]">
+                                            <a md-colors="{'color': 'accent-500'}" href="./uploads/tramite___tmp/{{registro_info['archivos'][$index][0]}}" target="_blank">
+                                                <md-icon>attach_file</md-icon> 
+                                                {{registro_info['archivos'][$index][1]}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <md-button ng-show="registro_info['archivos'][$index]" class="md-icon-button" ng-click="eliminarArchivo($index, $index)">
+                                        <md-icon>delete</md-icon>
+                                    </md-button>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <!--<div layout="row" layout-xs="column" layout-align="start center" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+                                <md-input-container class="md-icon-left" flex="20" flex-xs="100">
+                                    <md-checkbox ng-true-value="1" ng-false-value="0" ng-model="registro_info.flag_fisico"
+                                        class="mt-10">
+                                        <span
+                                            ng-style="{'font-weight': registro_info.flag_fisico ? 'bold' : 'normal'}">Físico</span>:
+                                        <b>{{registro_info.flag_fisico ? 'SI' : 'NO'}}</b>
+                                    </md-checkbox>
+                                </md-input-container>
+                                <md-input-container class="md-icon-left" flex="20" hidden  flex-xs="100">
+                                    <md-checkbox ng-true-value="1" ng-false-value="0" ng-model="registro_info.flag_adjunto"
+                                        class="mt-10">
+                                        <span
+                                            ng-style="{'font-weight': registro_info.flag_adjunto ? 'bold' : 'normal'}">Adjunto</span>:
+                                        <b>{{registro_info.flag_adjunto ? 'SI' : 'NO'}}</b>
+                                    </md-checkbox>
+                                </md-input-container>
+                                <div flex="60" style="overflow: hidden;"  flex-xs="100" ng-show="!registro_info.flag_fisico">
+                                    <div class="m-l"><input type="file" id="adjuntar_archivo" onchange="var el = this; setTimeout(function(){angular.element(el).scope().uploader.queue[0].upload()},100)" ng-disabled="uploader.queue.length" nv-file-select="" uploader="uploader" /></div>
+                                </div>
+                            </div>
+
+                            <div layout="column" layout-padding>
+                                <div ng-if="uploader.queue.length" layout="row">
+                                    <div flex md-truncate>
+                                        {{ uploader.queue[0].file.name }} {{ uploader.queue[0].file.size/1024/1024|number:2 }} MB
+                                    </div>
+                                    <div flex="20">
+                                        
+                                        <md-icon ng-show="uploader.queue[0].isSuccess" class="text-success">check</md-icon>
+                                        <md-icon ng-show="uploader.queue[0].isCancel" class="text-warning">block</md-icon>
+                                        <md-icon ng-show="uploader.queue[0].isError" class="text-danger">close</md-icon>
+                                        <md-button class="md-icon-button" ng-disabled="uploader.queue[0].isUploading" ng-click="eliminarArchivo(uploader.queue[0])"><md-icon>delete</md-icon></md-button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-if="uploader.queue.length">
+                                <md-progress-linear class="md-accent" md-mode="buffer" value="{{uploader.queue[0].progress}}"
+                      md-buffer-value="{{uploader.queue[0].progress}}" ng-disabled="!uploader.queue.length"></md-progress-linear>
+                            </div>
+
+                        -->
+
+                            <md-list>
+                                <md-subheader class="md-no-sticky no-background" > Destinatarios ({{destinatarios.length}})</md-subheader>
+                                <div layout="column" layout-padding>
+                                    
+                                    <md-input-container ng-show="!WAI.config.sede_unica">
+                                        <md-icon>account_balance</md-icon>
+                                        <label>Sede</label>
+                                        <md-select ng-model="destinatario.id_sede" ng-disabled="WAI.config.sede_unica">
+                                            <md-option ng-value="item.id_sede" ng-repeat="item in sedes | orderBy: 'nombre'">{{item.nombre}} 
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <md-icon>bubble_chart</md-icon>
+                                        <label>Área</label>
+                                        <md-select ng-model="destinatario.id_area">
+                                            <md-option ng-value="item.id_area" ng-repeat="item in areas | orderBy: 'areas'">{{item.nombre}} ({{contar('oficinas', item.id_area)}})
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <md-icon>business</md-icon>
+                                        <label>Oficina</label>
+                                        <md-select ng-model="destinatario.id_oficina" ng-disabled="!destinatario.id_sede">
+                                            <md-option ng-value="item.id_oficina"
+                                                ng-repeat="item in oficinas | filter: {id_sede: destinatario.id_sede, id_area: destinatario.id_area} : true | orderBy: 'nombre'">
+                                                {{item.nombre}} ({{item.total_usuarios}})</md-option>
+                                        </md-select>
+                                    </md-input-container>
+                    
+                                    <div layout="row" layout-align="center center">
+                                        <md-input-container flex>
+                                            <md-icon>account_box</md-icon>
+                                            <label>Cargo</label>
+                                            <md-select ng-model="destinatario_selected" ng-disabled="!destinatario.id_oficina">
+                                                <md-option ng-value="item"
+                                                    ng-disabled="destinatarioExistente(item.id_cargo_usuario)"
+                                                    ng-repeat="item in cargos_usuarios | orderBy: 'nombre_completo'">
+                                                    {{item.cargo}} - {{item.nombre_completo}}
+                                                </md-option>
+                                            </md-select>
+
+                                        </md-input-container>
+                                        <md-button class="md-icon-button md-primary" ng-disabled="!destinatario_selected"
+                                            ng-click="agregarDestinatario($event)">
+                                            <md-icon>add</md-icon>
+                                        </md-button>
+                                        <span class="m-xs">&nbsp;</span>
+                                        <span>
+                                            <md-tooltip>Agregar todos los usuarios de oficina</md-tooltip>
+                                            <md-button class="md-icon-button" ng-click="agregarDestinatarioTodos($event)" ng-disabled="agregarTodosAdding"><md-icon>group_add</md-icon></md-button>
+                                        </span>
+                                        
+                                    </div>
+
+        
+                                </div>
+                                <md-list-item ng-repeat="person in destinatarios" class="noright list-item">
+                                    <img alt="" ng-src="{{person | avatarUrl}}" class="md-avatar" />
+                                    <p> {{ person.cargo }} - <b>{{ person.nombre_completo }}</b><br /><small>
+                                            <md-icon>business</md-icon> {{person.oficina}}
+                                        </small></p>
+                                    <!--<md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>-->
+                                    <md-icon class="md-secondary"
+                                        ng-click="eliminarDestinatario($event, person.id_cargo_usuario)">delete</md-icon>
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+
+    </md-content>
+
+    <!--<md-button ng-click="test()">TEST</md-button>-->
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <!--<md-button type="submit" class="md-accent md-raised"
+                ng-disabled="loading || formulario.$invalid || !registro_info.destinatarios.length || !mis_cargos.length">
+                <md-icon>save</md-icon> Guardar
+            </md-button>-->
+            <span ng-show="uploader.queue[0].isUploading" class="text-muted text-small">Subiendo archivo...</span>
+            <md-button type="submit" class="md-accent md-raised"
+                ng-disabled="loading || !registro_info.destinatarios.length || !mis_cargos.length || (uploader.queue.length ? !uploader.queue[0].isSuccess : false)">
+                <md-icon>save</md-icon> Guardar
+            </md-button>
+        </div>
+    </div>
+
+</form>

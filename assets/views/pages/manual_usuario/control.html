@@ -1,0 +1,68 @@
+<form name="formulario" ng-submit="enviar()" novalidate>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div><md-icon>{{nuevo ? 'add' : 'edit'}}</md-icon> {{nuevo ? 'Crear' : 'Editar'}} manual</div>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding>
+
+        <div layout="column">
+
+            <div layout="row" layout-xs="column">
+                <md-input-container flex="50" flex-xs="100">
+                    <md-icon>done</md-icon>
+                    <label>Tipo</label>
+                    <md-select ng-required="true" ng-model="registro_info.tipo">
+                        <md-option ng-value="+item.codigo" 
+                            ng-repeat="item in WAI.config.parametros.MANUAL">
+                            {{item.descripcion}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="50" flex-xs="100">
+                    <md-icon>short_text</md-icon>
+                    <label>Título</label>
+                    <input ng-required="true" md-autofocus name="titulo" autocomplete="off" type="text" ng-model="registro_info.titulo">
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-xs="column">
+                <md-input-container flex="50" flex-xs="100">
+                    <md-icon>link</md-icon>
+                    <label>URL</label>
+                    <input name="enlace" type="text" ng-model="registro_info.enlace">
+                </md-input-container>
+                <md-input-container flex="50" flex-xs="100">
+                    <md-icon>insert_drive_file</md-icon>
+                    <label>Archivo</label>
+                    <input name="archivo" autocomplete="off" type="text"
+                        ng-model="registro_info.archivo" 
+                        wai-file-module="manual_usuario" wai-file-model="registro_info.archivo" 
+                        
+                        >
+                    <div class="hint">Adjunta un archivo de documentación</div>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-xs="column">
+                <md-input-container flex="100">
+                    <md-icon>description</md-icon>
+                    <label>Contenido (opcional)</label>
+                    <textarea name="contenido" rows="3" ng-model="registro_info.contenido"></textarea>
+                </md-input-container>
+            </div>
+            
+        </div>
+
+     </md-content>
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()"><md-icon>reply</md-icon> Cancelar</md-button>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="loading"><md-icon>save</md-icon> {{nuevo ? 'Crear Registro' : 'Actualizar'}}</div></md-button>
+        </div>
+    </div>
+</form>

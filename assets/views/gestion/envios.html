@@ -1,0 +1,195 @@
+<form name="formulario" ng-submit="guardar()" novalidate>
+    <md-content layout-padding class="no-scroll">
+        
+        
+        <!--<div layout-padding layout-align="start center" layout="row">
+            
+            <md-radio-group flex="50" layout="row" ng-model="registro_info.tipo" flex class="ml-10" ng-disabled="!seleccionar_tipo_origen">
+
+                <md-radio-button value="1" class="md-primary" ng-style="{'font-weight': registro_info.tipo == 1 ? 'bold' : 'normal'}" ng-show="seleccionar_tipo_origen || (!seleccionar_tipo_origen && registro_info.tipo == 1)"><md-icon>airline_seat_recline_normals</md-icon> Por viajero</md-radio-button>
+                <md-radio-button value="2" class="md-accent" ng-style="{'font-weight': registro_info.tipo == 2 ? 'bold' : 'normal'}" ng-show="seleccionar_tipo_origen || (!seleccionar_tipo_origen && registro_info.tipo == 2)"><md-icon>rv_hookup</md-icon> Por carga</md-radio-button>
+
+            </md-radio-group>
+            
+        </div>-->
+        <div layout-padding layout-align="start center" layout="row">
+            
+            <md-radio-group flex="50" layout="row" ng-model="registro_info.origen" flex class="ml-10">
+
+                <md-radio-button value="1" class="md-primary" ng-style="{'font-weight': registro_info.origen == 1 ? 'bold' : 'normal'}" ><md-icon>flight_takeoff</md-icon> Envío</md-radio-button>
+                <md-radio-button value="2" class="md-accent" ng-style="{'font-weight': registro_info.origen == 2 ? 'bold' : 'normal'}" ><md-icon>flight_land</md-icon> Recepción</md-radio-button>
+
+            </md-radio-group>
+            
+        </div>
+
+        <md-card>
+            <md-card-content>
+
+                <div layout="column">
+
+                    <div layout="row" layout-xs="column">
+
+                        <md-input-container flex="50" flex-xs="100" ng-if="registro_info.origen != 1">
+                            <md-icon>check</md-icon>
+                            <label>Nuevo Estado</label>
+                            <md-select ng-required="true" ng-model="registro_info.id_estado_envio">
+                                <md-option ng-repeat="param in WAI.parametros.estado_envio  | filter:{estado: 1} | orderBy: 'nombre'"
+                                    ng-value="+param.id_estado_envio">{{param.nombre}}</md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container flex="50" flex-xs="100">
+                            <md-icon>home_work</md-icon>
+                            <label>{{registro_info.origen == 1 ? 'Hacia' : 'Llegada'}}</label>
+                            <md-select ng-required="true" ng-model="registro_info.id_local">
+                                <md-option ng-if="param.id_local > 1" ng-repeat="param in WAI.parametros.locales  | filter:{estado: 1} | orderBy: 'nombre'"
+                                    ng-value="+param.id_local">{{param.nombre}}</md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <!--<md-input-container flex="25" flex-xs="100" ng-if="registro_info.origen == 1">
+                            <md-icon>{{registro_info.tipo_viajero == 1 ? 'airline_seat_recline_normal' : 'rv_hookup'}}</md-icon>
+                            <label>Tipo</label>
+                            <md-select ng-required="true" ng-model="registro_info.tipo_viajero">
+                                <md-option ng-value="+item.codigo" md-autofocus
+                                    ng-repeat="item in WAI.config.parametros.TIPVIA">
+                                    {{item.descripcion}}</md-option>
+                            </md-select>
+                        </md-input-container>-->
+
+                        <md-input-container flex="50" flex-xs="100" ng-if="registro_info.origen == 1">
+                            <md-icon>airline_seat_recline_normal</md-icon>
+                            <label>Viajero / Carga</label>
+                            <md-select ng-required="true" ng-model="registro_info.id_viajero" >
+                                <md-option ng-repeat="param in WAI.parametros.viajeros  | filter:{estado: 1} | orderBy: 'nombre_completo'"
+                                    ng-value="+param.id_viajero">[{{param.tipo_viajero | parametro: 'TIPVIA'}}] {{param.numero_documento}} - {{param.nombre_completo}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        
+                    </div>
+
+                </div>
+
+            </md-card-content>
+        </md-card>
+
+        <div layout="column" layout-xs="column">
+
+         
+
+            <md-divider></md-divider>
+
+            <div  layout="column">
+        
+                <div>
+                    <md-list>
+                        <md-subheader class="md-no-sticky">Productos </md-subheader>
+                        <div layout="row" layout-xs="column" layout-padding >
+
+                            <div class="md-caption text-muted m-t-md" hide-xs>
+                                Mostrar
+                            </div>
+                            
+                            <md-input-container flex="33" flex-xs="100">
+                                <md-icon>bubble_chart</md-icon>
+                                <label>Categoría</label>
+                                <md-select ng-model="productos_filtros.id_categoria">
+                                    <md-option ng-value="0">Todos</md-option>
+                                    <md-option ng-repeat="param in WAI.parametros.categorias  | filter:{estado: 1} | orderBy: 'nombre'"
+                                        ng-value="+param.id_categoria">{{param.nombre}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                            
+                            <md-input-container flex="33" flex-xs="100">
+                                <md-icon>home_work</md-icon>
+                                <label>Local actual</label>
+                                <md-select ng-model="productos_filtros.id_local">
+                                    <md-option ng-repeat="param in WAI.parametros.locales  | filter:{estado: 1} | orderBy: 'nombre'"
+                                        ng-value="+param.id_local">{{param.nombre}}</md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container flex="33" flex-xs="100">
+                                <md-icon>check</md-icon>
+                                <label>Estado</label>
+                                <md-select ng-model="productos_filtros.id_estado_envio">
+                                    <md-option ng-repeat="param in WAI.parametros.estado_envio  | filter:{estado: 1} | orderBy: 'nombre'"
+                                        ng-value="+param.id_estado_envio">{{param.nombre}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                                       
+            
+                        </div>
+                        <md-list-item ng-repeat="item in ListaProductos | orderBy: '-fecha'" ng-click="toggle(item.id_venta_producto, selected)" class="listado noright">
+
+                        <img ng-if="!item.foto" ng-src="./assets/images/no_producto.png" alt=""  class="md-avatar">
+                        <img ng-if="item.foto" title="{{ item.nombre_producto }}" vista-previa="item.foto ? './uploads/productos/' + item.foto : null" ng-src="./uploads/productos/{{item.foto}}" alt=""  class="listado-thumb md-avatar">
+                        
+                          <!--<p>{{ item.cliente }} - <md-icon>bubble_chart</md-icon> [{{item.categoria}}] <b>{{ item.nombre_producto }} X{{item.cantidad}}: {{item.precio | moneda}}</b> <md-icon>home_work</md-icon> {{item.local_actual}}</p>-->
+                          <div layout="row" layout-xs="column" flex>
+                           
+                            <div flex="25" flex-xs="100">
+                                
+                                <div md-truncate><md-icon>bubble_chart</md-icon> <b>{{ item.categoria }}</b></div>
+                                <div class="listado-caption" md-truncate><b>{{ item.nombre_producto }}</b> </div>
+                                
+                            </div>
+                            <div flex="25" flex-xs="100">
+                                <div md-truncate><md-icon>person</md-icon> {{ item.cliente }}</div>
+                                <div class="listado-caption">{{item.tipo_documento | parametro:'DOCIDE'}}: {{ item.numero_documento }}</div>
+                            </div> 
+
+                            <div flex="25" flex-xs="100" layout="column" layout-xs="row" >
+                                <div flex="100" flex-xs="33"  md-truncate><md-icon>card_travel</md-icon> {{ item.servicio }}</div>
+                                <div flex="100" flex-xs="66" class="listado-caption" md-truncate><b>X{{item.cantidad}}</b> {{ item.unidad_medida }}: {{item.precio | moneda}}</div>
+                            </div>
+                            <div flex="25" flex-xs="100">
+                                <div md-truncate><md-icon>home_work</md-icon> {{item.local_actual}}</div>
+                                <div class="md-caption" md-truncate>{{item.fecha | amDateFormat: 'DD/MMMM/YYYY - HH:mm:ss'}}</div>
+                                <div show-xs>
+                                    <md-divider></md-divider>
+                                </div>
+                            </div>
+                            <!--s<md-icon>bubble_chart</md-icon>-->
+                          </div>
+                          <!--<md-checkbox class="md-secondary" ng-model="productos"></md-checkbox>-->
+                          <md-checkbox class="md-secondary" ng-checked="exists(item.id_venta_producto, selected)" ng-click="toggle(item.id_venta_producto, selected)">
+                            
+                          </md-checkbox>
+                          <!--<md-icon g-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" >email</md-icon>
+                          <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat">message</md-icon>-->
+                        </md-list-item>
+                    </md-list>
+
+                </div>
+
+                
+
+            </div>
+
+            
+        </div>
+
+    </md-content>
+
+    <!--<md-button ng-click="test()">TEST</md-button>-->
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <div layout="row" layout-xs="column" layout-align="center center">
+           
+       
+
+            </div>
+            <span ng-show="uploader.queue[0].isUploading" class="text-muted text-small">Subiendo archivo...</span>
+            <md-button type="submit" class="md-accent md-raised"
+                ng-disabled="loading || !validProducto() || (uploader.queue.length ? !uploader.queue[0].isSuccess : false)">
+                <md-icon>save</md-icon> Guardar
+            </md-button>
+        </div>
+    </div>
+
+</form>

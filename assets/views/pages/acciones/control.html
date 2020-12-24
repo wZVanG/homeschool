@@ -1,0 +1,39 @@
+<form name="formulario" ng-submit="enviar()" novalidate>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div><md-icon>{{nuevo ? 'add' : 'edit'}}</md-icon> {{nuevo ? 'Crear' : 'Editar'}} acción</div>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding ng-init="registro_info.tipo = 1">
+
+        <div layout="column">
+            <md-input-container flex="100">
+                <md-icon>compare_arrows</md-icon>
+                <label>Nombre</label>
+                <input ng-required="true" md-autofocus name="nombre" autocomplete="off" md-maxlength="128" type="text" ng-model="registro_info.nombre">
+                <div class="hint">Denominación</div>
+            </md-input-container>
+            <md-input-container flex="100">
+                <md-icon>done_all</md-icon>
+                <label>Tipo</label>
+                <md-select ng-required="true" ng-model="registro_info.tipo">
+                    <md-option ng-value="1">Deriva documento</md-option>
+                    <md-option ng-value="2">Archiva documento</md-option>
+                </md-select>
+                <div class="hint">Seleccione el tipo de acción</div>
+            </md-input-container>
+        </div>
+
+     </md-content>
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()"><md-icon>reply</md-icon> Cancelar</md-button>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="loading"><md-icon>save</md-icon> {{nuevo ? 'Crear Registro' : 'Actualizar'}}</div></md-button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,152 @@
+<form name="formulario" ng-submit="enviar()" novalidate flex layout="column">
+
+    <div flex layout-fill>
+        <md-tabs md-dynamic-height md-border-bottom ng-init="BuscarFn.personas = autocompleteList('personas');">
+            <md-tab ng-disabled="true">
+                <md-tab-label>
+                    <md-icon>{{nuevo ? 'add' : 'edit'}}</md-icon> {{nuevo ? 'Crear' : 'Editar'}} Cliente
+                </md-tab-label>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <md-icon>account_circle</md-icon> Datos de Usuario
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content layout-padding>
+                        <div layout="column" ng-init="BuscarFn.personas = autocompleteList('personas')">
+                            <!--<md-autocomplete flex="100" md-input-icon="account_circle" md-input-name="id_persona"
+                                md-selected-item="BuscarTemp.id_persona" md-search-text="BuscarTextos.id_persona"
+                                md-items="acItem in BuscarFn.personas({term: BuscarTextos.id_persona})"
+                                md-item-text="acItem.nombre_completo" md-floating-label="Persona" md-require-match
+                                md-autoselect="true" md-menu-class="md-autocomplete-card md-3-line">
+                                <md-item-template>
+                                    <div layout="row" layout-fill layout-align="start center">
+                                        <div class="md-autocomplete-card-avatar">
+                                            <md-icon>person</md-icon>
+                                        </div>
+                                        <div class="md-autocomplete-card-content">
+                                            <p md-highlight-text="BuscarTextos.id_persona" md-highlight-flags="i">
+                                                {{acItem.nombre_completo}}</p>
+                                        </div>
+                                    </div>
+                                </md-item-template>
+                                <div class="hint">Seleccione persona</div>
+
+                            </md-autocomplete>-->
+                            <md-input-container flex="100">
+                                <md-icon>account_box</md-icon>
+                                <label>Usuario</label>
+                                <input ng-required="true" ng-maxlength="64" name="nombre_usuario" autocomplete="off"
+                                    type="text" ng-model="registro_info.nombre_usuario">
+                                <div class="hint">Nombre de usuario</div>
+                            </md-input-container>
+                            <md-input-container flex="100" ng-init="registro_info.clave = ''">
+                                <md-icon>account_box</md-icon>
+                                <label>Clave</label>
+                                <input name="clave" ng-minlength="6" autocomplete="off" type="password"
+                                    ng-model="registro_info.clave">
+
+                            </md-input-container>
+                            <md-input-container flex="100">
+                                <md-icon>group</md-icon>
+                                <label>Rol de Usuario</label>
+                                <md-select ng-required="true" ng-model="registro_info.rol">
+                                    <md-option ng-value="+item.codigo" md-autofocus
+                                        ng-repeat="item in WAI.config.parametros.ROLES">
+                                        {{item.descripcion}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <md-icon>person</md-icon> Datos personales
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content layout-padding>
+
+                        <div layout="column">
+
+                            <div layout="row" layout-xs="column">
+                                <md-input-container flex="50" flex-xs="100">
+                                    <md-icon>credit_card</md-icon>
+                                    <label>Tipo de documento</label>
+                                    <md-select ng-required="true" ng-model="registro_info.tipo_documento">
+                                        <md-option ng-value="+item.codigo" md-autofocus
+                                            ng-repeat="item in WAI.config.parametros.DOCIDE">
+                                            {{item.descripcion}}</md-option>
+                                    </md-select>
+                                </md-input-container>
+
+                                <md-input-container flex="50" flex-xs="100">
+                                    <md-icon>credit_card</md-icon>
+                                    <label>Número de Documento</label>
+                                    <input ng-required="true" name="numero_documento" autocomplete="off" type="text"
+                                        ng-model="registro_info.numero_documento">
+                                </md-input-container>
+                            </div>
+                            <div layout="row" layout-xs="column">
+                                <md-input-container flex="50" flex-xs="100">
+                                    <md-icon>business</md-icon>
+                                    <label>Tipo</label>
+                                    <md-select ng-model="registro_info.tipo_persona">
+                                        <md-option ng-value="+item.codigo"  md-autofocus  ng-repeat="item in WAI.config.parametros.TIPPER">
+                                            {{item.descripcion}}</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex="50" flex-xs="100">
+                                    <md-icon>person</md-icon>
+                                    <label>Nombre completo</label>
+                                    <input ng-required="true" name="nombre_completo" autocomplete="off" type="text"
+                                        ng-model="registro_info.nombre_completo">
+                                </md-input-container>
+                            </div>
+                            <div layout="row" layout-xs="column">
+                                <md-input-container flex="100" flex-xs="100">
+                                    <md-icon>mail</md-icon>
+                                    <label>E-mail</label>
+                                    <input name="email" autocomplete="off" type="email" ng-model="registro_info.email">
+                                </md-input-container>
+                            </div>
+
+                            <div layout="row" layout-xs="column">
+                                <md-input-container flex="50" flex-xs="100">
+                                    <md-icon>phone</md-icon>
+                                    <label>Celular</label>
+                                    <input name="celular" autocomplete="off" type="phone"
+                                        ng-model="registro_info.celular">
+                                </md-input-container>
+                                <md-input-container flex="50" flex-xs="100">
+                                    <md-icon>image</md-icon>
+                                    <label>Foto</label>
+                                    <input  name="foto" autocomplete="off" type="text"
+                                        ng-model="registro_info.foto" 
+                                        wai-file-module="avatars" wai-file-model="registro_info.foto" 
+                                        wai-file-accept="'image/*'" 
+                                        wai-file-pattern="'image/*'"
+                                        wai-file-resize="{width: 120, height: 120}">
+                                    <div class="hint">Adjunta un archivo para asignar la URL</div>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </div>
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()">
+                <md-icon>reply</md-icon> Cancelar
+            </md-button>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="loading">
+                <md-icon>save</md-icon> {{nuevo ? 'Crear Registro' : 'Actualizar'}}
+        </div>
+        </md-button>
+    </div>
+</form>

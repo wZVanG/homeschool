@@ -1,0 +1,28 @@
+<div flex layout="column" class="mis-libros" >
+
+	<div layout-padding layout="column" layout-fill ng-if="!groups.length" layout-align="center center">
+		<div  class="md-muted">
+			Actualmente no cuenta con registros
+		</div>
+		<div>
+			<md-button class="md-primary" ui-sref="index.homeschool.inscripcion"><md-icon>playlist_add</md-icon> Inscripción a libros</md-button>
+		</div>
+	</div>
+<!-- ng-click="abrirLibro($event, item)"  -->
+	<md-list ng-repeat="group in groups | orderBy: '-id_grupo' ">
+		<md-subheader class="md-no-sticky">Periodo {{group.title}}</md-subheader>
+		<md-list-item class="md-3-line md-long-text mis-libros-item" ng-repeat="item in group.items" md-colors="{background: 'accent'}">
+			<img ng-src="./uploads/libros/{{item.foto}}" class="md-avatar" alt="{{todos[0].who}}" />
+			<div class="md-list-item-text" >
+				<h3><b>N° {{item.id_periodo_detalle | padId}}</b> - {{ item.nombre_libro }}</h3>
+				<p>
+					{{item.descripcion}}
+				</p>
+				<!--<div class="mis-libros-item-progress mis-libros-item-progress--tareas" style="width:0%" data-porcentaje="0%"></div>
+				<div class="mis-libros-item-progress mis-libros-item-progress--general" style="width:100%" data-porcentaje="100%"></div>-->
+			</div>
+
+		</md-list-item>
+	</md-list>
+
+</div>

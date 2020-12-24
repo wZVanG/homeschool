@@ -1,0 +1,178 @@
+<form name="formulario" ng-submit="guardar()" novalidate class="modal-normal">
+    <md-toolbar ng-class="{'md-warn': !is_derivar, 'md-primary' : is_derivar}">
+        <div class="md-toolbar-tools">
+            <div><md-icon>{{is_derivar ? 'assignment_turned_in' : 'assignment_returned'}}</md-icon> {{is_derivar ? 'Atender' : 'Archivar'}} documento</div>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding layout-fill flex>
+        <md-radio-group flex="50" layout="row" ng-model="registro_info.derivar" flex class="m-l-lg">
+            <md-radio-button value="1" class="md-primary">Derivar</md-radio-button>
+            <md-radio-button value="2" class="md-warn"> Archivar </md-radio-button>
+        </md-radio-group>
+        <div layout="row">
+            <div flex="50" flex-xs="100" layout="column">
+                <md-input-container>
+                    <md-icon>compare_arrows</md-icon>
+                    <label>Acción</label>
+                    <md-select ng-model="registro_info.id_accion">
+                        <md-option ng-repeat="param in WAI.parametros.acciones  | filter:{tipo: registro_info.derivar} | orderBy: 'nombre'"
+                            ng-value="param.id_accion" ng-if="param.id_accion != 1">{{param.nombre}}</md-option>
+                    </md-select>
+                    <div class="hint">Seleccione una acción</div>
+                </md-input-container>
+                <md-input-container class="mb-xs">
+                    <md-icon>short_text</md-icon>
+                    <label for="">Mensaje</label>
+                    <textarea autocomplete="off" ng-required="true" md-autofocus rows="{{is_derivar ? 3 : 4}}" ng-model="registro_info.mensaje"></textarea>
+                    <div class="hint">Escribe un mensaje para {{is_derivar ? 'derivar' : 'archivar'}} el documento</div>
+                </md-input-container>
+                <md-input-container ng-if="!is_derivar">
+                    <md-icon>code</md-icon>
+                    <label>Código archivado</label>
+                    <input name="codigo_archivo" autocomplete="off" type="text" ng-model="registro_info.codigo_archivo">
+                    <div class="hint">Escribe un código de archivo</div>
+                </md-input-container>
+                <md-input-container ng-if="is_derivar" class="md-icon-left mt-xs mb-xs" flex="20">
+                    <md-checkbox ng-true-value="1" ng-false-value="0" ng-checked="registro_info.flag_adjunto"
+                        class="mt-10">
+                        <span
+                            ng-style="{'font-weight': registro_info.flag_adjunto ? 'bold' : 'normal'}">Adjunto</span>:
+                        <b>{{registro_info.flag_adjunto ? 'SI' : 'NO'}}</b>
+                    </md-checkbox>
+                </md-input-container>
+                <div ng-if="is_derivar">
+                    <div layout="row" layout-align="end center">
+                        <div flex>Archivo adjunto</div>
+                        <div>
+                            <md-button class="md-icon-button" ng-click="makeUploader()"><md-icon>add</md-icon></md-button>
+                        </div>
+                    </div>
+
+                    <div layout="column" layout-padding>
+                        <div layout="row" ng-repeat="uploader in uploaders">
+                            <div flex md-truncate>
+                                <div><input type="file" num="{{$index}}" id="archivo_{{$index}}" onchange="var el = this; setTimeout(function(){angular.element(el).scope().uploaders[el.getAttribute('num')].queue[0].upload()},100)" ng-disabled="!registro_info.flag_adjunto || uploader.queue.length" nv-file-select="" uploader="uploader" /></div>
+                                <div ng-if="uploader.queue.length">
+                                    
+                                    <md-progress-circular ng-show="uploader.queue[0].progress" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+
+                                    <span ng-if="uploader.queue[0].isSuccess">{{registro_info.archivos[$index]}}</span>
+
+                                    <md-icon ng-show="uploader.queue[0].isSuccess" class="text-success">check</md-icon>
+                                    <md-icon ng-show="uploader.queue[0].isCancel" class="text-warning">block</md-icon>
+                                    <md-icon ng-show="uploader.queue[0].isError" class="text-danger">close</md-icon>
+
+                                    <!--{{ uploader.queue[0].file.name }} {{ uploader.queue[0].file.size/1024/1024|number:2 }} MB-->
+                                </div>
+                                <div ng-if="registro_info['archivos'][$index]">
+                                    <a md-colors="{'color': 'accent-500'}" href="./uploads/tramite___tmp/{{registro_info['archivos'][$index][0]}}" target="_blank">
+                                        <md-icon>attach_file</md-icon> 
+                                        {{registro_info['archivos'][$index][1]}}
+                                    </a>
+                                </div>
+                            </div>
+                            <md-button ng-show="registro_info['archivos'][$index]" class="md-icon-button" ng-click="eliminarArchivo($index, $index)">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                        </div>
+                    </div>
+                </div>
+                <!--<div ng-if="is_derivar" layout="column" layout-padding>
+                    <div ng-if="uploader.queue.length" layout="row">
+                        <div flex md-truncate>
+                            {{ uploader.queue[0].file.name }} {{ uploader.queue[0].file.size/1024/1024|number:2 }} MB
+                        </div>
+                        <div flex="20">
+                            
+                            <md-icon ng-show="uploader.queue[0].isSuccess" class="text-success">check</md-icon>
+                            <md-icon ng-show="uploader.queue[0].isCancel" class="text-warning">block</md-icon>
+                            <md-icon ng-show="uploader.queue[0].isError" class="text-danger">close</md-icon>
+                            <md-button class="md-icon-button" ng-click="eliminarArchivo(uploader.queue[0])"><md-icon>delete</md-icon></md-button>
+                        </div>
+                    </div>
+                </div>-->
+                <div ng-if="is_derivar && uploader.queue.length">
+                    <md-progress-linear class="md-accent" md-mode="buffer" value="uploader.queue[0].progress"
+        md-buffer-value="{{uploader.queue[0].progress}}" ng-disabled="!uploader.queue.length"></md-progress-linear>
+                </div>
+            </div>
+            <div flex="50" flex-xs="100">
+                <md-list ng-show="is_derivar">
+                    <md-subheader class="md-no-sticky no-background" > Destinatarios ({{destinatarios.length}})</md-subheader>
+                    <div layout="column" layout-padding>
+                        <md-input-container ng-show="!WAI.config.sede_unica">
+                            <md-icon>account_balance</md-icon>
+                            <label>Sede</label>
+                            <md-select ng-model="destinatario.id_sede" ng-disabled="WAI.config.sede_unica">
+                                <md-option ng-value="+item.id_sede" ng-repeat="item in sedes | orderBy: 'nombre'">{{item.nombre}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container>
+                            <md-icon>bubble_chart</md-icon>
+                            <label>Área</label>
+                            <md-select  ng-model="destinatario.id_area">
+                                <md-option ng-value="+item.id_area" ng-repeat="item in areas | orderBy: 'nombre'">{{item.nombre}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container>
+                            <md-icon>business</md-icon>
+                            <label>Oficina</label>
+                            <md-select ng-model="destinatario.id_oficina" ng-disabled="!destinatario.id_sede">
+                                <md-option ng-value="+item.id_oficina"
+                                    ng-repeat="item in oficinas | filter: {id_sede: destinatario.id_sede, id_area: destinatario.id_area} : true | orderBy: 'nombre'">
+                                    {{item.nombre}}</md-option>
+                            </md-select>
+                        </md-input-container>
+ 
+
+                        <div layout="row" layout-align="center center">
+                            <md-input-container flex>
+                                <md-icon>account_box</md-icon>
+                                <label>Cargo</label>
+                                <md-select ng-model="destinatario_selected" ng-disabled="!destinatario.id_oficina">
+                                    <md-option ng-value="item"
+                                        ng-disabled="destinatarioExistente(item.id_cargo_usuario)"
+                                        ng-repeat="item in cargos_usuarios | orderBy: 'nombre_completo'">
+                                        {{item.cargo}} - {{item.nombre_completo}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-button class="md-icon-button md-primary" ng-disabled="!destinatario_selected"
+                                ng-click="agregarDestinatario($event)">
+                                <md-icon>add</md-icon>
+                            </md-button>
+                            <span class="m-xs">&nbsp;</span>
+                            <span>
+                                <md-tooltip>Agregar todos los usuarios de oficina</md-tooltip>
+                                <md-button class="md-icon-button" ng-click="agregarDestinatarioTodos($event)" ng-disabled="agregarTodosAdding"><md-icon>group_add</md-icon></md-button>
+                            </span>
+                            
+                        </div>
+      
+                    </div>
+                    <md-list-item ng-repeat="person in destinatarios" class="noright">
+                        <img alt="" ng-src="{{person | avatarUrl}}" class="md-avatar" />
+                        <p>{{ person.cargo }} - <b>{{ person.nombre_completo }}</b><br /><small>
+                                <md-icon>business</md-icon> {{person.oficina}}
+                            </small></p>
+                        <!--<md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>-->
+                        <md-icon class="md-secondary"
+                            ng-click="eliminarDestinatario($event, person.id_cargo_usuario)">delete</md-icon>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+
+
+    </md-content>
+
+    <md-divider></md-divider>
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()"><md-icon>reply</md-icon> Cancelar</md-button>
+            <md-button type="submit" class="md-raised" ng-disabled="loading || formulario.$invalid || (is_derivar ? !registro_info.destinatarios.length : false)" ng-class="{'md-warn': !is_derivar, 'md-primary' : is_derivar}"><md-icon>{{is_derivar ? 'send' : 'assignment_returned'}}</md-icon> {{is_derivar ? 'Derivar documento' : 'Archivar documento'}}</md-button>
+        </div>
+    </div>
+</form>

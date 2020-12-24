@@ -1,0 +1,51 @@
+<div class="video-content">
+    <!--<div play-video="76979871"></div>-->
+    <!--<div play-video data-plyr-provider="vimeo"  data-plyr-embed-id="https://vimeo.com/420783151" data-plyr-config='{ "title": "Example Title" }'></div>-->
+    <div class="bg" ng-style="{'background-image': 'url(./uploads/portadas/'+video.imagen+')'}">
+        <div class="video-content-footer"></div>
+    </div>
+    
+    <div class="video-content-body">
+        <div class="video-content-description">
+            <div class="title">
+                <h1>{{video.title}}</h1>
+            </div>
+            <div class="subtitle">
+                <b>{{video.year}}</b> {{video.genero}}
+            </div>
+
+            <div class="description">
+                {{video.description_long}}
+            </div>
+
+            <div class="cast">
+                <h2>Elenco:</h2>
+                <ul>
+                    <li ng-repeat="item in casting">
+                        <img ng-src="./uploads/actor/{{item.foto}}" alt="">
+                        <span>{{item.nombre}} <em>({{item.tipo}})</em></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="play-button">
+            <a ui-sref="index.play({seo_url: video.seo_url})">
+                <img src="./assets/lumine/images/play.svg" alt="">
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="video-content-secondary">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="description">
+                <h3><i><span>Más de</span> {{video.title}}</i></h3>
+                <p class="muted">{{video.description_add}}</p>
+            </div>
+        </div>
+    </div>
+    
+</div>

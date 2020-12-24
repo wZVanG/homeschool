@@ -1,0 +1,59 @@
+<form name="formulario" ng-submit="enviar()" novalidate>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div><md-icon>{{nuevo ? 'add' : 'edit'}}</md-icon> {{nuevo ? 'Crear' : 'Editar'}} Ruta</div>
+        </div>
+    </md-toolbar>
+
+    <div ng-if="registro_info.id_ruta">
+        <div ng-init="BuscarTextos.id_usuario = registro_info.nombre_completo"></div>
+    </div>
+     
+
+    <md-content layout-padding>
+
+        <div layout="column" ng-init = "BuscarFn.usuarios = autocompleteList('usuarios'); ">
+            
+            <md-autocomplete flex="100"
+            md-input-icon="account_circle"
+            ng-required="true"
+            md-input-name="id_usuario"
+            md-selected-item="BuscarTemp.id_usuario"
+            md-search-text="BuscarTextos.id_usuario"
+            md-items="acItem in BuscarFn.usuarios({term: BuscarTextos.id_usuario})"
+            md-item-text="acItem.nombre_completo"
+            md-floating-label="Usuario" md-require-match 
+            md-autoselect="true"
+            md-menu-class="md-autocomplete-card md-3-line">
+            <md-item-template>
+                <div layout="row" layout-fill layout-align="start center">
+                    <div class="md-autocomplete-card-avatar">
+                        <md-icon>account_balance</md-icon> 
+                    </div>
+                    <div class="md-autocomplete-card-content">
+                        <p md-highlight-text="BuscarTextos.id_usuario" md-highlight-flags="i">{{acItem.nombre_completo}}</p>
+                        <div><small md-highlight-text="BuscarTextos.id_usuario" md-highlight-flags="i">{{acItem.nombre_usuario}}</small></div>
+                    </div>
+                </div>
+            </md-item-template>
+            <div class="hint">Seleccione usuario</div>
+        
+            </md-autocomplete>
+            <md-input-container>
+                <md-icon>title</md-icon>
+                <label>Descripción</label>
+                <input ng-required="true" name="nombre" autocomplete="off" type="text" ng-model="registro_info.nombre">
+            </md-input-container>
+        </div>
+
+     </md-content>
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()"><md-icon>reply</md-icon> Cancelar</md-button>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="loading"><md-icon>save</md-icon> {{nuevo ? 'Crear Registro' : 'Actualizar'}}</div></md-button>
+        </div>
+    </div>
+</form>

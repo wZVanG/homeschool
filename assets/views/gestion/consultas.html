@@ -1,0 +1,185 @@
+<form ng-submit="buscar()">
+    <input type="hidden" id="filter_title" name="filter_title" />
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+      <div layout="row" layout-align="end center">
+        <div flex="10" class="md-title">
+          Consultas
+        </div>
+        <div layout="column" flex ng-init="mostrar_filtros = false">
+
+            <div ng-show="mostrar_filtros">
+                <div flex layout="row">
+                    <md-input-container flex="25">
+                        <label for="">Tipo de documento</label>
+                        <md-icon>file_copy</md-icon>
+                        <md-select ng-model="filtros.id_tipo_documento" multiple>
+                            <md-option ng-repeat="item in WAI.parametros.tipos_documento" ng-value="item.id_tipo_documento">
+                                {{item.nombre}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="25">
+                        <label for="">Tipo de origen</label>
+                        <md-icon>merge_type</md-icon>
+                        <md-select ng-model="filtros.tipo_origen" multiple>
+                            <md-option ng-value="1">
+                                Interno
+                            </md-option>
+                            <md-option ng-value="2">
+                                Externo
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div layout="row" flex >
+                        <md-input-container flex="50">
+                            <label for="">Año</label>
+                            <md-icon>insert_drive_file</md-icon>
+                            <md-select ng-model="filtros.anho">
+                                <md-option ng-repeat="item in anhos" ng-value="item">{{item}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label for="">Código #</label>
+                            <md-icon>search</md-icon>
+                            <input type="text" ng-model="filtros.codigo">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div flex layout="row">
+                    <md-input-container flex="25">
+                        <label for="">Sede origen</label>
+                        <md-icon>account_balance</md-icon>
+                        <md-select ng-model="filtros.id_sede_origen" multiple md-on-close="clearSearchTerm('sede_origen')">
+                            <md-select-header>
+                                <input ng-model="tmp_busqueda.sede_origen" type="search" placeholder="Buscar..." class="md-text">
+                            </md-select-header>
+                            <md-optgroup label="Sedes">
+                                <md-option ng-repeat="item in sedes | filter: tmp_busqueda.sede_origen" ng-value="item.id_sede">
+                                    {{item.nombre}} ({{contarOficinas(item.id_sede)}} ofic.)
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="25">
+                        <label for="">Oficina origen</label>
+                        <md-icon>business</md-icon>
+                        <md-select ng-model="filtros.id_oficina_origen" multiple>
+                            <md-option ng-repeat="item in oficinas | filter: filtroSedeOrigen" ng-value="item.id_oficina">
+                                {{item.nombre}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="25">
+                        <label for="">Sede destino</label>
+                        <md-icon>account_balance</md-icon>
+                        <md-select ng-model="filtros.id_sede" multiple md-on-close="clearSearchTerm('sede_destino')">
+                            <md-select-header>
+                                <input ng-model="tmp_busqueda.sede_destino" type="search" placeholder="Buscar..." class="md-text">
+                            </md-select-header>
+                            <md-optgroup label="Sedes">
+                                <md-option ng-repeat="item in sedes | filter: tmp_busqueda.sede_destino" ng-value="item.id_sede">
+                                    {{item.nombre}}  ({{contarOficinas(item.id_sede)}} ofic.)
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="25">
+                        <label for="">Oficina destino</label>
+                        <md-icon>business</md-icon>
+                        <md-select ng-model="filtros.id_oficina" multiple>
+                            <md-option ng-repeat="item in oficinas | filter: filtroSedeDestino" ng-value="item.id_oficina">
+                                {{item.nombre}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+    
+                </div>
+                
+                <div flex layout="row"  layout-align="start center">
+                    <md-input-container flex="25">
+                        <md-icon>priority_high</md-icon>
+                        <label>Prioridad</label>
+                        <md-select ng-model="filtros.prioridad" multiple>
+                            <md-option ng-repeat="param in WAI.config.parametros.PRIORI  | orderBy: 'codigo'"
+                                ng-value="+param.codigo">
+                                <span class="movimiento-prioridad-select-option" ng-style="{backgroundColor: '#' + param.codigo_hex}"></span> 
+                                {{param.descripcion}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+    
+                <div flex layout="row"  layout-align="start center">
+                    <md-input-container flex="25">
+                        <label for="">Cargo origen</label>
+                        <md-icon>account_box</md-icon>
+                        <md-select ng-model="filtros.id_id_cargo_origen" multiple>
+                            <md-option ng-repeat="item in WAI.parametros.cargos" ng-value="item.id_cargo">
+                                {{item.nombre}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="25">
+                        <label for="">Cargo destino</label>
+                        <md-icon>account_box</md-icon>
+                        <md-select ng-model="filtros.id_cargo" multiple>
+                            <md-option ng-repeat="item in WAI.parametros.cargos" ng-value="item.id_cargo">
+                                {{item.nombre}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div layout="row" flex="50"  layout-align="start center">
+                    <md-datepicker flex="40" aria-label="Desde {{filtros.desde}}" ng-model="filtros.desde" md-placeholder="Fecha desde"></md-datepicker>
+                    <md-datepicker flex="40" aria-label="Hasta {{filtros.hasta}}" ng-model="filtros.hasta" md-placeholder="Fecha hasta"></md-datepicker>
+                    <md-input-container flex class="mb-out">
+                        <label for="">Días</label>
+                        <md-icon>history</md-icon>
+                        <input type="number" aria-label="Días {{filtros.dias}}" ng-model="filtros.dias">
+                    </md-input-container>
+                    </div>
+    
+                </div>
+            </div>
+            <div flex layout="row">
+                <md-button class="md-primary md-raised" ng-click="mostrar_filtros = !mostrar_filtros">
+                    <md-icon>filter_list</md-icon>
+                    {{mostrar_filtros ? 'Ocultar' : 'Mostrar'}} filtros
+                </md-button>
+                <md-button flex class="md-accent md-raised" type="submit" ng-click="buscar($event)"><md-icon>search</md-icon> Buscar</md-button>
+            </div>
+
+            <!--<div layout="row" ng-init = "BuscarFn.cargos_1 = autocompleteList('cargos_usuarios')">
+                <md-autocomplete flex="50"
+                md-input-icon="account_box"
+                md-input-name="id_cargo_usuario"
+                md-selected-item="BuscarTemp.id_cargo_usuario"
+                md-search-text="BuscarTextos.id_cargo_usuario"
+                md-items="acItem in BuscarFn.cargos_1({term: BuscarTextos.id_cargo_usuario})"
+                md-item-text="acItem.nombre_completo"
+                md-floating-label="Persona" md-require-match 
+                md-autoselect="true"
+                md-menu-class="md-autocomplete-card md-3-line">
+                <md-item-template>
+                    <div layout="row" layout-fill layout-align="start center">
+                        <div class="md-autocomplete-card-avatar">
+                            <md-icon>person</md-icon> 
+                        </div>
+                        <div class="md-autocomplete-card-content">
+                            <p md-highlight-text="BuscarTextos.id_cargo_usuario" md-highlight-flags="i">{{acItem.nombre_completo}}</p>
+                        </div>
+                    </div>
+                </md-item-template>
+                <div class="hint">Seleccione persona</div>
+            
+                </md-autocomplete>
+            </div>-->
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table id="lista" ui-jp="dataTable" ui-noload="1" ui-options="dtOptions" class="table table-striped b-t b-b"></table>
+    </div>
+  </div>
+</form>

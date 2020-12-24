@@ -1,0 +1,156 @@
+
+<!-- valores por defecto -->
+<div ng-if="!registro_info.id_cliente">
+	<div ng-init="registro_info.tipo_documento = 1"></div>
+</div>
+
+<form name="formulario" ng-submit="enviar()" novalidate flex layout="column">
+	<md-toolbar>
+        <div class="md-toolbar-tools">
+            <div>
+                <md-icon>{{nuevo ? 'add' : 'edit'}}</md-icon> {{nuevo ? 'Crear' : 'Editar'}} Estudiante
+            </div>
+        </div>
+    </md-toolbar>
+	<md-content flex layout-fill>
+
+						<md-tabs md-dynamic-height md-border-bottom="false">
+							<md-tab>
+								<md-tab-label>
+									Datos personales
+								</md-tab-label>
+								<md-tab-body >
+									
+									<md-content layout-padding>
+										<div layout="column">
+
+											<div layout="row" layout-xs="column" >
+												<md-input-container flex="50" flex-xs="100">
+													<md-icon>credit_card</md-icon>
+													<label>Tipo de documento</label>
+													<md-select ng-required="true" ng-model="registro_info.tipo_documento">
+														<md-option ng-value="+item.codigo" md-autofocus
+															ng-repeat="item in WAI.config.parametros.DOCIDE">
+															{{item.descripcion}}</md-option>
+													</md-select>
+												</md-input-container>
+				
+												<md-input-container flex="50" flex-xs="100">
+													<md-icon>credit_card</md-icon>
+													<label>Número de Documento</label>
+													<input ng-required="true" name="numero_documento" autocomplete="off" type="text"
+														ng-model="registro_info.numero_documento">
+												</md-input-container>
+											</div>
+				
+											<div layout="row" layout-xs="column">
+												<md-input-container flex="100" flex-xs="100">
+													<md-icon>person</md-icon>
+													<label>Nombre completo</label>
+													<input ng-required="true" name="nombre_completo" autocomplete="off" type="text"
+														ng-model="registro_info.nombre_completo">
+												</md-input-container>
+											</div>
+										
+											<div layout="row" layout-xs="column" >
+											
+												<md-input-container flex="50" flex-xs="100">
+													<md-icon>image</md-icon>
+													<label>Foto</label>
+													<input  name="foto" autocomplete="off" type="text"
+														ng-model="registro_info.foto" 
+														wai-file-module="clientes" wai-file-model="registro_info.foto" 
+														wai-file-accept="'image/*'" 
+														wai-file-pattern="'image/*'"
+														wai-file-resize="{width: 240, height: 240}">
+													<div class="hint">Adjunta un archivo para asignar la URL</div>
+												</md-input-container>
+									
+											</div>
+				
+										</div>
+									</md-content>
+
+								</md-tab-body>
+							</md-tab>
+
+							<md-tab>
+								<md-tab-label>
+									Datos de contacto
+								</md-tab-label>
+								<md-tab-body>
+				
+									<md-content layout-padding>
+										<div layout="column">
+
+											<div layout="row" layout-xs="column">
+												<md-input-container flex="50" flex-xs="100">
+													<md-icon>mail</md-icon>
+													<label>E-mail</label>
+													<input name="email" autocomplete="off" type="email" ng-model="registro_info.email">
+												</md-input-container>
+												<md-input-container flex="50" flex-xs="100">
+													<md-icon>mail</md-icon>
+													<label>E-mail alternativo</label>
+													<input name="email_2" autocomplete="off" type="email" ng-model="registro_info.email_2">
+												</md-input-container>
+											</div>
+											<div layout="row" layout-xs="column" >
+												<md-input-container flex="50" flex-xs="100">
+													<md-icon>phone</md-icon>
+													<label>Celular</label>
+													<input name="celular" autocomplete="off" type="phone"
+														ng-model="registro_info.celular">
+												</md-input-container>
+												<md-input-container flex="50" flex-xs="100">
+													<md-icon>phone</md-icon>
+													<label>Celular alternativo</label>
+													<input name="celular_2" autocomplete="off" type="phone"
+														ng-model="registro_info.celular_2">
+												</md-input-container>
+											</div>
+	
+											<div layout="row" layout-xs="column" >
+												<md-input-container flex="33" flex-xs="100">
+													<md-icon>pin_drop</md-icon>
+													<label>Dirección 1</label>
+													<input name="direccion" autocomplete="off" type="text"
+														ng-model="registro_info.direccion">
+												</md-input-container>
+												<md-input-container flex="33" flex-xs="100">
+													<md-icon>pin_drop</md-icon>
+													<label>Referencia</label>
+													<input name="direccion_referencia" autocomplete="off" type="text"
+														ng-model="registro_info.direccion_referencia">
+												</md-input-container>
+												<md-input-container flex="33" flex-xs="100">
+													<md-icon>place</md-icon>
+													<label>Dirección 2</label>
+													<input name="direccion_2" autocomplete="off" type="text"
+														ng-model="registro_info.direccion_2">
+												</md-input-container>
+											</div>
+				
+										</div>
+									</md-content>
+								</md-tab-body>
+							</md-tab>
+
+						</md-tabs>
+	
+	
+	</md-content>
+
+	<md-divider></md-divider>
+
+	<div layout-padding layout="column">
+		<div layout="row" layout-align="end center">
+			<md-button class="md-raised" ng-click="cancel()">
+				<md-icon>reply</md-icon> Cancelar
+			</md-button>
+			<md-button type="submit" class="md-accent md-raised" ng-disabled="loading">
+				<md-icon>save</md-icon> {{nuevo ? 'Crear Registro' : 'Actualizar'}}
+		</div>
+		</md-button>
+	</div>
+</form>

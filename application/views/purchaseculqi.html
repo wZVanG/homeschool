@@ -1,0 +1,33 @@
+<div>
+
+</div>
+
+<!-- Incluye Culqi Checkout en tu sitio web-->
+<script src="https://checkout.culqi.com/js/v3"></script>
+
+<script>
+    // Configura tu llave pública
+    Culqi.publicKey = 'Aquí inserta tu llave pública';
+    // Configura tu Culqi Checkout
+    Culqi.options({
+    lang: 'auto',
+    modal: false,
+    installments: false,
+    //customButton: 'Pagar',
+    style: {
+      logo: 'https://fliperang.com/assets/images/logo/favicon/android-chrome-192x192.png',
+      maincolor: '#feca00',
+      buttontext: '#ffffff',
+      maintext: '#4A4A4A',
+      desctext: '#4A4A4A'
+    }
+});
+
+    Culqi.settings({
+        title: 'Suscripción Lumine',
+        currency: 'PEN',
+        description: 'Premium Access',
+        amount: 19
+    });
+    Culqi.open();
+</script>

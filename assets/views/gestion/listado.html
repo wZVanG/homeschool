@@ -1,0 +1,113 @@
+<form name="formulario" ng-submit="guardar()" novalidate>
+    <md-content layout-padding class="no-scroll">
+        
+ 
+        
+        <div layout="column">
+            <md-input-container flex="100">
+                <md-icon>timeline</md-icon>
+                <label>Periodo lectivo</label>
+                <md-select ng-model="registro_info.id_periodo">
+                    <!--<md-option ng-value="0">Todos</md-option>-->
+                    <md-option ng-repeat="param in Periodos  | filter:{estado: 1} | orderBy: 'nombre'"
+                        ng-value="+param.id_periodo">{{param.nombre}}</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container flex="100">
+                <md-icon>bookmarks</md-icon>
+                <label>Libro</label>
+                <md-select ng-model="registro_info.id_periodo_detalle">
+                    <!--<md-option ng-value="0">Todos</md-option>-->
+                    <md-option ng-repeat="param in PeriodosDetalles  | filter:{estado: 1, id_periodo: registro_info.id_periodo} | orderBy: 'nombre'"
+                        ng-value="+param.id_periodo_detalle">
+                        <img ng-src="./uploads/libros/{{param.foto}}" width="25" height="25" /> {{param.nombre}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+
+        </div>
+
+
+        <div layout="column" layout-xs="column" ng-if="registro_info.id_periodo_detalle">
+
+         
+
+            <md-divider></md-divider>
+
+            <h3>Asignación de puntajes en tareas</h3>
+
+            <div  layout="column">
+
+                <div layout="row" layout-align="center center">
+                    <div flex>Estudiante</div>
+                        
+                    <div flex="70">
+                        <table class="table">
+                            <tr>
+                                <th ng-repeat="col in lista_notas">
+                                    Ev. {{$index + 1}} <sup>{{col.nota_peso}}%</sup>
+                                </th>
+                            </tr>
+                            <tr>
+
+                            </tr>
+                        </table>
+                    </div>
+                    
+                </div>
+
+               <div ng-repeat="estudiante in PeriodosMatriculas | filter: {id_periodo_detalle: registro_info.id_periodo_detalle}" layout="row">
+                    <div flex>
+                        {{estudiante.nombre_usuario}}
+                    </div>
+
+                    <div flex="70">
+                        <table class="table">
+                            <tr>
+                                <th ng-repeat="col in lista_notas">
+                                    
+                                    <!--<input type="text" ng-model="col._estudiantes[estudiante.id_periodo_matricula]" style="width:50px">-->
+                                    <input type="text" style="width:50px">
+                                </th>
+                            </tr>
+                            <tr>
+
+                            </tr>
+                        </table>
+                    </div>
+
+               </div>
+
+               <pre>{{lista_notas |json}}</pre>
+
+                
+
+            </div>
+
+            
+        </div>
+
+    </md-content>
+
+    <!--<md-button ng-click="test()">TEST</md-button>-->
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <div layout="row" layout-xs="column" layout-align="center center">
+           
+       
+
+            </div>
+            <span ng-show="uploader.queue[0].isUploading" class="text-muted text-small">Subiendo archivo...</span>
+            <md-button type="submit" class="md-accent md-raised"
+                ng-disabled="loading || !validProducto() || (uploader.queue.length ? !uploader.queue[0].isSuccess : false)">
+                <md-icon>save</md-icon> Guardar
+            </md-button>
+        </div>
+    </div>
+
+</form>

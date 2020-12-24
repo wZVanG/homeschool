@@ -1,0 +1,116 @@
+<div class="content-page formulario ">
+
+  <div class="container">
+    
+      <h1 class="m-b-s" ng-if="!post_response.ok">Ingresa aquí tus datos</h1>
+      <h1 class="m-b-s" ng-if="post_response.ok">Finalizado</h1>
+
+      <form ng-submit="submit()" >
+
+        <div layout="column" class="mb-3">
+          <div class="alert alert-info" flex>Este registro requiere aprobación de a administración de <strong>HomeSchool</strong></div>
+        </div>
+
+          
+          <div  ng-if="post_response.ok" flex>
+
+            <md-card>
+              <md-card-content>
+                <div class="md-headline">¡Te has registrado exitósamente!, te llegará un correo a tu bandeja una vez se apruebe tu registro...</div>
+
+                <div layout-padding>
+                  <md-button ui-sref="index.homeschool" class="md-primary" ng-disabled="false">
+                    <md-icon>home</md-icon>
+                    Ir a HomeShool
+                  </md-button>
+                  <md-button ui-sref="index.outschool" class="md-primary" ng-disabled="true">
+                    <md-icon>home</md-icon>
+                    Ir a OutSchool
+                  </md-button>
+                </div>
+              </md-card-content>
+            </md-card>
+          </div>
+        
+          <div ng-if="!post_response.ok">
+
+            <div layout="row" layout-xs="column" layout-padding>
+            
+                <md-input-container flex="50" flex-xs="100">
+                  <md-icon>credit_card</md-icon>
+                  <label for="">Tipo de Documento</label>
+                  <md-select required ng-model="registro_info.tipo_documento">
+                    <md-option ng-value="1">DNI</md-option>
+                    <md-option ng-value="3">C.E</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <md-input-container flex="50"  flex-xs="100">
+                  <md-icon>credit_card</md-icon>
+                  <label for="">Número de Documento</label>
+                  <input type="text"  required autocomplete="new-usuario" ng-model="registro_info.usuario" id="usuario" placeholder="">
+                  <div class="hint text-muted">
+                    Será su nombre de usuario para ingresar al sistema
+                  </div>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-padding>
+       
+                <md-input-container flex="50"  flex-xs="100">
+                  <md-icon>mail</md-icon>
+                  <label for="">Ingrese su correo Electrónico</label>
+                  <input type="email" required autocomplete="new-email" ng-model="registro_info.email">
+                  <div class="hint text-muted">
+                    El correo es importante para recibir información de la administración.
+                  </div>
+                </md-input-container>
+
+                <md-input-container flex="50"  flex-xs="100">
+                  <md-icon>lock</md-icon>
+                  <label for="">Cree una contraseña</label>
+                  <input type="password" required autocomplete="new-password" ng-model="registro_info.password">
+                  <div class="hint text-muted">
+                    Escriba una contraseña que siempre pueda recordar
+                  </div>
+                </md-input-container>
+
+            </div>
+
+            <div layout="column" layout-padding>
+       
+              <md-input-container flex="100">
+                <md-checkbox  ng-model="registro_info.confirmar" ng-true-value="1" ng-false-value="0">
+                  Acepto todos los <a target="_blank" href="#">términos y condiciones</a>
+                </md-checkbox>
+                </md-input-container>
+          
+            
+                
+            </div>
+         
+        
+            <div class="form-group" ng-if="post_response.send && !post_response.ok">
+              
+              <p class="alert alert-danger">{{post_response.mensaje}}</p>
+            </div>
+
+            <div layout="column" layout-padding>
+              <div flex class="no-padding-top">
+                <md-button type="submit" class="md-primary md-raised" ng-disabled="loading || !registro_info.confirmar">{{text_submit}}</md-button>
+              </div>
+              <div>
+
+                <p class="caption muted">Esta página está protegida por Google reCAPTCHA para comprobar que no eres un robot. </p>
+              </div>
+            </div>
+            
+            
+          </div>
+
+        </form>
+
+
+  </div>
+
+</div>

@@ -1,0 +1,1 @@
+UPDATE tramite SET estado_tramite = NEW.tipo_movimiento WHERE id_tramite = NEW.id_tramite;

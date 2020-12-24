@@ -1,0 +1,60 @@
+<form name="formulario" ng-submit="enviar()" novalidate flex layout="column">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div>
+                <md-icon>{{nuevo ? 'add' : 'edit'}}</md-icon> {{nuevo ? 'Crear' : 'Editar'}} Libros
+            </div>
+        </div>
+    </md-toolbar>
+
+    <md-content flex layout-fill>
+
+        <div layout="column" layout-padding>
+
+           <div layout="row" layout-xs="column">
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>short_text</md-icon>
+                <label>Nombre</label>
+                <input ng-required="true" name="nombre" autofocus autocomplete="off" type="text" ng-model="registro_info.nombre">
+            </md-input-container>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>image</md-icon>
+                <label>Imágen</label>
+                <input  name="foto" autocomplete="off" type="text"
+                    ng-model="registro_info.foto" 
+                    wai-file-module="libros" wai-file-model="registro_info.foto" 
+                    wai-file-accept="'image/*'" 
+                    wai-file-pattern="'image/*'"
+                    wai-file-resize="{width: 160, height: 160}"
+                    >
+                <div class="hint">Adjunta un archivo para especificar la URL</div>
+            </md-input-container>
+           </div>
+
+            <md-input-container flex="100">
+                <md-icon>short_text</md-icon>
+                <label>Dirección</label>
+                <textarea name="descripcion" ng-model="registro_info.descripcion" rows="3"></textarea>
+            </md-input-container>
+           
+        </div>
+
+     
+
+    </md-content>
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()">
+                <md-icon>reply</md-icon> Cancelar
+            </md-button>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="loading">
+                <md-icon>save</md-icon> {{nuevo ? 'Crear Registro' : 'Actualizar'}}
+            </md-button>
+        </div>
+    </div>
+</form>

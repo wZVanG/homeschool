@@ -1,0 +1,45 @@
+<form name="formulario" ng-submit="enviar()" novalidate flex layout="column">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div>
+                <md-icon>{{nuevo ? 'add' : 'edit'}}</md-icon> {{nuevo ? 'Crear' : 'Editar'}} Feriado
+            </div>
+        </div>
+    </md-toolbar>
+
+    <md-content flex layout-fill>
+
+        <div layout="row" layout-xs="column" layout-padding>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>date_range</md-icon>
+                <label>Fecha</label>
+                <input ng-required="true" name="fecha_fija" maxlength="5" minlength="5" autocomplete="off" type="text"
+                    ng-model="registro_info.fecha_fija">
+                <div class="hint">Formato (Día-Mes). Ejemplo: 28-07</div>
+            </md-input-container>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>short_text</md-icon>
+                <label>Descripción</label>
+                <input ng-required="true" name="nombre" autocomplete="off" type="text" ng-model="registro_info.nombre">
+            </md-input-container>
+
+        </div>
+
+    </md-content>
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()">
+                <md-icon>reply</md-icon> Cancelar
+            </md-button>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="loading">
+                <md-icon>save</md-icon> {{nuevo ? 'Crear Registro' : 'Actualizar'}}
+            </md-button>
+        </div>
+    </div>
+</form>

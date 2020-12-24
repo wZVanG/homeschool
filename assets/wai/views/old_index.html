@@ -1,0 +1,182 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="navbar">
+	<a class="navbar-brand logo" ui-sref="inicio.intro"><span></span></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarCollapse">
+	  <ul class="navbar-nav mr-auto">
+		<li class="nav-item active">
+		  <a class="nav-link" ui-sref="inicio.intro">Inicio</a>
+		</li>
+
+		<li class="nav-item">
+			<div class="dropdown">
+				<a href="javascript://" class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Categorías
+				</a>
+
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					
+				  <a class="dropdown-item" ui-sref="inicio.busqueda({busqueda: item.url})" ng-repeat="item in categorias">{{item.nombre}}</a>
+				</div>
+			  </div>
+		</li>
+		<li class="nav-item">
+			<div class="dropdown">
+				<a href="javascript://" class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Lo más buscado
+				</a>
+
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a class="dropdown-item disabled" href="">No hay registros</a>
+				</div>
+			  </div>
+		</li>
+		<!--<li class="nav-item">
+		  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+		</li>-->
+	  </ul>
+	  <form class="form-inline form-busqueda mt-2 mt-md-0" ng-submit="buscar()">
+		
+		  <div class="input-search" data-busqueda >
+			<input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Buscar" ng-model="$root.busqueda">
+		  </div>
+		  
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+			<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+		  </svg></button>
+	  </form>
+	  <ul class="navbar-nav">
+
+		<li class="nav-item">
+			<a class="nav-link" ui-sref="inicio.login">
+				
+			
+				<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+				<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+				<g>
+					<path style="fill:#ffffff;" d="M256,0c-74.4,0-135,60.6-135,135c0,74.4,60.6,135,135,135s135-60.6,135-135C391,60.6,330.4,0,256,0z
+						"/>
+					<path style="fill:#ffffff;" d="M478.6,398.6C438.1,338,370.6,302,297.7,302h-83.4c-72.9,0-140.4,36-180.9,96.6l-2.4,3.9V512h450
+						V402.5L478.6,398.6z"/>
+				</g>
+				<g>
+					<path style="fill:#ffffff;" d="M256,270V0c74.4,0,135,60.6,135,135C391,209.4,330.4,270,256,270z"/>
+					<path style="fill:#ffffff;" d="M481,402.5V512H256V302h41.7c72.9,0,140.4,36,180.9,96.6L481,402.5z"/>
+				</g>
+				</svg>
+				
+
+				Acceder a mi cuenta</a>
+		</li>
+  
+		<li class="menu-afiliar">
+			<a class="nav-link" ui-sref="inicio.crear_cuenta">
+		  <span>
+			  <svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m124.397 219.462-102.503 170.375c-5.874 9.763-2.721 22.438 7.042 28.312l95.46 57.432v-256.119z" fill="#ffdc00"/><path d="m483.064 93.848-95.461-57.432v256.119l102.503-170.375c5.873-9.763 2.72-22.439-7.042-28.312z" fill="#ffdc00"/><path d="m387.61 20.625v470.747c0 11.384-9.241 20.625-20.635 20.625h-66.119c-4.286-20.841-22.737-36.521-44.856-36.521s-40.58 15.68-44.866 36.521h-66.109c-11.394 0-20.635-9.241-20.635-20.625v-470.747c0-11.384 9.241-20.625 20.635-20.625h66.109c4.286 20.841 22.747 36.521 44.866 36.521s40.57-15.68 44.856-36.521h66.119c11.394 0 20.635 9.241 20.635 20.625z" fill="#fff0c0"/><path d="m387.606 472.804v18.567c0 11.388-9.242 20.629-20.63 20.629h-66.118c-4.291-20.846-22.744-36.524-44.859-36.524s-40.578 15.678-44.869 36.524h-66.107c-11.387 0-20.63-9.242-20.63-20.629v-18.567c0 11.388 9.242 20.629 20.63 20.629h49.531c9.428-24.755 33.378-42.352 61.445-42.352s52.007 17.597 61.435 42.352h49.542c11.388 0 20.63-9.241 20.63-20.629z" fill="#ffe394"/><path d="m105.83 464.41 18.567 11.17v-256.118l-18.567 30.86z" fill="#ffbf00"/><path d="m406.17 47.587-18.567-11.171v256.119l18.567-30.86z" fill="#ffbf00"/><path d="m266.75 128.337 15.29 25.778c1.755 2.959 4.652 5.064 8.008 5.818l29.241 6.576c9.261 2.082 12.912 13.321 6.644 20.449l-19.791 22.507c-2.272 2.583-3.378 5.989-3.059 9.414l2.782 29.842c.881 9.451-8.679 16.396-17.395 12.638l-27.522-11.868c-3.159-1.362-6.74-1.362-9.899 0l-27.522 11.868c-8.716 3.758-18.276-3.187-17.395-12.638l2.782-29.842c.319-3.425-.787-6.831-3.059-9.414l-19.791-22.507c-6.268-7.128-2.616-18.366 6.644-20.449l29.241-6.576c3.356-.755 6.253-2.859 8.008-5.818l15.29-25.778c4.845-8.164 16.661-8.164 21.503 0z" fill="#ffdc00"/><g><path d="m304.741 236.654c-2.729 5.759-9.736 8.956-16.27 6.139l-27.522-11.868c-3.159-1.362-6.74-1.362-9.899 0l-27.522 11.868c-6.534 2.817-13.541-.38-16.27-6.139l-1.125 12.067c-.881 9.451 8.679 16.396 17.395 12.638l27.522-11.868c3.159-1.362 6.74-1.362 9.899 0l27.522 11.868c8.716 3.758 18.276-3.187 17.395-12.638z" fill="#ffbf00"/></g><path d="m387.445 346.771h-10.302c-4.276 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c.051 0 .113 0 .165-.01v-15.433c-.051-.011-.113-.011-.165-.011zm-36.057 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727-.001-4.266-3.462-7.727-7.727-7.727zm-36.058 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727zm-36.057 0h-10.303c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.461-7.727-7.726-7.727zm-36.058 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727zm-36.058 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727zm-36.057 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727zm-36.058 0h-10.302c-.113 0-.237 0-.35.021v15.412c.113.021.237.021.35.021h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727z" fill="#ffdc00"/></g></svg>
+				  
+		  </span>
+		  <span style="color:#feca00">Afíliarse a <b>L</b>umine!</span> 
+			</a>
+		</li>
+
+		 </ul>
+
+
+	</div>
+  </nav>
+
+  <header id="header" class="heropanel--video" data-vide-bg="mp4: ./assets/lumine/video/principal.mp4" data-vide-options="posterType: jpg, loop: true, muted: true, position: 50% 50%">
+	<div class="heropanel__content" id="heropanel__content" data-portada-fn>
+	   <h1><b>Lumine!</b> <span ng-bind="$root.busqueda ? (': ' + $root.busqueda) : ('- Teatro desde tu casa') "></span></a></h1>
+	   <p>Una alternativa de entretenimiento para todos los gustos</p>
+		<div class="botones">
+
+			<a ui-sref="inicio.intro"  class="animated-button12">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				Ver Trailers 
+			  </a>
+
+
+			  <a ui-sref="inicio.crear_cuenta" class="animated-button12 second">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<b>
+					<svg id="Capa_1" enable-background="new 0 0 512 512" height="20" viewBox="0 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg"><g><path d="m124.397 219.462-102.503 170.375c-5.874 9.763-2.721 22.438 7.042 28.312l95.46 57.432v-256.119z" fill="#ffdc00"/><path d="m483.064 93.848-95.461-57.432v256.119l102.503-170.375c5.873-9.763 2.72-22.439-7.042-28.312z" fill="#ffdc00"/><path d="m387.61 20.625v470.747c0 11.384-9.241 20.625-20.635 20.625h-66.119c-4.286-20.841-22.737-36.521-44.856-36.521s-40.58 15.68-44.866 36.521h-66.109c-11.394 0-20.635-9.241-20.635-20.625v-470.747c0-11.384 9.241-20.625 20.635-20.625h66.109c4.286 20.841 22.747 36.521 44.866 36.521s40.57-15.68 44.856-36.521h66.119c11.394 0 20.635 9.241 20.635 20.625z" fill="#fff0c0"/><path d="m387.606 472.804v18.567c0 11.388-9.242 20.629-20.63 20.629h-66.118c-4.291-20.846-22.744-36.524-44.859-36.524s-40.578 15.678-44.869 36.524h-66.107c-11.387 0-20.63-9.242-20.63-20.629v-18.567c0 11.388 9.242 20.629 20.63 20.629h49.531c9.428-24.755 33.378-42.352 61.445-42.352s52.007 17.597 61.435 42.352h49.542c11.388 0 20.63-9.241 20.63-20.629z" fill="#ffe394"/><path d="m105.83 464.41 18.567 11.17v-256.118l-18.567 30.86z" fill="#ffbf00"/><path d="m406.17 47.587-18.567-11.171v256.119l18.567-30.86z" fill="#ffbf00"/><path d="m266.75 128.337 15.29 25.778c1.755 2.959 4.652 5.064 8.008 5.818l29.241 6.576c9.261 2.082 12.912 13.321 6.644 20.449l-19.791 22.507c-2.272 2.583-3.378 5.989-3.059 9.414l2.782 29.842c.881 9.451-8.679 16.396-17.395 12.638l-27.522-11.868c-3.159-1.362-6.74-1.362-9.899 0l-27.522 11.868c-8.716 3.758-18.276-3.187-17.395-12.638l2.782-29.842c.319-3.425-.787-6.831-3.059-9.414l-19.791-22.507c-6.268-7.128-2.616-18.366 6.644-20.449l29.241-6.576c3.356-.755 6.253-2.859 8.008-5.818l15.29-25.778c4.845-8.164 16.661-8.164 21.503 0z" fill="#ffdc00"/><g><path d="m304.741 236.654c-2.729 5.759-9.736 8.956-16.27 6.139l-27.522-11.868c-3.159-1.362-6.74-1.362-9.899 0l-27.522 11.868c-6.534 2.817-13.541-.38-16.27-6.139l-1.125 12.067c-.881 9.451 8.679 16.396 17.395 12.638l27.522-11.868c3.159-1.362 6.74-1.362 9.899 0l27.522 11.868c8.716 3.758 18.276-3.187 17.395-12.638z" fill="#ffbf00"/></g><path d="m387.445 346.771h-10.302c-4.276 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c.051 0 .113 0 .165-.01v-15.433c-.051-.011-.113-.011-.165-.011zm-36.057 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727-.001-4.266-3.462-7.727-7.727-7.727zm-36.058 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727zm-36.057 0h-10.303c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.461-7.727-7.726-7.727zm-36.058 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727zm-36.058 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727zm-36.057 0h-10.302c-4.275 0-7.727 3.462-7.727 7.727s3.451 7.727 7.727 7.727h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727zm-36.058 0h-10.302c-.113 0-.237 0-.35.021v15.412c.113.021.237.021.35.021h10.302c4.265 0 7.727-3.462 7.727-7.727 0-4.266-3.462-7.727-7.727-7.727z" fill="#ffdc00"/></g></svg>
+				  
+					Afíliate a <i style=" color: #feca00; font-style:normal">Lumine!</i></b>
+			  </a>
+		</div>
+
+		<div class="registro-form">
+	
+		</div>
+
+
+		<div class="intro-caption">
+			<h3>¡Afíliate a nuestro sitio y podrás disfrutar de todo nuestro contenido!</h3>
+			<em></em>
+		</div>
+	</div>
+	<div class="bottom-shadow"></div>
+</header>
+
+
+	</div>
+
+<main id="main" role="main" class="container-fluid">
+	  <div class="row">
+		  <div class="col-md-12">
+			<div ui-view></div>
+		  </div>
+	  </div>
+	  
+  </main>
+
+  <div class="footer">
+	<div class="footer-wrap">
+		<div class="row">
+			<div class="col-md-3 col-sm-12">
+				<h2>Contáctanos</h2>
+			</div>
+			<div class="col-md-9 col-sm-12">
+				<div class="row">
+									
+					<div class="col-6">
+						<div class="linea-footer">
+							<img class="icon" src="./assets/images/icons/telefono.svg" alt="" />
+							<a href="tel:51993995148">(+51) 993995148</a>
+						</div>
+						<div class="linea-footer">
+							<img class="icon" src="./assets/images/icons/email.svg" alt="" />
+							<a href="mailto:correo@lumine.pe">correo@lumine.pe</a>
+						</div>
+						<div class="linea-footer telefono">
+							<img class="icon" src="./assets/images/icons/whatsapp.svg" alt="" />
+							<a href="https://wa.me/51993995148?text=Informaci%C3%B3n%20de%20Lumine" target="_blank">993995148</a>
+						</div>
+					</div>
+
+					<div class="col-6 links">
+						<div class="linea-footer">- <img class="icon" src="./assets/images/icons/telefono.svg" alt="" /> <a ui-sref="inicio.preguntas_frecuentes">Preguntas Frecuentes</a></div>
+						<div class="linea-footer">- <img class="icon" src="./assets/images/icons/telefono.svg" alt="" /> <a ui-sref="inicio.centro_ayuda">Centro de Ayuda</a></div>
+						<div class="linea-footer">- <img class="icon" src="./assets/images/icons/telefono.svg" alt="" /> <a ui-sref="inicio.terminos">Términos de Uso</a></div>
+						
+					</div>
+				</div>
+			</div>
+	
+			
+		</div>
+	</div>
+	<div class="footer-box-1"></div>
+	<div class="footer-box-2"></div>
+	<div class="footer-box-3"></div>
+  </div>

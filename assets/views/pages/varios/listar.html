@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+      <div layout="row" layout-align="end center">
+        <div flex class="md-title">
+          {{info.title}}
+        </div>
+        <md-button class="md-accent md-raised" ng-click="crud.agregar($event)"><md-icon>add</md-icon> Agregar nuevo</md-button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table id="lista" ui-jp="dataTable" ui-noload="1" ui-options="dtOptions" class="table table-striped b-t b-b"></table>
+    </div>
+  </div>

@@ -1,0 +1,51 @@
+<div layout="column" flex layout-fill class="login-wrap">
+  
+  <form name="form" ng-submit="submit()" flex layout="column" layout-align="center center" class="w-auto-xs md-whiteframe-z1 text-color">
+
+    <div class="container">
+      <div class="login-logo"></div>
+
+      <h1>Bienvenido</h1>
+      <div layout="column">
+      
+            
+        <md-input-container flex="100">
+          <md-icon>credit_card</md-icon>
+          <label for="">Nombre de Usuario (N° Documento)</label>
+          <input type="text"  required ng-model="registro_info.usuario" class="form-control" id="wai_usuario">
+
+        </md-input-container>
+
+        <md-input-container flex="100">
+          <md-icon>lock</md-icon>
+          <label for="">Contraseña</label>
+          <input type="password" required ng-model="registro_info.password" class="form-control" id="wai_password">
+        </md-input-container>
+
+        <md-input-container flex="100">
+          <md-checkbox  ng-model="registro_info.remember_me" ng-checked="registro_info.remember_me" ng-true-value="1" ng-false-value="0">
+            Recordar mi sesión
+          </md-checkbox>
+          </md-input-container>
+
+      </div>
+    </div>
+    
+    <div class="form-group" ng-if="post_response.send && !post_response.ok">
+                
+      <p class="alert alert-danger">{{post_response.mensaje}}</p>
+
+    </div>
+    <div layout="column" layout-padding>
+      <div flex class="no-padding-top">
+        <md-button type="submit" class="md-primary md-raised" ng-disabled="loading">{{text_submit}}</md-button>
+      </div>
+      <div>
+        <p>¿Primera vez en HomeSchool? <a class="highlight" ui-sref="index.inicio.crear_cuenta">Registro</a>.</p>
+        <p>Si olvidaste tu contraseña, <a class="highlight" ui-sref="index.inicio.recuperar_contrasenha">ingresa aquí</a>.</p>
+        <p class="caption muted">Esta página está protegida por Google reCAPTCHA para comprobar que no eres un robot. </p>
+      </div>
+    </div>
+  </form>
+
+</div>

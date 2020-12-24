@@ -1,0 +1,207 @@
+<div class="padding-out---" ng-init="tab_active = 'perfil'">
+	<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+		<h3 class="no-margin">Configuración de Usuario</h3>
+	</div>
+
+	<div class="box">
+		<div class="col-md-3">
+			<div style="background:url({{WAI.usuario.info | avatarUrl}}) center center; background-size:cover">
+				<div class="p-lg bg-white-overlay text-center">
+					<a href class="w-xs inline">
+						<img ng-src="{{WAI.usuario.info | avatarUrl}}" class="img-circle img-responsive avatar">
+					</a>
+					<div class="m-b m-t-sm h2">
+						<span class="text-black" ng-bind="WAI.usuario.info.nombre_completo"></span>
+					</div>
+					<p>
+						{{WAI.usuario.info.nombre_usuario}}
+					</p>
+				</div>
+			</div>
+			<ul class="nav nav-lists b-t" ui-nav>
+				<li md-colors="{'background-color': tab_active === 'perfil' ? 'primary-400' : 'background'}">
+					<a href ng-click="tab_active = 'perfil'"><md-icon>account_circle</md-icon> Datos de usuario</a>
+				</li>
+				<li md-colors="{'background-color': tab_active === 'firma' ? 'primary-400' : 'background'}">
+					<a href ng-click="tab_active = 'firma'"><md-icon>assignment_turned_in</md-icon> Firma digital</a>
+				</li>
+				<li  md-colors="{'background-color': tab_active === 'password' ? 'primary-400' : 'background'}">
+					<a href ng-click="tab_active = 'password'"><md-icon>security</md-icon> Contraseña</a>
+				</li>
+				<!--<li>
+					<a href>Account Settings</a>
+				</li>-->
+			</ul>
+		</div>
+		<div class="col-md-9 b-l bg-white bg-auto" ng-if="tab_active === 'perfil'">
+			<div class="p-md bg-light lt b-b font-bold md-title">Datos de usuario</div>
+
+			<div layout="column" layout-padding>
+				<div flex="100">
+					<form role="form" class="mt-20">
+						<div layout="row" layout-xs="column" layout-align="start center" nv-file-drop=""
+							uploader="uploader" filters="queueLimit, customFilter">
+							<div flex="30" flex-xs="100">
+								<md-icon>account_circle</md-icon> Foto de usuario
+							</div>
+							<div flex flex-xs="100"><input type="file" id="nombre_archivo"
+									onchange="var el = this; setTimeout(function(){angular.element(el).scope().uploader.queue[0].upload()},100)"
+									ng-disabled="false" nv-file-select="" uploader="uploader" /></div>
+						</div>
+
+						<div ng-if="uploader.queue.length">
+							<md-progress-linear class="md-accent" md-mode="buffer" value="uploader.queue[0].progress"
+								md-buffer-value="{{uploader.queue[0].progress}}" ng-disabled="!uploader.queue.length">
+							</md-progress-linear>
+						</div>
+
+					</form>
+				</div>
+				<div flex="100">
+					<md-divider></md-divider>
+					<form name="formulario" ng-submit="guardar('perfil')" novalidate class="mt-20">
+						<div layout="column">
+							<md-input-container flex="100">
+								<label>Email</label>
+								<md-icon>mail</md-icon>
+								<input type="email" required autocomplete="off" class="form-control" ng-model="usuario_info.email">
+							</md-input-container>
+							<md-input-container flex="100">
+								<label>Celular</label>
+								<md-icon>smartphone</md-icon>
+								<input type="tel" class="form-control" ng-model="usuario_info.celular">
+							</md-input-container>
+							<!--<md-input-container flex="100">
+								<label>Ubigeo</label>
+								<md-icon>place</md-icon>
+								<input type="text" class="form-control" ng-model="usuario_info.ubigeo">
+							</md-input-container>-->
+							<div flex="100" layout="row" layout-xs="column">
+								<md-input-container flex="33" flex-xs="100">
+									<md-icon>place</md-icon>
+									<md-label>Departamento</md-label>
+									<md-select ng-model="ubigeo.departamento">
+										<md-option ng-repeat="item in UbigeoDepartamentos" ng-value="item" ng-bind="item"></md-option>
+									</md-select>
+								</md-input-container>
+								<md-input-container flex="33" flex-xs="100">
+									<md-label>Provincia</md-label>
+									<md-select ng-model="ubigeo.provincia">
+										<md-option ng-repeat="item in UbigeoProvincias" ng-value="item" ng-bind="item"></md-option>
+									</md-select>
+								</md-input-container>
+								<md-input-container flex="33" flex-xs="100">
+									<md-label>Distrito</md-label>
+									<md-select ng-model="ubigeo.distrito">
+										<md-option ng-repeat="item in UbigeoDistritos" ng-value="item" ng-bind="item"></md-option>
+									</md-select>
+								</md-input-container>
+							</div>
+							<md-input-container flex="100">
+								<label>Dirección</label>
+								<md-icon>house</md-icon>
+								<input type="text" class="form-control" ng-model="usuario_info.direccion">
+							</md-input-container>
+							
+							<div>
+								<md-button class="md-primary md-raised" type="submit" ng-disabled="!formulario.$valid || loading">
+									Guardar
+									cambios</md-button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-md-9 b-l bg-white bg-auto" ng-if="tab_active === 'firma'">
+			<div class="p-md bg-light lt b-b font-bold md-title">Firma digital</div>
+
+			<div layout="column" layout-padding>
+	
+				<div flex="100">
+					<form name="formulario" ng-submit="guardar('firma')" novalidate class="mt-20">
+						<div layout="column">
+							<div layout="column" layout-padding nv-file-drop="" uploader="uploaders[1]" filters="queueLimit, customFilter">
+								<md-input-container flex="70">
+									<md-icon>attach_file</md-icon>
+									<input type="file" id="archivo_1"
+										onchange="var el = this; setTimeout(function(){angular.element(el).scope().uploaders[1].queue[0].upload()},100)"
+										ng-disabled="false" nv-file-select="" uploader="uploaders[1]" />
+									<div class="hint"><span ng-if="usuario_info.archivo_1"><a md-colors="{'color': 'accent-500'}" download="" target="_blank" href="./uploads/firmas/{{usuario_info.archivo_1}}"><md-icon>save_alt</md-icon> Descargar</a></span> Archivo <b>.cer</b> </div>
+								</md-input-container>	
+								<div ng-if="uploaders[1].queue.length">
+									<md-progress-linear class="md-accent" md-mode="buffer" value="uploaders[1].queue[0].progress"
+										md-buffer-value="{{uploaders[1].queue[0].progress}}" ng-disabled="!uploaders[1].queue.length">
+									</md-progress-linear>
+								</div>
+							</div>
+
+							<div layout="column" layout-padding nv-file-drop="" uploader="uploaders[2]" filters="queueLimit, customFilter">
+								<md-input-container flex="70">
+									<md-icon>attach_file</md-icon>
+									<input type="file" id="archivo_2"
+										onchange="var el = this; setTimeout(function(){angular.element(el).scope().uploaders[2].queue[0].upload()},100)"
+										ng-disabled="false" nv-file-select="" uploader="uploaders[2]" />
+									<div class="hint"><span ng-if="usuario_info.archivo_2"><a md-colors="{'color': 'accent-500'}" download="" target="_blank" href="./uploads/firmas/{{usuario_info.archivo_2}}"><md-icon>save_alt</md-icon> Descargar</a></span> Archivo <b>.key</b> </div>
+								</md-input-container>	
+								<div ng-if="uploaders[2].queue.length">
+									<md-progress-linear class="md-accent" md-mode="buffer" value="uploaders[2].queue[0].progress"
+										md-buffer-value="{{uploaders[2].queue[0].progress}}" ng-disabled="!uploaders[2].queue.length">
+									</md-progress-linear>
+								</div>
+							</div>
+							
+							<md-input-container flex="100">
+								<label>Clave pública</label>
+								<md-icon>vpn_key</md-icon>
+								<input type="text" autocomplete="off" class="form-control" ng-model="usuario_info.clave_publica">
+							</md-input-container>	
+							<div>
+								<md-button class="md-primary md-raised" type="submit" ng-disabled="!formulario.$valid || loading || subiendo[1] || subiendo[2]">
+									Guardar
+									cambios</md-button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-md-9 b-l bg-white bg-auto" ng-if="tab_active === 'password'">
+			<div class="p-md bg-light lt b-b font-bold md-title">Editar contraseña</div>
+
+			<div layout="column" layout-padding>
+				<div flex="100">
+					<form name="formulario_password" ng-submit="guardar('password')" novalidate class="mt-20">
+						<div layout="column">
+							<md-input-container flex="100">
+								<label>Contraseña actual</label>
+								<md-icon>security</md-icon>
+								<input type="password" name="old_password" required autocomplete="off" class="form-control" ng-model="usuario_password.old_password">
+							</md-input-container>
+							<md-input-container flex="100">
+								<label>Nueva contraseña</label>
+								<md-icon>security</md-icon>
+								<input type="password" name="new_password" ng-minlength="6" required autocomplete="off" class="form-control" ng-model="usuario_password.new_password">
+							</md-input-container>
+							<md-input-container flex="100">
+								<label>Repetir Nueva contraseña</label>
+								<md-icon>security</md-icon>
+								<input type="password" name="re_new_password" ng-minlength="6" required autocomplete="off" class="form-control" ng-model="usuario_password.re_new_password">
+							</md-input-container>
+							<div>
+								<md-button class="md-primary md-raised" type="submit" ng-disabled="!formulario_password.$valid || loading || usuario_password.new_password != usuario_password.re_new_password || usuario_password.old_password === usuario_password.new_password">
+									Guardar
+									cambios</md-button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

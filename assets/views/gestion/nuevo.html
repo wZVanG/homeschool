@@ -1,0 +1,261 @@
+<form name="formulario" ng-submit="guardar()" novalidate>
+    <md-content layout-padding class="no-scroll">
+        
+        
+        <div layout-padding layout-align="start center" layout="row">
+            
+            <md-radio-group flex="50" layout="row" ng-model="registro_info.id_servicio" flex class="ml-10" ng-disabled="!seleccionar_tipo_origen">
+
+                <md-radio-button value="1" class="md-primary" ng-style="{'font-weight': registro_info.id_servicio == 1 ? 'bold' : 'normal'}" ng-show="seleccionar_tipo_origen || (!seleccionar_tipo_origen && registro_info.id_servicio == 1)">Silver</md-radio-button>
+                <md-radio-button value="2" class="md-accent" ng-style="{'font-weight': registro_info.id_servicio == 2 ? 'bold' : 'normal'}" ng-show="seleccionar_tipo_origen || (!seleccionar_tipo_origen && registro_info.id_servicio == 2)">Gold</md-radio-button>
+
+            </md-radio-group>
+            
+        </div>
+        <md-card>
+            <md-card-content>
+
+                <div layout="row">
+                    <md-autocomplete flex class="no-margin"
+                    md-input-icon="assignment_ind"
+                    md-no-asterisk
+                    ng-required="false"
+                    md-input-name="id_cliente"
+                    md-selected-item="BuscarTemp.id_cliente"
+                    md-search-text="BuscarTextos.id_cliente"
+                    md-items="acItem in BuscarFn.clientes({term: BuscarTextos.id_cliente})"
+                    md-item-text="acItem.nombre_completo"
+                    md-floating-label="Cliente" md-require-match 
+                    md-autoselect="true"
+                    md-menu-class="md-autocomplete-card md-3-line">
+                        <md-item-template>
+                            <div layout="row" layout-fill layout-align="start center">
+                                <div class="md-autocomplete-card-avatar">
+                                    <!--<md-icon>assignment_ind</md-icon> -->
+                                    <div avatar avatar-url="acItem.foto ? './uploads/clientes/' + acItem.foto : './assets/images/no_avatar.png'"></div>
+                                </div>
+                                <div class="md-autocomplete-card-content">
+                                    <p md-highlight-text="BuscarTextos.id_cliente" md-highlight-flags="i">{{acItem.nombre_completo}}</p>
+                                    <div><small md-highlight-text="BuscarTextos.id_cliente" md-highlight-flags="i">{{acItem.numero_documento}}</small></div>
+                                </div>
+                            </div>
+                        </md-item-template>											
+                    </md-autocomplete>
+
+                    <div>
+                        <div class="cliente-botones-full">
+                            <md-button class="md-raised" ng-disabled="!BuscarTemp.id_cliente" ng-click="crud_cliente.agregar($event, BuscarTemp.id_cliente.id_cliente, true, crud_cliente_callbacks, [0])">
+                                <md-icon>assignment_ind</md-icon> Cliente
+                            </md-button>
+                            <md-button  class="md-raised md-primary" ng-click="crud_cliente.agregar($event, undefined, true, crud_cliente_callbacks, [0])">
+                                <md-icon>add</md-icon> Nuevo Cliente
+                            </md-button>
+                        </div>
+                        <div class="cliente-botones-small">
+                            <md-button class="md-icon-button md-raised" ng-disabled="!BuscarTemp.id_cliente" ng-click="crud_cliente.agregar($event, BuscarTemp.id_cliente.id_cliente, true, crud_cliente_callbacks, [0])">
+                                <md-icon>assignment_ind</md-icon>
+                            </md-button>
+                            <md-button  class="md-icon-button md-raised" ng-click="crud_cliente.agregar($event, undefined, true, crud_cliente_callbacks, [0])">
+                                <md-icon>add</md-icon>
+                            </md-button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div layout="column" layout-xs="column">
+
+                    <div  layout="row" layout-xs="column">
+
+                        <div layout="row" layout-xs="column" flex="50" flex-xs="100">
+                                                    
+<md-switch hide-xs ng-disabled="true" ng-model="registro_info.flag_compra_cliente" ng-true-value="1" ng-false-value="0" flex="50" flex-xs="100">
+    Compra realizada por el cliente
+    </md-switch>
+    <md-switch ng-model="registro_info.flag_envio_cliente" ng-true-value="1" ng-false-value="0"  flex="50" flex-xs="100">
+    Envío a nombre del cliente
+    </md-switch>
+                        </div>
+                        <md-input-container flex="25" flex-xs="100">
+                            <md-icon>language</md-icon>
+                            <label>Proveedor</label>
+                            <md-select ng-required="true" ng-model="registro_info.id_proveedor">
+                                <md-option ng-repeat="param in WAI.parametros.proveedor  | filter:{estado: 1} | orderBy: 'nombre'"
+                                    ng-value="+param.id_proveedor">
+                                   <img ng-src="./uploads/proveedor/{{param.foto}}" width="28" height="28" /> {{param.nombre}}
+                                </md-option>
+                            </md-select>
+                        
+                        </md-input-container>
+
+                        <!--<md-input-container flex="25" flex-xs="100">
+                            <md-icon>home_work</md-icon>
+                            <label>Recepción</label>
+                            <md-select ng-required="true" ng-model="registro_info.id_local_recepcion">
+                                <md-option ng-repeat="param in WAI.parametros.locales  | filter:{estado: 1} | orderBy: 'nombre'"
+                                    ng-value="+param.id_local">{{param.nombre}}</md-option>
+                            </md-select>
+                        
+                        </md-input-container>-->
+                     
+                    </div>
+
+                </div>
+            </md-card-content>
+        </md-card>
+
+        <div  layout="column">
+            <div >
+                <div layout="row" layout-align="end center">
+                    <div flex>
+                        <md-subheader class="md-no-sticky" >Productos ({{productos.length}})</md-subheader>
+                    </div>
+                    
+                </div>
+
+            </div>
+            
+            <div layout="row" layout-xs="column" class="producto-wrap" layout-padding-lg>
+                <div flex="33" flex-xs="100" layout="column">
+                    <md-input-container class="no-margin--">
+                        <md-icon>bubble_chart</md-icon>
+                        <label>Categoría</label>
+                        <md-select ng-model="producto.id_categoria">
+                            <md-option ng-repeat="param in WAI.parametros.categorias  | filter:{estado: 1} | orderBy: 'nombre'"
+                                ng-value="+param.id_categoria">{{param.nombre}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="no-margin--">
+                        <md-icon md-svg-src="./assets/images/barcode.svg"></md-icon>
+                        <label>UPC</label>
+                        <input type="text" ng-model="producto.upc" >
+                    </md-input-container>
+                        
+                    <md-input-container class="no-margin--">
+                        <md-icon>short_text</md-icon>
+                        <label>Nombre del producto</label>
+                        <input type="text" ng-model="producto.nombre_producto" >
+                    </md-input-container>
+
+                                  
+
+                    <div layout="row" id="foto_wrap" hidden>
+                        
+                        <md-input-container flex flex-xs="100">
+                            <md-icon>image</md-icon>
+                            <label>Foto</label>
+                            <input  name="foto" autocomplete="off" type="text"
+                                ng-model="producto.foto" 
+                                wai-file-module="productos" wai-file-model="producto.foto" 
+                                wai-file-accept="'image/*'" 
+                                wai-file-pattern="'image/*'"
+                                wai-file-resize="{width: 800}"
+                                >
+                        </md-input-container>
+                    
+                    </div>
+                </div>
+                <div flex="33" flex-xs="100" layout="row" layout-align="center center" class="producto-wrap-img">
+                    <img ng-click="openUpload()" ng-if="!producto.foto" ng-src="./assets/images/no_producto.png" alt="">
+                    <img ng-click="openUpload()" ng-if="producto.foto" ng-src="./uploads/productos/{{producto.foto}}" alt="">
+                </div>
+
+                <div flex="33" flex-xs="100" layout="column">
+                    <div layout="row">
+                        <md-input-container flex="66">
+                            <md-icon>label</md-icon>
+                            <label>U. medida</label>
+                            <md-select ng-model="producto.id_unidad_medida">
+                                <md-option ng-repeat="param in WAI.parametros.unidad_medida  | filter:{estado: 1} | orderBy: 'nombre'"
+                                    ng-value="+param.id_unidad_medida">{{param.nombre}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container flex="33">
+                            <md-icon></md-icon>
+                            <label>Cantidad</label>
+                            <input type="number" ng-model="producto.cantidad" >
+                        </md-input-container>
+                    </div>
+                    <md-input-container class="no-margin--">
+                        <md-icon>monetization_on</md-icon>
+                        <label>Precio por {{producto.id_unidad_medida | parametroCollection: 'unidad_medida' : 'id_unidad_medida' : 'nombre'}}</label>
+                        <input type="number" ng-model="producto.precio" >
+                    </md-input-container>
+
+                </div>
+            </div>
+
+
+            <!--<div layout="row" ng-repeat="uploader in uploaders">
+                <div flex md-truncate>
+                    <div><input type="file" num="{{$index}}" id="archivo_{{$index}}" onchange="var el = this; setTimeout(function(){angular.element(el).scope().uploaders[el.getAttribute('num')].queue[0].upload()},100)" ng-disabled="!registro_info.flag_adjunto || uploader.queue.length" nv-file-select="" uploader="uploader" /></div>
+                    <div ng-if="uploader.queue.length">
+                        
+                        <md-progress-circular ng-show="uploader.queue[0].progress" class="md-hue-2" md-diameter="20px"></md-progress-circular>
+
+                        <span ng-if="uploader.queue[0].isSuccess">{{registro_info.archivos[$index]}}</span>
+
+                        <md-icon ng-show="uploader.queue[0].isSuccess" class="text-success">check</md-icon>
+                        <md-icon ng-show="uploader.queue[0].isCancel" class="text-warning">block</md-icon>
+                        <md-icon ng-show="uploader.queue[0].isError" class="text-danger">close</md-icon>
+
+                        
+                    </div>
+                    <div ng-if="registro_info['archivos'][$index]">
+                        <a md-colors="{'color': 'accent-500'}" href="./uploads/tramite___tmp/{{registro_info['archivos'][$index][0]}}" target="_blank">
+                            <md-icon>attach_file</md-icon> 
+                            {{registro_info['archivos'][$index][1]}}
+                        </a>
+                    </div>
+                </div>
+                <md-button ng-show="registro_info['archivos'][$index]" class="md-icon-button" ng-click="eliminarArchivo($index, $index)">
+                    <md-icon>delete</md-icon>
+                </md-button>
+            </div>-->
+
+            <div layout="row">
+                <md-button flex class="md-raised md-accent" ng-disabled="!validProducto()" ng-click="agregarProducto()">{{textAgregarProducto()}} <md-icon>arrow_downward</md-icon></md-button>
+            </div>
+
+            <div>
+                <table class="table">
+                    <tr>
+                        <th width="80">U.Medida</th>
+                        <th width="50">Cant.</th>
+                        <th>Producto</th>
+                        <th width="80">Precio</th>
+                    </tr>
+
+                    <tr ng-repeat="item in productos">
+                        <td>{{item.id_unidad_medida | parametroCollection:'unidad_medida':'id_unidad_medida':'nombre'}}</td>
+                        <td>{{item.cantidad}}</td>
+                        <td>
+                            <img ng-if="item.foto" width="50" height="50" ng-src="./uploads/productos/{{item.foto}}" alt="">
+                            {{item.nombre_producto}}
+                        </td>
+                        <td>{{item.precio | moneda}}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </md-content>
+
+    <!--<md-button ng-click="test()">TEST</md-button>-->
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            
+            <span ng-show="uploader.queue[0].isUploading" class="text-muted text-small">Subiendo archivo...</span>
+            <md-button type="submit" class="md-accent md-raised"
+                ng-disabled="loading || !registro_info.id_proveedor || !productos.length || !BuscarTemp.id_cliente || (uploader.queue.length ? !uploader.queue[0].isSuccess : false)">
+                <md-icon>save</md-icon> Guardar
+            </md-button>
+        </div>
+    </div>
+
+</form>

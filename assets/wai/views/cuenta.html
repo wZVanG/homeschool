@@ -1,0 +1,77 @@
+<div layout="row" layout-xs="column">
+	<div flex="50" flex-xs="100">
+
+		<h2 class="highlight">Usuario</h2>
+
+		<md-card>
+
+			<md-card-content>
+				<div>
+					<img class="avatar"
+						ng-src="{{usuario.info.foto ? './uploads/avatars/' + usuario.info.foto : './assets/images/no_avatar.png'}}"
+						alt="">
+				</div>
+				<p>Registrado {{usuario.info.fecha_registro | amTimeAgo}} <b>({{usuario.info.fecha_registro |
+						amDateFormat:'DD/MMMM/YYYY'}})</b></p>
+
+				<p><strong class="highlight">Nombre de usuario:</strong> {{usuario.info.nombre_usuario}}</p>
+				<p><strong class="highlight">E-mail:</strong> {{usuario.info.email}}</p>
+				<p><strong class="highlight">Contraseña:</strong> *******</p>
+
+			</md-card-content>
+		</md-card>
+
+	</div>
+	<div flex="50" flex-xs="100">
+
+		<h2 class="highlight">Cambiar contraseña</h2>
+
+		<md-card>
+
+			<md-card-content>
+
+				<div layout="column" layout-padding>
+					<div flex="100">
+						<form name="formulario_password" ng-submit="guardar('password')" novalidate class="mt-20">
+
+							<div layout="column" layout-padding>
+
+								<md-input-container flex="100">
+									<md-icon>no_encryption</md-icon>
+									<label for="">Contraseña actual</label>
+									<input type="password" name="old_password" required autocomplete="off"
+										ng-model="usuario_password.old_password">
+								</md-input-container>
+
+								<md-input-container flex="100">
+									<md-icon>lock</md-icon>
+									<label>Nueva contraseña</label>
+									<input type="password" name="new_password" ng-minlength="6" required
+										autocomplete="off" ng-model="usuario_password.new_password">
+								</md-input-container>
+
+								<md-input-container flex="100">
+									<md-icon>lock</md-icon>
+									<label>Repetir la nueva contraseña</label>
+									<input type="password" name="re_new_password" ng-minlength="6" required
+										autocomplete="off" ng-model="usuario_password.re_new_password">
+								</md-input-container>
+
+								<md-input-container flex="100">
+									<md-button class="md-primary md-raised"
+										ng-disabled="!formulario_password.$valid || loading || usuario_password.new_password != usuario_password.re_new_password || usuario_password.old_password === usuario_password.new_password">
+										Guardar Cambios</md-button>
+								</md-input-container>
+
+							</div>
+
+
+
+						</form>
+					</div>
+				</div>
+			</md-card-content>
+		</md-card>
+
+	</div>
+</div>

@@ -1,0 +1,13 @@
+<div class="play-content">
+<!--https://github.com/sampotts/plyr#options-->
+    <div class="top" id="play-content-top">
+        <a ui-sref="index.video({seo_url: video.seo_url})">
+            <img src="./assets/lumine/images/back-arrow.svg" alt="">
+
+            <h1>{{video.title}}</h1>
+        </a>
+    </div>
+    <!--<div play-video data-plyr-provider="vimeo"  video-url="video.url" data-plyr-config='{ "title": "Example Title" }'></div>-->
+    <div play-video video-url="video.url"></div>
+</div>
+

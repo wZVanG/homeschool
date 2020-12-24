@@ -1,0 +1,41 @@
+<div layout="column" flex layout-fill class="login-wrap">
+  
+  <form name="form" ng-submit="login()" flex layout="column" layout-align="center center" class="w-auto-xs md-whiteframe-z1--disabled text-color">
+
+    <div>
+      <div class="login-logo"></div>
+      <div class="m-b text-sm--disabled">
+        <b>Inicio de sesión</b>. Escribe tus credenciales para ingresar al panel de administración de <b>{{$root.WAI.config.sistema.titulo_corto}}</b>
+      </div>
+      <div layout="column">
+        <md-input-container flex="100">
+          <label for="">Usuario</label>
+          <md-icon>account_box</md-icon>
+          <input type="text" md-no-asterisk autocomplete="off" ng-model="user.nombre_usuario" ng-required="true">
+        </md-input-container>
+        <md-input-container flex ng-init="show_password = false">
+          <label for="">Contraseña</label>
+          <md-icon>security</md-icon>
+          <input type="{{show_password ? 'text' : 'password'}}" md-no-asterisk autocomplete="off" ng-model="user.clave" ng-required="true">
+          <div class="toggle-password"><md-button ng-click="show_password = !show_password" class="md-icon-button"><md-icon>{{!show_password ? 'visibility' : 'visibility_off'}}</md-icon></md-button></div>
+          
+        </md-input-container>
+  
+      <md-input-container ng-if="cargos_login.length">
+        <label for="">Cargo</label>
+        <md-icon>group</md-icon>
+        <md-select ng-model="user.cargo_index">
+            <md-option ng-value="-2">Ingresar como usuario principal</md-option>
+            <md-option ng-repeat="item in cargos_login" ng-value="$index">
+                {{item.oficina}} - {{item.cargo}} <md-icon>keyboard_arrow_right</md-icon> {{item.cargo_nombre_completo}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+      </div>
+    </div>
+    <md-button type="submit" class="md-raised md-primary btn-block p-h-md">Ingresar</md-button>
+    
+  </form>
+
+</div>

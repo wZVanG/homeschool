@@ -1,0 +1,119 @@
+<form action="" class="modal-large">
+	<md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedIndex" layout-fill flex>
+		<md-tab>
+			<md-tab-label>
+				<md-icon>remove_red_eye</md-icon> Ver
+			</md-tab-label>
+			<md-tab-body>
+		
+				<md-subheader>
+			
+							<div>
+								<md-icon>date_range</md-icon> Se envió el {{tramite.fecha | amDateFormat: 'LLLL'}}
+							</div>
+				
+				</md-subheader>
+				<md-divider></md-divider>
+
+
+				<div layout="column" layout-padding>
+
+					<div layout="row">
+						<div flex="25"><b>Servicio</b></div>
+						<div flex="25">{{tramite.servicio}} </div>
+						<div flex="25"><b>Cliente</b></div>
+						<div flex>{{tramite.cliente}}</div>
+					</div>
+
+					<div layout="row">
+						<div flex="25"><b>U. Medida</b></div>
+						<div flex="25">{{tramite.unidad_medida}} </div>
+						<div flex="25"><b>Producto</b></div>
+						<div flex>{{tramite.nombre_producto}}</div>
+					</div>
+			
+					<div ng-if="tramite.foto">
+						<a href="./uploads/productos/{{tramite.foto}}" target="_blank">
+							<img ng-src="./uploads/productos/{{tramite.foto}}" alt="" width="120" class="md-avatar">
+						</a>
+						
+					</div>
+					
+			
+				</div>
+
+		
+
+				<md-divider></md-divider>
+			
+
+			</md-tab-body>
+		</md-tab>
+		<md-tab>
+			<md-tab-label>
+				<md-icon>history</md-icon> Movimiento del producto <span class="badge bg-white">{{items.length}}</span>
+			</md-tab-label>
+			<md-tab-body>
+				<md-content layout-fill>
+
+				<section>
+
+				<div class="m-r-sm" id="historial">
+					<ul class="timeline ng-scope" ng-class="{'timeline-center': center}">
+						<li hidden ng-repeat-start="item in items | orderBy:'fecha_detalle' track by $index" ></li>
+						<li class="tl-header list-item-static" ng-show="timelineHeader(item)"  ng-style="{'animation-delay': ($index * 0.15 + 0.25) + 's'}">
+							<span class="badge pos-rlt" ng-class="{'bg-dark': item.tipo_movimiento == 3, 'bg-success': item.tipo_movimiento == 2, 'bg-primary': item.tipo_movimiento == 1}">
+								<b class="arrow bottom pull-in" ng-class="{'b-dark': item.tipo_movimiento == 3, 'b-success': item.tipo_movimiento == 2, 'b-primary': item.tipo_movimiento == 1}"></b>{{timelineText(item)}}
+							</span>
+						</li>
+						<li class="tl-item tl-left list-item-static" ng-class="{'active': $last}" ng-style="{'animation-delay': ($index * 0.15 + 0.25) + 's'}"
+							ng-init="mostrar_archivos = false">
+						
+								<div class="tl-wrap" ng-class="{'b-dark': item.tipo_movimiento == 3, 'b-success': item.tipo_movimiento == 2, 'b-primary': item.tipo_movimiento == 1}">
+								<span class="tl-date text-muted" title="{{item.fecha_detalle}}">{{item.fecha_detalle | amTimeAgo}} <br /> <i class="text-small">{{item.fecha_detalle | amDateFormat:'hh:mm a'}}</i></span>
+								<div class="tl-content panel panel-card dk block">
+								  <span class="arrow b-white left pull-top hidden-left"></span>
+								  <span class="arrow b-white right pull-top visible-left"></span>
+								  <div class="text-lt p-h m-b-sm">
+									{{item.local_detalle}} - {{item.nombre_producto}} <span class="label" ng-class="{'bg-dark': item.tipo_movimiento == 3, 'bg-success': item.tipo_movimiento == 2, 'bg-primary': item.tipo_movimiento == 1}">
+										{{item.estado_envio}}</span> 
+
+								  </div>
+								  <div class="panel-body b-t b-light p-h">
+
+									<div md-truncate><small><i class="fa fa-check"></i> {{item.nombre_usuario}} (<i>{{item.usuario_nombre_completo}}</i>)</small></div>
+									
+									<!-- Destino actual solo al último movimiento-->
+									<div ng-if="$last">
+										<div><md-icon>trending_down</md-icon> <span class="label bg-light"> Actualmente en:</span></div>
+										<b>{{item.local_actual}}</b>
+									</div>
+									<!-- //Destino actual solo al último movimiento-->
+								  </div>             
+								</div>
+							  </div>
+						</li>
+						<li ng-repeat-end hidden></li>
+				
+					  </ul>
+				</div>
+				</section>
+			</md-content>
+			
+			
+			</md-tab-body>
+		</md-tab>
+	</md-tabs>
+
+
+	<md-divider></md-divider>
+
+	<div layout-padding layout="column">
+		<div layout="row" layout-align="end center">
+			<md-button class="md-raised" ng-click="cancel()">
+				<md-icon>reply</md-icon> Cerrar
+			</md-button>
+		</div>
+	</div>
+
+</form>

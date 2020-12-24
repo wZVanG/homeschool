@@ -1,0 +1,88 @@
+
+<!-- saved from url=(0059)http://flatfull.com/themes/materil/angular/views/aside.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body><div class="box bg-white">
+  <div class="navbar md-whiteframe-z1 no-radius"  ng-class="$state.current.data.theme ? $state.current.data.theme.primary : app.setting.theme.primary">
+      <!-- brand -->
+      <a class="navbar-brand">
+        
+        <img src="./assets/images/logo/logito_horizontal.png?2" alt="." style="max-height: 36px;  vertical-align: middle;">
+        
+      </a>
+      <!-- / brand -->
+  </div>
+  <div class="box-row">
+    <div class="box-cell scrollable hover">
+      <div class="box-inner">
+        <div class="p hidden-folded pink-50" style="background-image:url(assets/images/bg.png); background-size:cover">
+          <div class="rounded w-64 bg-white pos-rlt m-a">
+            <img ng-src="{{WAI.usuario.info | avatarUrl}}" class="img-responsive rounded avatar">
+          </div>
+          <a class="block m-t-sm" ui-toggle-class="hide, show" target="#nav, #account">
+            <span class="block font-bold">{{WAI.usuario.info.reemplazo ? WAI.usuario.info.reemplazo.reemplazo_nombre_completo : WAI.usuario.info.nombre_completo}}</span>
+            <span class="pull-right auto">
+              <i class="fa inline fa-caret-down"></i>
+              <i class="fa none fa-caret-up"></i>
+            </span>
+            <small ng-show="WAI.usuario.info.reemplazo">Iniciado como</small> {{WAI.usuario.info.reemplazo ? WAI.usuario.info.reemplazo.cargo_nombre_completo : WAI.usuario.info.nombre_usuario}} 
+            <div ng-show="WAI.usuario.info.reemplazo"><small>{{WAI.usuario.info.reemplazo.oficina}} - {{WAI.usuario.info.reemplazo.cargo}}</small></div>
+          </a>
+        </div>
+        <div id="nav" ng-include="&#39;assets/views/partials/aside.nav.uikit.html&#39;"></div>
+        <div id="account" class="hide m-v-xs">
+          <nav>
+            <ul class="nav">
+              <!--<li>
+                <a md-ink-ripple="" ui-sref="page.profile">
+                  <md-icon>account_circle</md-icon> 
+                  <span>Cuenta</span>
+                </a>
+              </li>-->
+              <li>
+                <a md-ink-ripple="" ui-sref="usuario.configuracion">
+                  <md-icon>settings</md-icon>
+                  <span>Configuración</span>
+                </a>
+              </li>
+              <li>
+                <a md-ink-ripple="" ng-click="WAI.logout()">
+                  <md-icon>power_settings_new</md-icon>
+                  <span>Salir</span>
+                </a>
+              </li>
+              <li class="m-v-sm b-b b"></li>
+              <!--<li>
+                <a md-ink-ripple="" ui-fullscreen="">
+                  <md-icon>fullscreen</md-icon>
+                  <span>Pantalla completa</span>
+                </a>
+              </li>-->
+              <li>
+                <div class="nav-item">
+                  <label class="md-check">
+                    <input type="checkbox" ng-model="app.setting.asideFolded">
+                    <i class="{{app.setting.theme.accent}} no-icon"></i>
+                    <span class="hidden-folded">Reducir menú</span>
+                  </label>
+                </div>
+              </li>
+              <!--<li class="p p-v-sm hidden-folded">
+                <div ng-include="&#39;assets/views/partials/aside.setting.html&#39;"></div>
+              </li>-->
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <ul class="nav b-t b">
+      <li class="copyright">
+        
+        <a href="https://wai.technology" class="text-center" target="_blank" md-ink-ripple="">
+          Desarrollado por <b>WAI Technology</b> <img src="./assets/images/logo/wai_logo.svg" width="16" height="16" /> 
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</body></html>

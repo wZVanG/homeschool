@@ -1,0 +1,42 @@
+<slick class="slider" settings="slickConfig" ng-if="true">
+
+    <div ng-repeat="group in videoGroups" class="slide-item">
+        <div class="container-slider-group">
+            <div class="arrow-left">
+                <i class="icon-angle-left"></i>
+            </div>
+            
+            <a class="item item-{{$index+1}}" ui-sref="index.video({id_video: item.movie_id, seo_url: item.seo_url})" ng-style="{backgroundImage: 'url(./uploads/thumb/' + item.thumb + ')'}" ng-repeat="item in group.items">
+                
+                <div class="body-item">
+                    <div class="body-item-1">
+                    <div class="play">
+                        <span>
+                        <img src="./assets/lumine/images/play.svg" alt="" />
+                    </span>
+                    </div>
+                    </div>
+                    <div class="title body-item-2" ng-bind="item.title"></div>
+                    <div class="properties body-item-3">
+                    <!--<span class="match">{{item.precition}}</span>-->
+                    <span class="year" ng-bind="item.year"></span>
+                    <!--<span class="age-limit">{{item.age}}</span>
+                    <span class="time">{{item.duration}}</span>-->
+                    </div>
+                    <p class="description body-item-4" ng-bind="item.description_short"></p>
+                    <div class="body-item-5">
+                    
+                
+                    </div>
+                
+                </div>
+            </a>
+            
+            <div class="arrow-right">
+                <i class="icon-angle-right"></i>
+            </div>
+            </div>
+    </div>
+
+</slick>
+

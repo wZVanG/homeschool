@@ -1,0 +1,113 @@
+
+<!-- saved from url=(0078)http://flatfull.com/themes/materil/angular/assets/views/partials/aside.nav.uikit.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body><nav ui-nav="">
+  <ul class="nav">
+    <!--<li class="nav-header m-v-sm hidden-folded">
+      Gestión Documental
+    </li>-->
+    <!--<li ng-class="{active:$state.includes(&#39;gestion&#39;)}">-->
+ <!--
+      <li class="active">
+        <a md-ink-ripple="">
+          <span class="pull-right text-muted">
+            <i class="fa fa-caret-down"></i>
+          </span>
+          
+          <md-icon>call_split</md-icon>
+          <span class="font-normal">Gestión Documental</span>
+        </a>
+        <ul class="nav nav-sub">
+          <li class="active">
+            <a md-ink-ripple="" >
+              <span class="pull-right text-muted">
+                <i class="fa fa-caret-down"></i>
+              </span>
+              <span class="font-normal"><md-icon>folder_shared</md-icon> Documentos</span>
+            </a>
+            <ul class="nav nav-sub">
+              <li ui-sref-active="active">
+                <a md-ink-ripple="" ui-sref="gestion.tramite.nuevo"><md-icon>add</md-icon> Nuevo</a>
+              </li>
+              <li ui-sref-active="active">
+                <a md-ink-ripple="" ui-sref="gestion.tramite.pendientes"><md-icon>assignment_late</md-icon> Pendientes</a>
+              </li>   
+              <li ui-sref-active="active">
+                <a md-ink-ripple="" ui-sref="gestion.tramite.enviados"><md-icon>send</md-icon> Enviados</a>
+              </li>   
+              <li ui-sref-active="active">
+                <a md-ink-ripple="" ui-sref="gestion.tramite.recibidos"><md-icon>list</md-icon> Recibidos</a>
+              </li>   
+              <li ui-sref-active="active">
+                <a md-ink-ripple="" ui-sref="gestion.tramite.archivados"><md-icon>assignment_returned</md-icon> Archivados</a>
+              </li>   
+            </ul>          
+          </li> 
+          <li ui-sref-active="active" ng-show="WAI.usuario.tienePermisos([3])">
+            <a md-ink-ripple="" ui-sref="gestion.consultas"><md-icon>search</md-icon> Consultas</a>  
+          </li>   
+        </ul>
+      </li>-->
+    <li class="active" ng-show="WAI.usuario.tienePermisos([3, 2])">
+      <a md-ink-ripple="">
+        <span class="pull-right text-muted">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <!--<i class="pull-right up"><b class="badge no-bg">2</b></i>-->
+        <md-icon  md-svg-src="./assets/images/logo/logo_gray.svg"></md-icon>
+        <span class="font-normal">VitaSchool</span>
+      </a>
+      <ul class="nav nav-sub">
+        <li class="active">
+          <a md-ink-ripple="" >
+            <span class="pull-right text-muted">
+              <i class="fa fa-caret-down"></i>
+            </span>
+            <span class="font-normal"><md-icon>card_travel</md-icon> HomeSchool</span>
+          </a>
+          <ul class="nav nav-sub">
+            <li ui-sref-active="active">
+              <a md-ink-ripple="" ui-sref="homeschool.asignaciones"><md-icon>list</md-icon> Inscripciones</a>
+            </li>
+            <li ui-sref-active="active">
+              <a md-ink-ripple="" ui-sref="homeschool.periodos_detalles_tareas"><md-icon>content_copy</md-icon> Tareas</a>
+            </li>   
+            <li ui-sref-active="active">
+              <a md-ink-ripple="" ui-sref="homeschool.tracking.listado"><md-icon>check</md-icon> Revisión</a>
+            </li> 
+          </ul>          
+        </li> 
+        <li ui-sref-active="active" ng-if="WAI.usuario.tienePermisos([3])">
+          <a md-ink-ripple="" ui-sref="administracion.usuarios"><md-icon>account_circle</md-icon> Usuarios</a>
+        </li>
+        <li ui-sref-active="active" ng-if="WAI.usuario.tienePermisos([3])">
+          <a md-ink-ripple="" ui-sref="homeschool.libros"><md-icon>bookmarks</md-icon> Libros</a>
+        </li>
+        <li ui-sref-active="active" ng-if="WAI.usuario.tienePermisos([3])">
+          <a md-ink-ripple="" ui-sref="administracion.periodos"><md-icon>timeline</md-icon> Periodos</a>
+        </li>
+
+      </ul>
+    </li>
+
+    <li class="active" ng-show="WAI.usuario.tienePermisos([3])">
+      <a md-ink-ripple="">
+        <span class="pull-right text-muted">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <!--<i class="pull-right up"><b class="badge no-bg">2</b></i>-->
+        <md-icon>settings</md-icon>
+        <span class="font-normal">Configuración</span>
+      </a>
+      <ul class="nav nav-sub">
+   
+
+        <li ui-sref-active="active" ng-if="WAI.usuario.tienePermisos([3])" class="size-medium">
+          <a md-ink-ripple="" ui-sref="configuracion.general"><md-icon>settings_applications</md-icon> Configuración Grl.</a>
+        </li>
+ 
+      </ul>
+    </li>
+    <!--<li class="b-b b m-v-sm"></li>-->
+  </ul>
+</nav>
+</body></html>

@@ -1,0 +1,47 @@
+<div class="center-block w-xxl w-auto-xs p-v-md">
+    <div class="navbar">
+      <div class="navbar-brand m-t-lg text-center logo">
+        <div class="login-logo"></div>
+        <div class="login-logo-title">{{$root.WAI.config.sistema.titulo}}</div>
+      </div>
+    </div>
+  
+    <div class="p-lg panel md-whiteframe-z1 text-color m panel-login">
+      <div class="m-b text-sm">
+        <b>Bienvenido</b>. Escriba sus credenciales para ingresar a su cuenta de administración de {{$root.WAI.config.sistema.titulo_corto}}
+      </div>
+      <form name="form" ng-submit="login()">
+        <div layout="column">
+          <md-input-container>
+            <label for="">Usuario</label>
+            <md-icon>account_box</md-icon>
+            <input type="text" md-no-asterisk autocomplete="off" ng-model="user.nombre_usuario" ng-required="true">
+          </md-input-container>
+          <md-input-container>
+            <label for="">Contraseña</label>
+            <md-icon>security</md-icon>
+            <input type="password" md-no-asterisk  autocomplete="off" ng-model="user.clave" ng-required="true">
+          </md-input-container>
+    
+          <md-input-container ng-if="cargos_login.length">
+            <label for="">Cargo</label>
+            <md-icon>group</md-icon>
+            <md-select ng-model="user.cargo_index">
+                <md-option ng-value="-2">Ingresar como usuario principal</md-option>
+                <md-option ng-repeat="item in cargos_login" ng-value="$index">
+                    {{item.oficina}} - {{item.cargo}} <md-icon>keyboard_arrow_right</md-icon> {{item.cargo_nombre_completo}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+  
+          <md-button type="submit" class="md-raised md-primary btn-block p-h-md">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  
+    <!--<div class="p-v-lg text-center">
+      <div class="m-b"><button ui-sref="access.forgot-password" class="md-btn">Forgot password?</button></div>
+      <div>Do not have an account? <button ui-sref="access.signup" class="md-btn">Create an account</button></div>
+    </div>-->
+  </div>
+  

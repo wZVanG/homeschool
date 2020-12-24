@@ -1,0 +1,155 @@
+
+<div layout="row" layout-xs="column" layout-padding layout-align="center center" class="mt-3">
+
+    <md-input-container flex="40" flex-xs="100">
+        <label>Periodo Lectivo</label>
+        <md-select ng-model="registro_info.periodo" ng-disabled="cargando_disponibles">
+            <md-option ng-disabled="!validaPeriodo(item)" ng-value="item" ng-repeat="item in info.periodos | orderBy:'-id_periodo'">
+                {{item.nombre}}
+            </md-option>
+        </md-select>
+        <div class="hint">
+            <div class="md-caption text-muted"><md-icon>date_range</md-icon> Inicio: {{registro_info.periodo.fecha_inicio | amDateFormat:'LLLL'}}</div>
+            <div class="md-caption text-muted"><md-icon>date_range</md-icon> Fin: {{registro_info.periodo.fecha_fin | amDateFormat:'LLLL'}}</div>
+        </div>
+    </md-input-container>
+
+    
+    <div flex  flex-xs="100">
+        <strong><md-icon>dynamic_feed</md-icon> Instrucciones:</strong>
+        <div>- Usted puede elegir hasta <b>{{registro_info.periodo.maximo_libros}} libros</b></div>
+        <div>- Arrastre los items a las que desee inscribirse</div>
+    </div>
+
+    
+</div>
+
+<md-divider></md-divider>
+
+<div ng-show="cargando_disponibles" layout-padding layout="row" layout-align="center center">
+    <div class="md-caption">Cargando...</div>
+</div>
+
+<div class="typesDemo mt-3" layout="row" ng-show="!cargando_disponibles">
+
+	<div flex="50" class="inscripcion-disponibles" layout-padding >
+                
+            <!--<ul dnd-list="list.people"
+            dnd-allowed-types="list.allowedTypes"
+            dnd-disable-if="list.people.length >= list.max">-->        
+
+        <div class="inscripcion-disponibles--region">
+
+
+                    
+            <ul dnd-list="disponibles.items"
+            dnd-allowed-types="disponibles.allowedTypes"
+            >
+
+                <li ng-repeat="item in disponibles.items"
+                    dnd-draggable="item"
+                    dnd-type="'foo'"
+                    dnd-disable-if="item.type == 'unknown'"
+                    dnd-moved="disponibles.items.splice($index, 1)"
+                    
+                    >
+                    <dnd-nodrag>
+                        <md-card  dnd-handle>
+                            <md-card-title>
+                            <md-card-title-text>
+                                <!--<span class="md-headline">{{item.nombre}}</span>-->
+                                <span class="md-subhead" md-colors="{color: 'primary'}">{{item.nombre}}</span>
+                                <!--<span class="md-subhead">{{item.descripcion}}</span>-->
+                            </md-card-title-text>
+                            <md-card-title-media>
+                                <div class="md-media-sm card-media">
+                                    <img ng-src="./uploads/libros/{{item.foto}}" alt="">
+                                </div>
+                            </md-card-title-media>
+                            </md-card-title>
+                            <md-card-actions layout="row" layout-align="start center">
+                                <md-icon>drag_handle</md-icon>
+                                <span flex>N° {{item.id_periodo_detalle | padId}}</span>
+                            <!--<md-button class="md-icon-buttton"><md-icon>visibility</md-icon></md-button>-->
+                            
+                            </md-card-actions>
+                        </md-card>
+                    <!--<div dnd-handle class="handle">:::</div>
+                    <div class="name">
+                        <input type="text" ng-model="item.name" class="background-{{item.type}} form-control input-sm">
+                    </div>-->
+                    </dnd-nodrag>
+                </li>
+
+                <li class="dndPlaceholder">
+                    Soltar aquí
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    
+    <div flex class="inscripcion-seleccionados">
+
+        <div class="inscripcion-seleccionados--region" layout="column">
+
+            <div class="text-center" md-colors="{'color': 'primary'}" layout-padding>
+                <b>{{seleccionados.items.length}}</b> seleccionado(s)
+            </div>
+                                
+            <ul dnd-list="seleccionados.items"
+            dnd-allowed-types="seleccionados.allowedTypes"
+            dnd-disable-if="seleccionados.items.length >= registro_info.periodo.maximo_libros">
+
+                <li ng-repeat="item in seleccionados.items"
+                    dnd-draggable="item"
+                    dnd-type="'foo'"
+                    dnd-disable-if="item.block"
+                    dnd-moved="seleccionados.items.splice($index, 1)"
+                    
+                    >
+                    <dnd-nodrag>
+                        <md-card >
+                            <md-card-title dnd-handle>
+                            <md-card-title-text>
+                                <!--<span class="md-headline">{{item.nombre}}</span>-->
+                                <span class="md-subhead">{{item.nombre}}</span>
+                                <!--<span class="md-subhead">{{item.descripcion}}</span>-->
+                            </md-card-title-text>
+                            <md-card-title-media>
+                                <div class="md-media-sm card-media">
+                                    <img ng-src="./uploads/libros/{{item.foto}}" alt="">
+                                </div>
+                            </md-card-title-media>
+                            </md-card-title>
+                            <md-card-actions layout="row" layout-align="start center">
+                                <md-icon>drag_handle</md-icon>
+                                <b flex>N° {{item.id_periodo_detalle | padId}}</b>
+                            <!--<md-button class="md-icon-buttton"><md-icon>visibility</md-icon></md-button>-->
+                            </md-card-actions>
+                        </md-card>
+        
+                    </dnd-nodrag>
+                </li>
+
+                <li class="dndPlaceholder">
+                    Soltar aquí
+                </li>
+
+            </ul>
+
+
+        </div>
+
+        
+        <div layout="row">
+            <md-button flex="100" ng-click="submit()" class="md-primary md-raised" ng-disabled="!total_registrar_nuevos">
+                {{seleccionados.items.length ? text_submit : 'Seleccione un item'}}
+            </md-button>
+        </div>
+    </div>
+
+</div>

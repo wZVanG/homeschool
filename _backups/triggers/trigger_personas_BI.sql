@@ -1,0 +1,1 @@
+SET NEW.nombre_completo = CONCAT(NEW.apellido_paterno, ' ', NEW.apellido_materno, ' ', NEW.nombres);

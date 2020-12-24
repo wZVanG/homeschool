@@ -1,0 +1,22 @@
+
+<!-- saved from url=(0060)http://flatfull.com/themes/materil/angular/views/layout.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body><md-sidenav id="aside" class="app-aside md-sidenav-left" ng-class="{&#39;folded&#39;: app.setting.asideFolded || $state.current.data.folded}" ui-view="aside@" md-component-id="aside">
+  </md-sidenav> 
+  <!-- / aside -->
+  
+  <!-- content -->
+  <div id="content" class="app-content" role="main" ui-view="content@">
+  </div>
+  <!-- / content -->
+
+
+<div class="modal fade inactive" id="user" data-backdrop="false">
+  <div class="right w-xl bg-white md-whiteframe-z2" ng-include="&#39;assets/views/partials/aside.tpl.user.html&#39;">
+  </div>
+</div>
+
+<!--<div class="modal fade" id="chat" data-backdrop="false">
+  <div class="right w-xxl bg-white md-whiteframe-z2" ng-include="&#39;assets/views/partials/aside.tpl.chat.html&#39;">
+  </div>
+</div>-->
+</body></html>

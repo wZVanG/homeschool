@@ -1,0 +1,187 @@
+<form name="formulario" ng-submit="enviar()" novalidate flex layout="column">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div>
+                <md-icon>{{nuevo ? 'add' : 'edit'}}</md-icon> {{nuevo ? 'Crear' : 'Editar'}} Vídeo
+            </div>
+        </div>
+    </md-toolbar>
+
+    <md-content flex layout-fill>
+
+        <div layout="row" layout-xs="column" layout-padding>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>check</md-icon>
+                <label>Categoría</label>
+                <md-select ng-model="registro_info.id_categoria" ng-required="true">
+                    <md-option ng-value="+item.id_categoria" ng-repeat="item in WAI.parametros.categorias">
+                        {{item.nombre}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>check</md-icon>
+                <label>Género</label>
+                <md-select ng-model="registro_info.id_genero" ng-required="true">
+                    <md-option ng-value="+item.id_genero" ng-repeat="item in WAI.parametros.genero">
+                        {{item.nombre}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+        </div>
+
+        <div layout="row" layout-xs="column" layout-padding>
+
+            <md-input-container flex="100">
+                <md-icon>short_text</md-icon>
+                <label>SEO Url</label>
+                <input ng-required="true" name="seo_url" autocomplete="off" type="text" ng-model="registro_info.seo_url">
+            </md-input-container>
+
+            
+
+        </div>
+
+
+        <div layout="row" layout-xs="column" layout-padding>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>link</md-icon>
+                <label>Video URL (Vimeo)</label>
+                <input ng-required="true" name="url" autocomplete="off" type="text" ng-model="registro_info.url">
+            </md-input-container>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>link</md-icon>
+                <label>Video Trailer</label>
+                <input ng-required="true" name="trailer" autocomplete="off" ng-model="registro_info.trailer">
+            </md-input-container>
+
+
+
+        </div>
+
+        <div layout="row" layout-xs="column" layout-padding>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>short_text</md-icon>
+                <label>Título</label>
+                <input ng-required="true" name="title" autocomplete="off" type="text" ng-model="registro_info.title">
+            </md-input-container>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>short_text</md-icon>
+                <label>Año</label>
+                <input name="year" autocomplete="off" type="number" ng-model="registro_info.year">
+            </md-input-container>
+
+
+
+        </div>
+
+        <div layout="row" layout-xs="column" layout-padding>
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>image</md-icon>
+                <label>Imagen</label>
+                <input  name="imagen" autocomplete="off" type="text"
+                    ng-model="registro_info.imagen" 
+                    wai-file-module="portadas" wai-file-model="registro_info.imagen" 
+                    wai-file-accept="'image/*'" 
+                    wai-file-pattern="'image/*'"
+                    >
+                <div class="hint">Imágen de portada</div>
+            </md-input-container>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>image</md-icon>
+                <label>Imagen miniatura</label>
+                <input  name="thumb" autocomplete="off" type="text"
+                    ng-model="registro_info.thumb" 
+                    wai-file-module="thumb" wai-file-model="registro_info.thumb" 
+                    wai-file-accept="'image/*'" 
+                    wai-file-pattern="'image/*'"
+                    wai-file-resize="{width: 341, height: 192}">
+                <div class="hint">Imágen publicada en la página principal</div>
+            </md-input-container>
+        </div>
+
+        <div layout="row" layout-xs="column" layout-padding>
+            
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>short_text</md-icon>
+                <label>Descripción corta</label>
+                <textarea ng-required="true" name="description_short"
+                 ng-model="registro_info.description_short" rows="5"></textarea>
+            </md-input-container>
+
+            <md-input-container flex="50" flex-xs="100">
+                <md-icon>short_text</md-icon>
+                <label>Descripción adicional</label>
+                <textarea name="description_add"
+                 ng-model="registro_info.description_add" rows="5"></textarea>
+            </md-input-container>
+
+        </div>
+
+        <div layout="row" layout-xs="column" layout-padding>
+
+            <md-input-container flex="100">
+                <md-icon>short_text</md-icon>
+                <label>Descripción completa</label>
+                <textarea ng-required="true" name="description_long"
+                 ng-model="registro_info.description_long" ></textarea>
+            </md-input-container>
+        </div>
+
+        <div layout="row" layout-xs="column" layout-padding>
+
+            <md-input-container flex="100" class="has-chips">
+                <label>Elenco</label>
+                <md-icon>file_copy</md-icon>
+                
+                <md-chips ng-model="chips" md-autocomplete-snap
+                            
+                md-require-match="true"
+                ng-required="true"
+                input-aria-label="Elenco">
+                    <md-autocomplete
+                        md-selected-item="selectedItem"
+                        md-search-text="searchText"
+                        md-items="item in querySearchItems(searchText)"
+                        md-item-text="item.nombre"
+                        input-aria-describedby="autocompleteTitle"
+                        placeholder="Buscar">
+                    <span md-highlight-text="searchText">{{item.nombre}} - {{item.tipo}}</span>
+                    </md-autocomplete>
+                    <md-chip-template>
+                    <span>
+                        <strong>{{$chip.nombre}}</strong>
+                        <em>({{$chip.tipo}})</em>
+                    </span>
+                    </md-chip-template>
+                </md-chips>
+
+            </md-input-container>
+
+        </div>
+
+
+    </md-content>
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()">
+                <md-icon>reply</md-icon> Cancelar
+            </md-button>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="loading">
+                <md-icon>save</md-icon> {{nuevo ? 'Crear Registro' : 'Actualizar'}}
+            </md-button>
+        </div>
+    </div>
+</form>

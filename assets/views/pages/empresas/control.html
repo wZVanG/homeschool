@@ -1,0 +1,46 @@
+<form name="formulario" ng-submit="enviar()" novalidate>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div><md-icon>add</md-icon> Registrar Empresa</div>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding>
+
+        <div layout="column">
+            <md-input-container flex="100">
+                <md-icon>business</md-icon>
+                <label>Nombre</label>
+                <input ng-required="true" md-autofocus name="nombre" autocomplete="off" type="text" ng-model="registro_info.nombre">
+                <div class="hint">Nombre Empresa</div>
+            </md-input-container>
+            <md-input-container>
+                <md-icon>credit_card</md-icon>
+                <label>Tipo Documento</label>
+                <md-select ng-model="registro_info.tipo_documento" ng-required="true">
+                    <md-option ng-value="1">DNI</md-option>
+                    <md-option ng-value="2">RUC</md-option>
+                    <md-option ng-value="3">C.E</md-option>
+                    <md-option ng-value="4">PASAPORTE</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex="100">
+                <md-icon>credit_card</md-icon>
+                <label>Número de documento</label>
+                <input ng-required="true" name="numero_documento" autocomplete="off" type="text" ng-model="registro_info.numero_documento">
+                <!--<div class="hint">Número de documento</div>-->
+            </md-input-container>
+        </div>
+
+     </md-content>
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()"><md-icon>reply</md-icon> Cancelar</md-button>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="loading"><md-icon>save</md-icon> Crear registro</md-button>
+        </div>
+    </div>
+</form>

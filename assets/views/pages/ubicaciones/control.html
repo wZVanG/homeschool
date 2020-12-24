@@ -1,0 +1,42 @@
+<form name="formulario" ng-submit="enviar()" novalidate>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div><md-icon>{{nuevo ? 'add' : 'edit'}}</md-icon> {{nuevo ? 'Crear' : 'Editar'}} Ubicación</div>
+        </div>
+    </md-toolbar>
+
+    <md-content layout-padding>
+
+        <div layout="column">
+            <md-input-container flex="100">
+                <md-icon>short_text</md-icon>
+                <label>Código</label>
+                <input ng-required="true" md-autofocus name="codigo" autocomplete="off" md-maxlength="32" type="text" ng-model="registro_info.codigo">
+                <div class="hint">Nombre en URL</div>
+            </md-input-container>
+            <md-input-container flex="100">
+                <md-icon>short_text</md-icon>
+                <label>Nombre</label>
+                <input ng-required="true" name="nombre" autocomplete="off" md-maxlength="64" type="text" ng-model="registro_info.nombre">
+                <div class="hint">Denominación</div>
+            </md-input-container>
+            <md-input-container flex="100">
+                <md-icon>short_text</md-icon>
+                <label>Descripción</label>
+                <textarea name="descripcion" ng-model="registro_info.descripcion" rows="2"></textarea>
+                <div class="hint">Escribe una descripción</div>
+            </md-input-container>
+        </div>
+
+     </md-content>
+
+    <md-divider></md-divider>
+
+    <div layout-padding layout="column">
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="cancel()"><md-icon>reply</md-icon> Cancelar</md-button>
+            <md-button type="submit" class="md-accent md-raised" ng-disabled="loading"><md-icon>save</md-icon> {{nuevo ? 'Crear Registro' : 'Actualizar'}}</div></md-button>
+        </div>
+    </div>
+</form>

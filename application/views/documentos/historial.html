@@ -1,0 +1,259 @@
+<html>
+	<head>
+		<style>
+			
+			@page {
+                margin: 0cm 0cm;
+            }
+
+            /** Define now the real margins of every page in the PDF **/
+            body {
+                margin: .5rem 1rem;
+                margin-top: 2rem;
+            }
+
+            /** Define the header rules **/
+            header {
+                position: fixed;
+                top: 0cm;
+                left: 0cm;
+                right: 0cm;
+                height: 2cm;
+                text-align: right;
+				line-height: 1rem;
+				padding: 2rem 2rem 2rem 2rem
+            }
+
+            /** Define the footer rules **/
+            footer {
+                position: fixed; 
+                bottom: 0cm; 
+                left: 0cm; 
+                right: 0cm;
+                height: 2cm;
+
+                /** Extra personal styles **/
+                background-color: #03a9f4;
+                color: white;
+                text-align: center;
+                line-height: 1.5cm;
+            }
+
+			* {
+				font-family: Arial, Helvetica, sans-serif; 
+				font-size:.8rem;
+			}
+			h2 {font-size: 1.5rem}
+			h3 {font-size: 1.2rem}
+			h4 {font-size: 1rem}
+			table {
+				width:100%;
+				border-collapse: collapse;
+            }
+            b, p {
+                font-size: 100%;
+            }
+
+			fieldset {padding: .35rem}
+			table th, table td {padding:0 .5rem}
+			h1, h2, h3, h4, h5 {}
+
+			.no-margin {margin: 0}
+
+			.cell-6 { width: 6% }
+			.cell-10 { width: 10% }
+			.cell-15 { width: 15% }
+			.cell-20 { width: 20% }
+			.cell-23 { width: 23.333333% }
+			.cell-25 { width: 20% }
+			.cell-30 { width: 30% }
+			.cell-33 { width: 33.333333% }
+			.cell-40 { width: 40% }
+			.cell-50 { width: 50% }
+			.cell-60 { width: 60% }
+			.cell-70 { width: 70% }
+			.cell-80 { width: 80% }
+			.cell-90 { width: 90% }
+			.cell-100 { width: 100% }
+
+			.clear {clear: both;}
+			.text-center { text-align: center;}
+			.text-right { text-align: right !important;}
+
+			.logo {
+				
+			}
+
+			.logo > div {
+				float: left;
+			}
+
+			.logo--img {
+				width: 25%;
+				text-align: center;
+			}
+			.logo--img img{
+				width: 60px;
+				height: 60px;
+			}
+
+			.logo--content {
+				width: 75%;
+			}
+
+			.content {
+				padding-top: 0rem
+			}
+
+			.cuotas {
+				padding: 0rem 0 0rem 0
+			}
+			.cuotas th {
+				padding-top: .2rem;
+				padding-bottom: .2rem;
+				text-align: center;
+			}
+			.cuotas td {
+				padding-top: .185rem;
+				padding-bottom: .185rem;
+			}
+			.cuotas .odd td{
+				background-color: #ddd;
+			}
+
+			.cuotas .foot th {
+				background-color: #ccc;
+            }
+            
+            .documento-texto {
+                font-size: 1rem;
+                margin: 2rem 1rem;
+            }
+
+            .documento-solicitud {
+                page-break-before: always;
+            }
+
+            .documento-solicitud table td, .documento-solicitud table th {
+                border: 2px solid #b58c81;
+                padding: .85rem
+            }
+
+            .documento-solicitud table th {
+                background-color: #ece2de;
+            }
+
+            .documento-solicitud .highlight {
+                color: #0070c6
+            }
+
+			table.movimientos td, table.movimientos th {
+				padding: .5rem
+			}
+
+        </style>
+        <title><?=$info["titulo"]?></title>
+	</head>
+
+	<body>
+
+		<header>
+			
+		</header>
+		
+		<div class="logo">
+			<div class="logo--img">
+				<div><img src="<?=FCPATH?>/assets/images/logo/reporte.png" /></div>
+				<div class="text-center"><h4 class="no-margin">TRÁMITE DOCUMENTARIO</h4></div>
+				<div>Fecha de documento: <?=date('d/m/Y h:i:s a')?></div>
+			</div>
+			<div class="logo--content">
+				<div class="text-center">
+					<h2 class="no-margin">HISTORIAL</h2>
+					<h4 class="no-margin">Trámite: <?=$tramite["codigo"]?></h4>
+				</div>
+				<fieldset>
+					<legend>Información de trámite</legend>
+					<table>
+						<tr>
+							<th class="cell-10 text-right">Código: </th>
+							<td class="cell-15"><?=($tramite["tipo_origen"] == 1 ? "INT" : "EXT")?><?=$tramite["codigo"]?></td>
+							<th class="cell-10 text-right">Documento:</th>
+							<td class="cell-40"><?=htmlspecialchars($tramite["documento"])?></td>
+							<th class="cell-10 text-right">Asunto:</th>
+							<td class="cell-15"><?=htmlspecialchars($tramite["asunto"])?></td>
+                        </tr>
+                        <tr>
+							<th class="cell-10 text-right">Mensaje: </th>
+							<td class="cell-15"><?=htmlspecialchars($tramite["mensaje"])?></td>
+							<th class="cell-10 text-right">Origen:</th>
+							<td class="cell-40"><?=($tramite["tipo_origen"] == 1 ? "Interno" : "Externo")?></td>
+							<th class="cell-10 text-right">Físico:</th>
+							<td class="cell-15"><?=($tramite["flag_fisico"] == 1 ? "SI" : "NO")?></td>
+                        </tr><tr>
+							<th class="cell-10 text-right">Oficina: </th>
+							<td class="cell-15"><?=htmlspecialchars($tramite["oficina"])?></td>
+							<th class="cell-10 text-right">Cargo:</th>
+							<td class="cell-40"><?=htmlspecialchars($tramite["cargo"])?></td>
+							<th class="cell-10 text-right">Usuario:</th>
+							<td class="cell-15"><?=htmlspecialchars($tramite["nombre_completo"])?></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">Tipo Documento:</th>
+							<td><?=htmlspecialchars($tramite["tipo_documento"])?></td>
+							<th class="text-right">Acción:</th>
+							<td><?=htmlspecialchars($tramite["accion"])?></td>
+							<!--<th class="text-right">Asunto:</th>
+							<td colspan="3">
+								<?=htmlspecialchars($tramite["asunto"])?>
+							</td>-->
+						</tr>
+					</table>
+				</fieldset>
+			</div>
+		</div>
+		<div class="clear"></div>
+		
+		<div class="content">	
+            <table class="movimientos">
+                <tr>
+                  <th>Fecha</th>
+				  <th>Origen</th>
+				  <th>Destino</th>
+                  <th>Acción</th>
+                  <th>Mensaje</th>
+                </tr>
+                <?php
+                    foreach($movimientos AS $index => $item):
+                ?>
+                <tr class="<?=!($index % 2) ? 'odd' : ''?>">
+                  <td class="text-center">
+                    <?=date('d/m/Y H:i:s', strtotime($item["fecha"]))?>
+                  </td>
+				  <td class="text-left"> <?=htmlspecialchars($item['oficina_origen'])?> - <?=htmlspecialchars($item['cargo_origen'])?> <br /> <b><?=htmlspecialchars($item['nombre_completo_origen'])?></b></td>
+				  <td class="text-left"><?=htmlspecialchars($item['sede'])?> - <?=htmlspecialchars($item['oficina'])?> - <?=htmlspecialchars($item['cargo'])?> <br /> <b><?=htmlspecialchars($item['nombre_completo'])?></b></td>
+                  <td class="text-center"><?=htmlspecialchars($item['accion'])?></td>
+                  <td class="text-left"><?=htmlspecialchars($item['mensaje'])?></td>
+                </tr>
+                <?php
+                    endforeach;
+                ?>
+                <!--<tr>
+                    <td colspan="9">&nbsp;</td>
+                </tr>-->
+                <!--<tr class="foot">
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="text-right">Total:</th>
+                    <th class="text-right"><?=number_format($total_abonado, 2)?></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>-->
+              </table>
+
+		</div>	
+	</body>
+</html>

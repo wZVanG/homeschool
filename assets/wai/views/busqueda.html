@@ -1,0 +1,20 @@
+<div class="content-page content-page-full">
+
+    <h1 class="page-title">Búsqueda</h1>
+
+    <p>{{$root.$state.params.busqueda}}</p>
+    
+    <div class="listado" ng-init="all = obtenerListado(null, $root.$state.params.busqueda)">
+        <div class="listado-item" ng-repeat="g in all" ng-if="g.items.length > 0">
+            
+            <!--<h1 ng-bind="categoria.nombre"></h1>-->
+
+            <div video-groups="[g]"></div>
+    
+    
+        </div>
+    </div>
+    
+
+</div>
+
