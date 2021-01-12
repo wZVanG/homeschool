@@ -3,7 +3,7 @@ angular.module('app').controller("LibrosCtrl", ["$scope", "API", "WAIUtils", "$c
 	$scope.module_name = "libros";
 
 	$scope.info = {
-		title: "Libros"
+		title: "Proyectos"
 	};
 	
 	$scope.dtOptions = {
