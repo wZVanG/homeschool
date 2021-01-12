@@ -566,6 +566,12 @@ window.HOMESCHOOL.run(["$rootScope", "$state", "$templateCache", "Project", "Usu
 	
 }]).controller("HomeSchoolMisLibrosCtrl", ["$scope", "Project", "$state", "$stateParams", "$mdDialog", "$q", "$http", function($scope, Project, $state, $stateParams, $mdDialog, $q, $http){
 
+	function getType(item){
+		let type = "none";
+		if(String(item).match(/\.(jpg|webp|png|gif|jpeg)$/)) type = "image";
+		return type;
+	}
+
 	$scope.abrirLibro = (ev, item) => {
 		    
         return $mdDialog.show({
@@ -574,6 +580,13 @@ window.HOMESCHOOL.run(["$rootScope", "$state", "$templateCache", "Project", "Usu
 				$scope.item = LibroData.item;
 				$scope.tareas = LibroData.tareas;
 				$scope.cancel = $mdDialog.cancel;
+				
+				$scope.archivos = [];
+				if($scope.item.archivo_1) $scope.archivos.push({type: getType($scope.item.archivo_1), url: $scope.item.archivo_1});
+				if($scope.item.archivo_2) $scope.archivos.push({type: getType($scope.item.archivo_2), url: $scope.item.archivo_2});
+				if($scope.item.archivo_3) $scope.archivos.push({type: getType($scope.item.archivo_3), url: $scope.item.archivo_3});
+				if($scope.item.archivo_4) $scope.archivos.push({type: getType($scope.item.archivo_4), url: $scope.item.archivo_4});
+				
 			}],
 			templateUrl: "./assets/wai/views/homeschool/libro.html?" + WAI.assets_version,
             multiple: true,
@@ -597,7 +610,7 @@ window.HOMESCHOOL.run(["$rootScope", "$state", "$templateCache", "Project", "Usu
 	}
 	
 	
-}]).controller("HomeSchoolInscripcionCtrl", ["$scope", "Project", "$state", "$stateParams", "Libros", "Info", "$q", "$http", "Notificaciones", function($scope, Project, $state, $stateParams, Libros, Info, $q, $http, Notificaciones){
+}]).controller("HomeSchoolInscripcionCtrl", ["$scope", "Project", "$state", "$stateParams", "Libros", "Info", "$q", "$http", "Notificaciones", "$mdDialog", function($scope, Project, $state, $stateParams, Libros, Info, $q, $http, Notificaciones, $mdDialog){
 
 	$scope.registro_info = {
 		periodo: null
@@ -610,6 +623,13 @@ window.HOMESCHOOL.run(["$rootScope", "$state", "$templateCache", "Project", "Usu
 
 
 	$scope.abrirLibro = (ev, item) => {
+
+		function getType(item){
+			let type = "none";
+			if(String(item).match(/\.(jpg|webp|png|gif|jpeg)$/)) type = "image";
+			return type;
+		}
+	
 		    
         return $mdDialog.show({
             controller: ["$scope", "LibroData", function($scope, LibroData){
@@ -617,6 +637,13 @@ window.HOMESCHOOL.run(["$rootScope", "$state", "$templateCache", "Project", "Usu
 				$scope.item = LibroData.item;
 				$scope.tareas = LibroData.tareas;
 				$scope.cancel = $mdDialog.cancel;
+
+				$scope.archivos = [];
+				if($scope.item.archivo_1) $scope.archivos.push({type: getType($scope.item.archivo_1), url: $scope.item.archivo_1});
+				if($scope.item.archivo_2) $scope.archivos.push({type: getType($scope.item.archivo_2), url: $scope.item.archivo_2});
+				if($scope.item.archivo_3) $scope.archivos.push({type: getType($scope.item.archivo_3), url: $scope.item.archivo_3});
+				if($scope.item.archivo_4) $scope.archivos.push({type: getType($scope.item.archivo_4), url: $scope.item.archivo_4});
+
 			}],
 			templateUrl: "./assets/wai/views/homeschool/libro.html?" + WAI.assets_version,
             multiple: true,

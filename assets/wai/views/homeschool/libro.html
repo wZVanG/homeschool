@@ -8,6 +8,7 @@
         </div>
     </md-toolbar>
 
+
     <md-content flex layout-fill>
         <div flex layout-fill>
             <div layout="row">
@@ -19,14 +20,30 @@
                     <div  class="text-center">  <b>N° {{item.id_periodo_detalle | padId}}</b></div>
                 </div>
                 <div layout="column">
+                    <div style="margin-top:20px">
+                        <h3> <span class="md-subhead-small">{{item.nombre_bloque}}</span> · {{ item.nombre }}</h3>
+                    </div>
+
                     <div>Descripción: </div>
                     <div layout="row">
                         <div flex="100">
                             <p>{{item.descripcion}}</p>
                         </div>
                     </div>
-                    <div>
-                        <h3> <span class="md-subhead-small">{{item.nombre_bloque}}</span> · {{ item.nombre }}</h3>
+
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div class=" text-center" ng-if="archivos.length" layout="column" layout-padding>
+                <p>Documentos</p>
+            </div>
+            <div layout="row" layout-align="center center">
+                <div ng-repeat="archivo in archivos" flex="33">
+                    <div ng-if="archivo.type === 'image'">
+                        <a href="./uploads/libros_archivos/{{archivo.url}}" target="_blank"><img style="min-width: 100%; max-width: 100%;" ng-src="./uploads/libros_archivos/{{archivo.url}}"  /></a>
+                    </div>
+                    <div ng-if="archivo.type === 'none'">
+                        <a href="./uploads/libros_archivos/{{archivo.url}}" target="_blank">{{archivo.url}}</a>
                     </div>
                 </div>
             </div>

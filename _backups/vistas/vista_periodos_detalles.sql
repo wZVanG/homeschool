@@ -1,6 +1,6 @@
 DROP VIEW IF EXISTS vista_periodos_detalles;
 CREATE VIEW vista_periodos_detalles as
-SELECT pd.*, l.nombre, l.descripcion, l.foto, p.nombre AS nombre_periodo,
+SELECT pd.*, l.nombre, l.descripcion, l.foto, l.archivo_1, l.archivo_2, l.archivo_3, l.archivo_4, p.nombre AS nombre_periodo,
 b.nombre AS nombre_bloque
 FROM periodos_detalles pd
 JOIN libros l ON l.id_libro = pd.id_libro

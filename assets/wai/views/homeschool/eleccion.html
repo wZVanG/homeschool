@@ -59,7 +59,7 @@
                             <md-card-title-text>
                                 <!--<span class="md-headline">{{item.nombre}}</span>-->
                                 <span class="md-subhead-small">{{item.nombre_bloque}}</span>
-                                <span class="md-subhead" md-colors="{color: 'primary'}">{{item.nombre}}</span>
+                                <span class="md-subhead" md-colors="{color: 'primary'}"><a style="cursor: pointer;" ng-click="abrirLibro($event, item)">{{item.nombre}}</a></span>
                             </md-card-title-text>
                             <md-card-title-media>
                                 <div class="md-media-sm card-media">
@@ -117,7 +117,7 @@
                             <md-card-title-text>
                                 <!--<span class="md-headline">{{item.nombre}}</span>-->
                                 <span class="md-subhead-small">{{item.nombre_bloque}}</span>
-                                <span class="md-subhead"><a ng-click="abrirProyecto(item)">{{item.nombre}}</a></span>
+                                <span class="md-subhead"><a style="cursor: pointer;" ng-click="abrirLibro($event, item)">{{item.nombre}}</a></span>
                                 <!--<span class="md-subhead">{{item.descripcion}}</span>-->
                             </md-card-title-text>
                             <md-card-title-media>
