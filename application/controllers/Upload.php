@@ -21,7 +21,7 @@ class Upload extends MY_Controller {
             "max_size" => 10000,
         ],
         "libros_archivos" => [
-            "allowed_types" => 'jpg|gif|png|jpeg|webp|doc|docx|ppt|pdf|xls|xlsx',
+            "allowed_types" => 'jpg|gif|png|jpeg|webp|pdf',
             "max_size" => 20000,
         ],
              
