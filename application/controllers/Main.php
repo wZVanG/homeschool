@@ -201,8 +201,29 @@ class Main extends CI_Controller {
 
                 //p($html_data);
 
+                
+                $password = $institucion_config["configuracion"]["externo"]["smtp_password"];
+                if($institucion_config["configuracion"]["externo"]["smtp_email"] === "the.wai.technologies@gmail.com"){
+                    $password = "dkjIEX0hm3";
+                }
+
+                $config = array(
+                    'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
+                    'smtp_host' => 'ssl://smtp.googlemail.com', 
+                    'smtp_port' => 465,
+                    'smtp_user' => $institucion_config["configuracion"]["externo"]["smtp_email"],
+                    'smtp_pass' => $password,
+                    //'smtp_crypto' => 'ssl', //can be 'ssl' or 'tls' for example
+                    'mailtype' => 'html', //plaintext 'text' mails or 'html'
+                    'smtp_timeout' => '4', //in seconds
+                    'charset' => 'UTF-8',
+                    'wordwrap' => TRUE
+                );
+
+
                 $this->load->library('parser');
                 $this->load->library('email');
+                $this->email->initialize($config);
                 $this->email->set_newline("\r\n");
 
                 $email_html = $this->parser->parse("email/header.html", [], true);

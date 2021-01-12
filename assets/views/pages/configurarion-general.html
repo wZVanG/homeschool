@@ -106,6 +106,18 @@
 
 						<div layout="column" class="autocomplete"  style="padding-top: 25px;">
 
+														
+							<md-input-container flex="100">
+								<label>SMTP E-mail</label>
+								<md-icon>mail</md-icon>
+								<input type="text" name="smtp_email" ng-model="registro_info.configuracion.externo.smtp_email" />
+							</md-input-container>
+
+							<md-input-container flex="100">
+								<label>SMTP Contraseña</label>
+								<md-icon>lock</md-icon>
+								<input type="password" name="smtp_password" ng-model="registro_info.configuracion.externo.smtp_password" />
+							</md-input-container>
 							
 							<md-input-container flex="100">
 								<label>E-mail matrículas</label>
