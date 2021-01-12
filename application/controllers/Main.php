@@ -237,7 +237,7 @@ class Main extends CI_Controller {
                     $receptor = $institucion_config["configuracion"]["externo"]["email_matriculas"];
 
                 $this->email->subject("Elección de proyectos - $usuario_denominacion");
-                $this->email->from('no-reply@vitaschool.pe', 'VitaSchool.pe');
+                $this->email->from('no-reply@vitaschool.pe', 'Vitaschool.pe');
                 $this->email->to($receptor);
                 $this->email->message($email_html);
 
