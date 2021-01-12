@@ -308,10 +308,10 @@ app.config(["$stateProvider",  "CollectionProvider", function ($stateProvider, C
         },
         controller: 'PeriodosDetallesTareasCtrl'
     }).state("homeschool.libros", {
-        url: "/libros",
+        url: "/proyectos",
         templateUrl: "assets/views/pages/varios/listar.html",
         data: {
-            title: "Libros"
+            title: "Proyectos"
         },
         controller: 'LibrosCtrl',
         resolve: {
