@@ -22,9 +22,9 @@
 				<li md-colors="{'background-color': tab_active === 'institucion' ? 'primary-400' : 'background'}">
 					<a href ng-click="tab_active = 'institucion'"><md-icon>language</md-icon> Principal</a>
                 </li>
-                <!--<li md-colors="{'background-color': tab_active === 'externo' ? 'primary-400' : 'background'}">
-					<a href ng-click="tab_active = 'externo'"><md-icon>launch</md-icon> Web</a>
-				</li>
+                <li md-colors="{'background-color': tab_active === 'externo' ? 'primary-400' : 'background'}">
+					<a href ng-click="tab_active = 'externo'"><md-icon>launch</md-icon> Sistema</a>
+				</li><!--
 				<li md-colors="{'background-color': tab_active === 'video_principal' ? 'primary-400' : 'background'}">
 					<a href ng-click="tab_active = 'video_principal'"><md-icon>movie_filter</md-icon> Video Principal</a>
 				</li>
@@ -79,6 +79,7 @@
 								<md-icon>short_text</md-icon>
 								<textarea ng-model="registro_info.institucion.keywords" rows="3"></textarea>
 							</md-input-container>
+
 						
 							<div>
 								<md-button class="md-primary md-raised" type="submit" ng-disabled="!formulario.$valid || loading">
@@ -101,85 +102,15 @@
 
 					<form name="formulario" ng-submit="guardar('configuracion', 'externo')" novalidate class="chipsdemoContactChips mt-20">
 
-						<div class="p-md bg-light lt b-b font-bold md-title" >Web</div>
+						<div class="p-md bg-light lt b-b font-bold md-title" >Sistema</div>
 
 						<div layout="column" class="autocomplete"  style="padding-top: 25px;">
 
-                            <md-input-container flex="100" class="has-chips">
-								<label>Videos Gratis</label>
-                                <md-icon>check</md-icon>
-                        
-                            <md-chips ng-model="registro_info.configuracion.externo.movie_id" md-autocomplete-snap
-                            
-                            md-require-match="true"
-                            ng-required="true"
-                            input-aria-label="Videos gratis">
-                                <md-autocomplete
-                                    md-selected-item="selectedItem"
-                                    md-search-text="searchText"
-                                    md-items="item in querySearchItems(searchText)"
-                                    md-item-text="item.nombre"
-                                    input-aria-describedby="autocompleteTitle"
-                                    placeholder="Buscar video">
-                                <span md-highlight-text="searchText">{{item.title}} - {{item.genero}}</span>
-                                </md-autocomplete>
-                                <md-chip-template>
-                                <span>
-                                    <strong>{{$chip.title}}</strong>
-                                    <em>({{$chip.genero}})</em>
-                                </span>
-                                </md-chip-template>
-                            </md-chips>
-                            <div class="hint">Videos que podrán reproducir gratuitamente nuevos usuarios sin suscripción</div>
-
-
-                            </md-input-container>
-
-<!--
-                            <md-input-container flex="100">
-								<label>Tipo documento por defecto</label>
-                                <md-icon>insert_drive_file</md-icon>
-                                <md-select ng-model="registro_info.configuracion.externo.tipo_documento_defecto">
-                                    <md-option ng-repeat="param in WAI.parametros.tipos_documento  | filter:{estado: 1} | orderBy: 'nombre'"
-                                    ng-value="+param.id_tipo_documento">{{param.nombre}}</md-option>
-                                </md-select>
-							</md-input-container>
-						-->
-							<!--<md-input-container flex="100">
-								<label>Tipo documento a validar CUT</label>
-                                <md-icon>insert_drive_file</md-icon>
-                                <md-select multiple ng-model="registro_info.configuracion.externo.tipo_documento_validar_cut">
-                                    <md-option ng-repeat="param in WAI.parametros.tipos_documento  | filter:{estado: 1} | orderBy: 'nombre'"
-                                    ng-value="+param.id_tipo_documento">{{param.nombre}}</md-option>
-                                </md-select>
-                            </md-input-container>-->
-                            <!--<md-input-container flex="100" class="has-chips">
-								<label>Archivos Permitidos</label>
-                                <md-icon>file_copy</md-icon>
-                                <md-chips ng-model="registro_info.configuracion.externo.archivos_permitidos"
-              md-removable="true" md-enable-chip-edit="true" input-aria-label="Extensiones de archivo"></md-chips>
-                            </md-input-container>-->
-
+							
 							<md-input-container flex="100">
-								<label>Texto Centro de Ayuda</label>
-                                <md-icon>short_text</md-icon>
-                                <input type="text" name="texto_centro_ayuda" ng-model="registro_info.configuracion.externo.texto_centro_ayuda" />
-							</md-input-container>
-
-                            <md-input-container flex="100">
-								<label>URL Centro de Ayuda</label>
-                                <md-icon>link</md-icon>
-                                <input type="text" name="url_centro_ayuda" ng-model="registro_info.configuracion.externo.url_centro_ayuda" />
-							</md-input-container>
-							<md-input-container flex="100">
-								<label>Texto Términos y Condiciones</label>
-                                <md-icon>short_text</md-icon>
-                                <input type="text" name="texto_terminos_condiciones" ng-model="registro_info.configuracion.externo.texto_terminos_condiciones" />
-							</md-input-container>
-							<md-input-container flex="100">
-								<label>URL Términos y Condiciones</label>
-                                <md-icon>link</md-icon>
-                                <input type="text" name="url_terminos_condiciones" ng-model="registro_info.configuracion.externo.url_terminos_condiciones" />
+								<label>E-mail matrículas</label>
+								<md-icon>mail</md-icon>
+								<input type="text" name="email_matriculas" ng-model="registro_info.configuracion.externo.email_matriculas" />
 							</md-input-container>
 
 						</div>

@@ -10,64 +10,26 @@
 
     <md-content flex layout-fill>
         <div flex layout-fill>
-            <md-tabs md-dynamic-height md-border-bottom>
-
-                <md-tab ng-repeat="item in tareas">
-                    <md-tab-label>
-                        <md-icon>content_copy</md-icon> Tarea {{$index + 1}} <sup>({{item.nota_peso}})%</sup>
-                    </md-tab-label>
-                    <md-tab-body>
-                                                
-                        <md-card>
-
-                            <md-card-content>
-                                <div layout="row" layout-padding>
-                                    <div><b><md-icon>short_text</md-icon></b></div>                      
-                                    
-                                    <div flex>
-                                        <div><b> {{item.titulo}}:</b></div>
-                                        <p>{{item.descripcion}}</p>
-                                    </div>
-
-                                    <div>
-                                        <md-button type="button" class="md-primary md-raised" ng-disabled="loading">
-                                            <md-icon>save</md-icon> Guardar
-                                        </md-button>
-                                    </div>
-                                
-                                </div>
-                                
-                                
-                            </md-card-content>
-                        </md-card>
-
-                        <div layout="row" layout-xs="column" layout-padding class="mt-3">
-
-                            <md-input-container flex="50" flex-xs="100">
-                                <md-icon>short_text</md-icon>
-                                <label>Glosa</label>
-                                <textarea name="estudiante_observacion" autocomplete="off"
-                                ng-model="registro_info.estudiante_observacion" rows="3"></textarea>
-                            </md-input-container>
-
-                            <div flex="50" flex-xs="column" layout="column">
-                                <h5>Adjunto</h5>
-                                <div class="mb-3"></div> 
-                                <md-input-container flex="100">
-                                    <md-icon>attach_file</md-icon>
-                                    <label>Archivo</label>
-                                    <input  name="foto" autocomplete="off" type="text"
-                                        ng-model="registro_info.archivo" 
-                                        wai-file-module="tareas" wai-file-model="registro_info.archivo" 
-                                        >
-
-                                </md-input-container>
-                            </div>
+            <div layout="row">
+                <div flex="30">
+                    <div class="text-center">
+                        <img widh="120" height="120" ng-src="./uploads/libros/{{item.foto}}" class="md-avatar"  />
+                    </div>
+                    
+                    <div  class="text-center">  <b>N° {{item.id_periodo_detalle | padId}}</b></div>
+                </div>
+                <div layout="column">
+                    <div>Descripción: </div>
+                    <div layout="row">
+                        <div flex="100">
+                            <p>{{item.descripcion}}</p>
                         </div>
-
-                    </md-tab-body>
-                </md-tab>
-            </md-tabs>
+                    </div>
+                    <div>
+                        <h3> <span class="md-subhead-small">{{item.nombre_bloque}}</span> · {{ item.nombre }}</h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </md-content>
 

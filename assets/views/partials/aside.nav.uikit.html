@@ -68,16 +68,13 @@
             <li ui-sref-active="active">
               <a md-ink-ripple="" ui-sref="homeschool.asignaciones"><md-icon>list</md-icon> Inscripciones</a>
             </li>
-            <li ui-sref-active="active">
-              <a md-ink-ripple="" ui-sref="homeschool.periodos_detalles_tareas"><md-icon>content_copy</md-icon> Tareas</a>
-            </li>   
-            <li ui-sref-active="active">
-              <a md-ink-ripple="" ui-sref="homeschool.tracking.listado"><md-icon>check</md-icon> Revisión</a>
-            </li> 
           </ul>          
         </li> 
         <li ui-sref-active="active" ng-if="WAI.usuario.tienePermisos([3])">
           <a md-ink-ripple="" ui-sref="administracion.usuarios"><md-icon>account_circle</md-icon> Usuarios</a>
+        </li>
+        <li ui-sref-active="active" ng-if="WAI.usuario.tienePermisos([3])">
+          <a md-ink-ripple="" ui-sref="homeschool.bloques"><md-icon>donut_large</md-icon> Bloques</a>
         </li>
         <li ui-sref-active="active" ng-if="WAI.usuario.tienePermisos([3])">
           <a md-ink-ripple="" ui-sref="homeschool.libros"><md-icon>bookmarks</md-icon> Libros</a>

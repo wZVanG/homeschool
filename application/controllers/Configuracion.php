@@ -77,7 +77,7 @@ class Configuracion extends CI_controller {
                 "whatsapp",
                 "externo_social",
                 "video_principal_image",
-                "video_principal_url"
+                "email_matriculas"
             ],
             "payment" => [
                 "culqi_secret_key",

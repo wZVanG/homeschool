@@ -81,6 +81,8 @@ class Main extends CI_Controller {
         
         $matriculas = $this->_matriculas();
 
+        $institucion_config = $this->usuario_class->institucionData(1);
+
         switch($page){
             case  "info": 
 
@@ -134,7 +136,18 @@ class Main extends CI_Controller {
 
                     break;
 
-            case  "inscripcion": 
+            case  "eleccion":
+                
+
+                $usuario = $this->session->get_userdata();
+
+/*
+                $this->email->subject("Matrícula de proyecto - ");
+                $this->email->from('no-reply@vitaschool.pe', 'VitaSchool.pe');
+                $this->email->to($fields["email"]);
+                $this->email->message($email_html);
+
+                $ok = $this->email->send();*/
 
 
                 $id_periodo = (int) $this->input->post_get("id_periodo");
@@ -149,7 +162,7 @@ class Main extends CI_Controller {
                 $items = array_filter($items, function($id_periodo_detalle) use($ids_detalles_current){
                     return !in_array((int) $id_periodo_detalle, $ids_detalles_current);
                 });
-       
+
                 //omitir en ya matriculados
 
                 //VALIDAR MÁXIMO A MATRICULAR
@@ -167,6 +180,48 @@ class Main extends CI_Controller {
                     if(!$insert) return error("No fue posible agregar un item, por favor intente nuevamente");
                 }
 
+                //Data periodo detalle
+                //                $items[] = 4;$items[] = 3; ////////////BORRAR
+                $this->db->where_in("id_periodo_detalle", $items);
+                $periodos_detalles = $this->db->get("vista_periodos_detalles");
+                $periodos_detalles = $periodos_detalles->result_array();
+
+                $usuario_info = $this->db->get_where("vista_usuarios", ["id_usuario" => $id_usuario]); 
+                $usuario_info = $usuario_info->row_array();
+
+                $usuario_denominacion = $usuario_info["numero_documento"];
+
+                $html_data = [
+                    "usuario_denominacion" => $usuario_denominacion,
+                    "periodos_detalles" => $periodos_detalles,
+                    "items" => $periodos_detalles,
+                    "fecha" => date("Y-m-d H:i:s"),
+                    "base_url" => base_url()
+                ];
+
+                //p($html_data);
+
+                $this->load->library('parser');
+                $this->load->library('email');
+                $this->email->set_newline("\r\n");
+
+                $email_html = $this->parser->parse("email/header.html", [], true);
+                $email_html .= $this->parser->parse("email/eleccion.html", $html_data, true);
+                $email_html .= $this->parser->parse("email/footer.html", [], true);
+
+                //echo $email_html; exit;
+
+                $receptor = "blank@gmail.com";
+                if(!empty($institucion_config["configuracion"]["externo"]) && !empty($institucion_config["configuracion"]["externo"]["email_matriculas"]))
+                    $receptor = $institucion_config["configuracion"]["externo"]["email_matriculas"];
+
+                $this->email->subject("Elección de proyectos - $usuario_denominacion");
+                $this->email->from('no-reply@vitaschool.pe', 'VitaSchool.pe');
+                $this->email->to($receptor);
+                $this->email->message($email_html);
+
+                $email_ok = $this->email->send();                
+
                 if ($this->db->trans_status() === FALSE){
                     $this->db->trans_rollback();
                     return error("Hubo un error al agregar inscripción, por favor intente nuevamente");
@@ -177,6 +232,8 @@ class Main extends CI_Controller {
 
                 return json([
                     "ok" => 1,
+                    "email_ok" => $email_ok,
+                    "email_to" => $receptor,
                     "matriculas" => $this->_matriculas(),
                     "count" => count($items)
                     //"ids_periodos_detalles" => $ids_periodos_detalles
@@ -281,7 +338,7 @@ class Main extends CI_Controller {
         //echo $email_html; exit;
 
         $this->email->subject("Bienvenido a HomeSchool!");
-        $this->email->from('no-reply@homeschool.com', 'Homeschool.com');
+        $this->email->from('no-reply@vitaschool.pe', 'vitaschool.pe');
         $this->email->to($fields["email"]);
         $this->email->message($email_html);
 

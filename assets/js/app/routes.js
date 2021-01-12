@@ -1,4 +1,4 @@
-app.config(["$stateProvider", function ($stateProvider) {
+app.config(["$stateProvider",  "CollectionProvider", function ($stateProvider, CollectionProvider) {
 
     //$locationProvider.html5Mode(true);
     
@@ -313,7 +313,17 @@ app.config(["$stateProvider", function ($stateProvider) {
         data: {
             title: "Libros"
         },
-        controller: 'LibrosCtrl'
+        controller: 'LibrosCtrl',
+        resolve: {
+            Collection: CollectionProvider.create(["categorias"])
+        }
+    }).state("homeschool.bloques", {
+        url: "/bloques",
+        templateUrl: "assets/views/pages/varios/listar.html",
+        data: {
+            title: "Bloques"
+        },
+        controller: 'BloquesCtrl'
     }).state("homeschool.matriculas", {
         url: "/matriculas",
         templateUrl: "assets/views/pages/varios/listar.html",

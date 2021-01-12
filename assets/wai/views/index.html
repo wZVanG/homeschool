@@ -1,7 +1,7 @@
 
 <!-- https://codepen.io/team/AngularMaterial/pen/mVxgbg -->
 
-<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+<md-sidenav layout="column" ng-show="usuario.is_login" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
 	<a class="navbar-brand logo"  ng-show="usuario.is_login" ui-sref="index.inicio.intro"><span></span></a>
 	<div layout="row" layout-fill flex ng-show="!usuario.is_login" layout-align="center center" class="sidenav-nologin-wrap">
 		<div  class="md-caption text-muted" layou="column">
@@ -65,6 +65,10 @@
 			  
 			</div>
 		  </md-toolbar>
+		<div layout="column" layout-padding class="menu-image" ng-hide="$state.includes('index.homeschool') || $state.includes('index.outschool')">
+			<div><img src="./assets/wai/images/cohete.svg" alt=""></div>
+		</div>
+
 		  <md-list>
 			<md-subheader ng-show="$state.includes('index.homeschool') || $state.includes('index.cuenta')">HomeSchool</md-subheader>
 		  <md-list-item ng-repeat="item in homeschool.menu" ng-show="$state.includes('index.homeschool') || $state.includes('index.cuenta') ">

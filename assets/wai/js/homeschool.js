@@ -30,7 +30,7 @@ window.HOMESCHOOL.config(["$stateProvider", "$urlRouterProvider", "$locationProv
 
 	// For any unmatched url, send to /route1
 	$urlRouterProvider.otherwise("/");
-	$urlRouterProvider.when("/homeschool","/homeschool/mis-libros");
+	$urlRouterProvider.when("/homeschool","/homeschool/mis-proyectos");
 	
 	$stateProvider
 		.state('index', {
@@ -103,18 +103,18 @@ window.HOMESCHOOL.config(["$stateProvider", "$urlRouterProvider", "$locationProv
 				}]
 			}
 		}).state('index.homeschool.mis_libros', {
-			url: "/mis-libros",
+			url: "/mis-proyectos",
 			templateUrl: "./assets/wai/views/homeschool/mis-libros.html?" + WAI.assets_version,
 			controller: "HomeSchoolMisLibrosCtrl",
 			data: {
-				title: 'Mis Libros'
+				title: 'Mis Proyectos'
 			}
-		}).state('index.homeschool.inscripcion', {
-			url: "/inscripcion",
-			templateUrl: "./assets/wai/views/homeschool/inscripcion.html?" + WAI.assets_version,
+		}).state('index.homeschool.eleccion', {
+			url: "/eleccion",
+			templateUrl: "./assets/wai/views/homeschool/eleccion.html?" + WAI.assets_version,
 			controller: "HomeSchoolInscripcionCtrl",
 			data: {
-				title: 'Inscripción a libros'
+				title: 'Elección de proyectos'
 			}
 		}).state('index.video', {
 			url: "video/{seo_url}",
@@ -429,12 +429,12 @@ window.HOMESCHOOL.run(["$rootScope", "$state", "$templateCache", "Project", "Usu
 		menu: [
 			{
 			  link : 'index.homeschool.mis_libros',
-			  title: 'Mis libros',
+			  title: 'Mis proyectos',
 			  icon: 'bookmarks'
 			},
 			{
-			  link : 'index.homeschool.inscripcion({param: 2})',
-			  title: 'Inscripción a libros',
+			  link : 'index.homeschool.eleccion({param: 2})',
+			  title: 'Elección de proyectos',
 			  icon: 'playlist_add'
 			}
 		  ]
@@ -599,9 +599,6 @@ window.HOMESCHOOL.run(["$rootScope", "$state", "$templateCache", "Project", "Usu
 	
 }]).controller("HomeSchoolInscripcionCtrl", ["$scope", "Project", "$state", "$stateParams", "Libros", "Info", "$q", "$http", "Notificaciones", function($scope, Project, $state, $stateParams, Libros, Info, $q, $http, Notificaciones){
 
-	console.log("Libros", Libros);
-	console.log("Info", Info);
-
 	$scope.registro_info = {
 		periodo: null
 	};
@@ -610,6 +607,37 @@ window.HOMESCHOOL.run(["$rootScope", "$state", "$templateCache", "Project", "Usu
 		const hoy = Info.fecha_hoy;
 		return item.estado == 1 && hoy >= item.fecha_inicio && hoy <= item.fecha_fin
 	};
+
+
+	$scope.abrirLibro = (ev, item) => {
+		    
+        return $mdDialog.show({
+            controller: ["$scope", "LibroData", function($scope, LibroData){
+				console.log("item", LibroData)
+				$scope.item = LibroData.item;
+				$scope.tareas = LibroData.tareas;
+				$scope.cancel = $mdDialog.cancel;
+			}],
+			templateUrl: "./assets/wai/views/homeschool/libro.html?" + WAI.assets_version,
+            multiple: true,
+            targetEvent: ev,
+            clickOutsideToClose: false,
+            escapeToClose: false,
+            fullscreen: true,
+            resolve: {
+                LibroData: [function(){
+					let url = "./main/homeschool?page=libro_data&id_periodo_detalle=" + item.id_periodo_detalle;
+					let defer = $q.defer();
+					$http.get(url).then(response => defer.resolve(response.data));
+					return defer.promise;
+               }],
+
+            },
+            locals: {
+     
+            }
+        });
+	}
 
 	//Seleccionar último válido
 	let max = 0;
@@ -696,7 +724,7 @@ window.HOMESCHOOL.run(["$rootScope", "$state", "$templateCache", "Project", "Usu
 			id_periodo: $scope.registro_info.periodo.id_periodo
 		});
 
-		$http.post(`./main/homeschool?page=inscripcion`, post_data).then(response => {
+		$http.post(`./main/homeschool?page=eleccion`, post_data).then(response => {
 			if(!response.data) return;
 			Object.assign($scope.post_response, response.data);
 			Notificaciones.alert(`Se registraton ${response.data.count} libros`);

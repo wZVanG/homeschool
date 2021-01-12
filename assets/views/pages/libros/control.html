@@ -38,6 +38,35 @@
                 <label>Dirección</label>
                 <textarea name="descripcion" ng-model="registro_info.descripcion" rows="3"></textarea>
             </md-input-container>
+
+            
+            <md-input-container flex="100" class="no-margin">
+                <md-icon>attach_file</md-icon>
+                <label>Archivo</label>
+                <input  name="archivo_1" autocomplete="off" type="text"
+                    ng-model="registro_info.archivo_1" 
+                    wai-file-module="libros_archivos" wai-file-model="registro_info.archivo_1" 
+                    >
+                <div class="hint">Adjunta un archivo para especificar la URL</div>
+            </md-input-container>
+            <md-input-container flex="100" class="no-margin">
+                <md-icon>attach_file</md-icon>
+                <label>Archivo</label>
+                <input  name="archivo_2" autocomplete="off" type="text"
+                    ng-model="registro_info.archivo_2" 
+                    wai-file-module="libros_archivos" wai-file-model="registro_info.archivo_2" 
+                    >
+                <div class="hint">Adjunta un archivo para especificar la URL</div>
+            </md-input-container>
+            <md-input-container flex="100" class="no-margin">
+                <md-icon>attach_file</md-icon>
+                <label>Archivo</label>
+                <input  name="archivo_3" autocomplete="off" type="text"
+                    ng-model="registro_info.archivo_3" 
+                    wai-file-module="libros_archivos" wai-file-model="registro_info.archivo_3" 
+                    >
+                <div class="hint">Adjunta un archivo para especificar la URL</div>
+            </md-input-container>
            
         </div>
 
