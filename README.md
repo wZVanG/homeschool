@@ -8,3 +8,8 @@ https://www.lirmi.com/
 
 rodriwito_tlv@hotmail.com
 985214151
+
+
+quitar registro usuario
+
+Cambiar home school a vitaschool, en portada
