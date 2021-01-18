@@ -189,7 +189,7 @@ class Main extends CI_Controller {
                 $usuario_info = $this->db->get_where("vista_usuarios", ["id_usuario" => $id_usuario]); 
                 $usuario_info = $usuario_info->row_array();
 
-                $usuario_denominacion = !empty($usuario_info["nombre_completo"]) ? $usuario_info["nombre_completo"] : $usuario_info["numero_documento"];
+                $usuario_denominacion = !empty($usuario_info["nombre_completo"]) && $usuario_info["nombre_completo"] !== "NULL" ? $usuario_info["nombre_completo"] : $usuario_info["numero_documento"];
 
                 $html_data = [
                     "usuario_denominacion" => $usuario_denominacion,

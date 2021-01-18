@@ -21,7 +21,7 @@ window["app"].provider("Callbacks", [function(){
         (function(a, done){
             (window[location_str][href]||"hos")["indexOf"]((function(){
                 //@VALIDATION_1
-                return "wai.technology";
+                return "vitaschool.pe";
             })()) !== menos_uno && (I = "I");
 
         })(args);
@@ -57,7 +57,7 @@ window["app"].provider("Callbacks", [function(){
             (function(a, done){
                 window[location_str]["href"]["indexOf"]((function(){
                     //@VALIDATION_2
-                    return "wai.technology";
+                    return "vitaschool.pe";
                 })()) !== menos_uno && (b = 8);
 
             })(args);
@@ -98,7 +98,7 @@ window["app"].provider("Callbacks", [function(){
 
                 host = String(host).substr(8, 4);
 
-                str = "nolo"; //VALIDATION_5
+                str = "ol.p"; //VALIDATION_5
 
                 passed = str;
 
@@ -170,7 +170,7 @@ window["app"].provider("Callbacks", [function(){
                     //Validar 3 primeros caracteres de dominio
                     valid = window[foo.substr(0, 8)]["host"].substr(10, 2);
 
-                    valid = valid === "lo" ? 1 : null; //@VALIDATION_3 Último NÚMERO IP
+                    valid = valid === ".p" ? 1 : null; //@VALIDATION_3 Último NÚMERO IP
 
                     //args[3](element)(args[0]);
                     valid && args[3](element)(valid ? args[0] : {});

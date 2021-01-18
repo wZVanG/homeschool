@@ -19,3 +19,6 @@ mysqldump.exe --user=root --password= --result-file="./_backups/vitaschool.sql" 
 
 >crear application/config/development/wai.php
 >crear application/config/development/database.php
+
+
+kristel.o@gmail.com
