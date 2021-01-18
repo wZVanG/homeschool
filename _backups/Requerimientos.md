@@ -12,7 +12,7 @@ mysqldump.exe --user=root --password= --result-file="./_backups/vitaschool.sql" 
 
 >rm -r uploads && mkdir uploads && cp -a _backups/uploads/ . && chmod -R 777 uploads
 
->cp -a _backups/certificado /etc/nginx/certs/fliperang.com/
+>cp -a _backups/certificado /etc/nginx/certs/vitaschool.pe/
 
 >ln -s /etc/nginx/sites-available/vitaschool.com /etc/nginx/sites-enabled/
 

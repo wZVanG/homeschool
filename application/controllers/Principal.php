@@ -51,6 +51,9 @@ class Principal extends CI_Controller {
 		$id_institucion = isset($this->usuario_class->id_institucion) ? $this->usuario_class->id_institucion : 1;
 		$locals["institucion"] = $this->usuario_class->institucionData($id_institucion);
 
+		//No mostrar llaves secretas
+		unset($locals["institucion"]["configuracion"]["payment"]["culqi_secret_key"]);		
+
 		$this->load->view('principal', [
 			"titulo" => $locals["institucion"]["nombre"], 
 			"config" => $config,
