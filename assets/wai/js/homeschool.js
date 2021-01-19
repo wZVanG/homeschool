@@ -85,7 +85,7 @@ window.HOMESCHOOL.config(["$stateProvider", "$urlRouterProvider", "$locationProv
 			templateUrl: "./assets/wai/views/homeschool.html?" + WAI.assets_version,
 			controller: "HomeSchoolCtrl",
 			data: {
-				title: 'HomeSchool'
+				title: 'Vitaschool'
 			}, 
 			resolve: {
 				Libros: ["$q", "$http", function($q, $http){
