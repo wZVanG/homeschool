@@ -45,13 +45,17 @@ class Sesion extends MY_Controller {
 
         if(!$compare) return json(["login" => false, "usuario" => null, "mensaje" => "La contraseña es incorrecta"]);
 
-        //verifica admin
-        if(!$this->usuario_class->info || $this->usuario_class->info["rol"] != 3) return error("No tienes permisos para realizar esta acción");
-
 
         unset($row["clave"]);
 
         $this->session->set_userdata($row);
+
+        
+        //verifica admin
+
+        if($row && $row["rol"] != 3) 
+        return json(["login" => false, "usuario" => null, "mensaje" => "No tienes permisos para realizar esta acción"]);
+        //return error("");
 
         return json([
             "login" => true, 

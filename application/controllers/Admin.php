@@ -22,9 +22,11 @@ class Admin extends MY_Controller {
 	 var $permissions = true;
 
 	public function index(){
-		
-		if(!$this->usuario_class->info || $this->usuario_class->info["rol"] != 3) return error("No tienes permisos para realizar esta acción");
 
+		
+		if($this->usuario_class->info && $this->usuario_class->info["rol"] != 3) return error("No tienes permisos para realizar esta acción");
+		//if(!$this->usuario_class->info || $this->usuario_class->info["rol"] != 3) return error("No tienes permisos para realizar esta acción");
+		
 		$usuario_info = $this->usuario_class->get_info();
 
 		if(!empty($usuario_info["rol"]) && $usuario_info["rol"] != ROL_ADMINISTRADOR) {
