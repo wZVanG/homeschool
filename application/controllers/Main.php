@@ -358,7 +358,7 @@ class Main extends CI_Controller {
 
         //echo $email_html; exit;
 
-        $this->email->subject("Bienvenido a HomeSchool!");
+        $this->email->subject("Bienvenido a Vitaschool!");
         $this->email->from('no-reply@vitaschool.pe', 'vitaschool.pe');
         $this->email->to($fields["email"]);
         $this->email->message($email_html);
