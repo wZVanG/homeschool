@@ -61,6 +61,8 @@ class Admin extends MY_Controller {
 		$collection["parametros"]["categorias"] = $this->categorias_model->listarTodos();
 		
 		$collection["parametros"]["periodos"] = $this->periodos_model->listarTodos();
+
+		//$collection["parametros"]["libros"] = $this->libros_model->listarTodos();
 		
 		
 
