@@ -1,5 +1,6 @@
-app.factory("API", ["WAI_CONSTANTS", "$resource", "$mdDialog", "$q", function (WAI_CONSTANTS, $resource, $mdDialog, $q) {
+app.factory("API", ["WAI_CONSTANTS", "$resource", "$mdDialog", "$q", "$http", function (WAI_CONSTANTS, $resource, $mdDialog, $q, $http) {
     var obj =  {
+        $http: $http,
         url: function (controller, action) {
             var params = Array.prototype.slice.call(arguments);
             let url = `${WAI_CONSTANTS.BASE_API}${controller}/${action}${params.length > 2 ? "/" + params.splice(2).join("/") : ""}`;

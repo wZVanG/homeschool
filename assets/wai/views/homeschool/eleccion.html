@@ -48,7 +48,7 @@
             dnd-allowed-types="disponibles.allowedTypes"
             >
 
-                <li ng-repeat="item in disponibles.items"
+                <li ng-repeat="item in disponibles.items | filter:{estado: 1}"
                     dnd-draggable="item"
                     dnd-type="'foo'"
                     dnd-disable-if="item.type == 'unknown'"

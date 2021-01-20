@@ -140,7 +140,10 @@ app.config(["$stateProvider",  "CollectionProvider", function ($stateProvider, C
         data: {
             title: "Periodos"
         },
-        controller: 'PeriodosCtrl'
+        controller: 'PeriodosCtrl',
+        resolve: {
+            Collection: CollectionProvider.create(["libros", "bloques"])
+        }
     }).state("administracion.proveedores", {
         url: "/proveedores",
         templateUrl: "assets/views/pages/varios/listar.html",
@@ -313,10 +316,7 @@ app.config(["$stateProvider",  "CollectionProvider", function ($stateProvider, C
         data: {
             title: "Proyectos"
         },
-        controller: 'LibrosCtrl',
-        resolve: {
-            Collection: CollectionProvider.create(["categorias"])
-        }
+        controller: 'LibrosCtrl'
     }).state("homeschool.bloques", {
         url: "/bloques",
         templateUrl: "assets/views/pages/varios/listar.html",
