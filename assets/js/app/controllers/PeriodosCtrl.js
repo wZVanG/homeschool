@@ -1,7 +1,7 @@
 angular.module('app').controller("PeriodosCtrl", ["$scope", "API", "WAIUtils", "$compile", "Callbacks", function($scope, API, WAIUtils, $compile, Callbacks){
 
 
-	console.log("Collection", Collection);
+	console.log("WAI", WAI.parametros.libros);
 	$scope.module_name = "periodos";
 
 	$scope.info = {
