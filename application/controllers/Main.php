@@ -107,6 +107,11 @@ class Main extends CI_Controller {
                 $id_periodo = (int) $this->input->post_get("id_periodo");
                 if($id_periodo) $filters["id_periodo"] = $id_periodo;
 
+                //Bloques de usuario
+                $query = $this->db->get_where("usuarios_bloques", ["id_usuario" => $id_usuario, "id_periodo" => $id_periodo]);
+                $row_usuario_bloque = $query->row_array();
+                $filters["id_bloque"] = $row_usuario_bloque ? (int) $row_usuario_bloque["id_bloque"] : 0;
+                
                 $items = $this->db->get_where("vista_periodos_detalles", $filters);
                 $items = $items->result_array();
 

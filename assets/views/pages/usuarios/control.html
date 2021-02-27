@@ -134,6 +134,33 @@
                     </md-content>
                 </md-tab-body>
             </md-tab>
+            <md-tab ng-disabled="!registro_info.id_usuario">
+                <md-tab-label>
+                    <md-icon>donut_large</md-icon> Bloques
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content layout-padding>
+                        <div layout="column" ng-init="ctrl.cargarBloque(registro_info.id_usuario)">
+                            
+                            <div ng-repeat="item in WAI.parametros.periodos | orderBy:'-fecha_fin'" layout="row" layout-align="center center">
+                                <div flex="20">
+                                    <b>{{item.nombre}}</b>
+                                </div>
+                                <md-input-container flex="80" >
+                                    <md-icon>donut_large</md-icon>
+                                    <label>Bloque</label>
+                                    <md-select ng-disabled="ctrl.bloquest_list_loading || ctrl.bloques_loading[item.id_periodo]" ng-change="ctrl.cambiarBloque(registro_info.id_usuario, item.id_periodo)" ng-model="ctrl.bloques[item.id_periodo]">
+                                        <md-option ng-value="+bloque.id_bloque" 
+                                            ng-repeat="bloque in WAI.parametros.bloques">
+                                            {{bloque.nombre}}</md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        
+                        </div>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
         </md-tabs>
     </div>
 

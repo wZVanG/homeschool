@@ -67,6 +67,7 @@ $route['admin/api/crud/(:any)']['DELETE'] = 'crud/estado/$1';
 $route['admin/api/(:any)/(:any)'] = '$1/$2';
 $route['admin/api/(:any)/(:any)/(:any)'] = '$1/$2/$3';
 $route['admin/api/(:any)/(:any)/(:any)/(:any)'] = '$1/$2/$3/$4';
+$route['admin/api/(:any)/(:any)/(:any)/(:any)/(:any)'] = '$1/$2/$3/$4/$5';
 
 $route['admin/(:any)/(:any)'] = 'admin';
 $route['admin/(:any)/(:any)/(:any)'] = 'admin';
