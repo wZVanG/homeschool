@@ -6,17 +6,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" sizes="180x180" href="./web_assets/images/logo/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./web_assets/images/logo/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./web_assets/images/logo/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/logo/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/logo/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/logo/favicon/favicon-16x16.png">
     <meta name="description" content="VitaSchool" />
     <meta name="keywords" content="VitaSchool" />
     <meta name="author" content="WAI Technology" />
-    <link rel="manifest" href="./web_assets/images/logo/favicon/site.webmanifest?3">
-    <link rel="mask-icon" href="./web_assets/images/logo/favicon/safari-pinned-tab.svg" color="#00b7b7">
-    <link rel="shortcut icon" href="./web_assets/images/logo/favicon/favicon.ico">
+    <link rel="manifest" href="./assets/images/logo/favicon/site.webmanifest?3">
+    <link rel="mask-icon" href="./assets/images/logo/favicon/safari-pinned-tab.svg" color="#00b7b7">
+    <link rel="shortcut icon" href="./assets/images/logo/favicon/favicon.ico">
     <meta name="msapplication-TileColor" content="#00b7b7">
-    <meta name="msapplication-config" content="./web_assets/images/logo/favicon/browserconfig.xml">
+    <meta name="msapplication-config" content="./assets/images/logo/favicon/browserconfig.xml">
     <meta name="theme-color" content="#00b7b7">
 
 
