@@ -1,0 +1,58 @@
+
+.header {
+    position: absolute;
+    width: 100%;
+    z-index: 99;
+
+    &__content {
+        background-color: transparent;
+        height: 104px;
+    }
+
+    &__link {
+        display: block;
+        @include font-std(14px, $colorWhite, 500, $fontPrimary);
+        transition: transform .2s;
+        &:hover {
+            color: $colorWhite;
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+    }
+
+    &__logo {
+        display: block;
+        transition: transform .2s;
+        font-size: 30px;
+        color: $colorWhite;
+        @media (max-width: 768px) {
+            font-size: 23px;
+        }
+        &:hover {
+            color: $colorWhite;
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+    }
+
+    &__item {
+        height: 104px;
+        display: flex;
+        align-items: center;
+        &.menu {
+            transition: 1s all;
+            background: rgb(0, 26, 255);
+        }
+    }
+
+    &__button {
+        transition: 1s all;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 84px;
+        height: 84px;
+        background-color:rgb(0, 26, 255);
+        border-radius: 10000px;
+    }
+}

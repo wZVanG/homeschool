@@ -1,0 +1,145 @@
+.menu-desktop {
+    background-color: #000;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -120vh;
+    width: 100vw;
+    height: 100vh;
+    transition: transform .2s;
+    z-index: 999;
+
+    &__title {
+        @include font-std(16px, $colorWhite, 500, $fontPrimary);
+        opacity: 0.6;
+        line-height: 130.5%;
+    }
+
+    &__item {
+        list-style: none;
+        padding-bottom: 35px;
+        transition: transform .2s;
+        &:before {
+            content: "▪";
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+            padding-right: 20px;
+            position: relative;
+            bottom: 4px;
+        }
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &__link {
+        @include font-std(32px, $colorWhite, 500, $fontPrimary);
+        line-height: 42px;
+        transition: transform .2s;
+        &:hover {
+            color: $colorWhite;
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+    }
+
+    &__text {
+        @include font-std(24px, $colorWhite, 500, $fontPrimary);
+        line-height: 32px;
+    }
+
+    .slice-menu {
+        position: absolute;
+        opacity: 0.5;
+        top: 0;
+        left: -100vw;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        transition: transform .2s;
+        img {
+            width: 100vw;
+        }
+    }
+
+    .close-menu {
+        position: absolute;
+        top: 19px;
+        right: 50px;
+        cursor: pointer;
+    }
+}
+
+.menu-mobile {
+    background-color: #000;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -100vh;
+    width: 100vw;
+    height: 100vh;
+    transition: transform .2s;
+    z-index: 999;
+
+    &__title {
+        @include font-std(16px, $colorWhite, 500, $fontPrimary);
+        opacity: 0.6;
+        line-height: 130.5%;
+    }
+
+    &__item {
+        list-style: none;
+        padding-bottom: 25px;
+        transition: transform .2s;
+        &:before {
+            content: "▪";
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+            padding-right: 20px;
+            position: relative;
+            bottom: 4px;
+        }
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &__link {
+        @include font-std(16px, $colorWhite, 500, $fontPrimary);
+        line-height: 42px;
+        transition: transform .2s;
+        &:hover {
+            color: $colorWhite;
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+    }
+
+    &__text {
+        @include font-std(24px, $colorWhite, 500, $fontPrimary);
+        line-height: 32px;
+    }
+
+    .slice-menu {
+        position: absolute;
+        opacity: 0.5;
+        top: 0;
+        left: -100vw;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        transition: transform .2s;
+        img {
+            height: 50%;
+        }
+    }
+
+    .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+    }
+}
