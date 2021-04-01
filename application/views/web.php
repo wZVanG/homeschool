@@ -155,12 +155,12 @@
 
                     <div class="banner__slide--1">
                         <div class="banner__content webdoor-content d-flex flex-column text-center text-md-left">
-                            <h1 class="banner__title title-webdoor pt-4">Programa por Proyectos <br> por Proyectos</h1>
+                            <h1 class="banner__title title-webdoor pt-4">Programa <br> por Proyectos</h1>
                             <div class="d-flex flex-row justify-content-between">
                                 <span class="banner__text d-none d-md-block">
-                                    Creemos que integrando los cursos,<br>
-                                     nuestros hijos aprenden más<br>
-                                      y se convierten en niños indagadores
+                                    Creemos que integrando <br>los cursos,
+                                     nuestros hijos<br> aprenden más
+                                      y se convierten<br> en niños indagadores
               </span>
                      <!--           <a class="banner__arrow m-auto m-md-0" href="/link-3/">
                 <i class="icon-arrow"></i>
@@ -552,7 +552,7 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <h2 class="banner__title second pt-4 web-color-1" data-aos="zoom-in-up" data-aos-duration="1000">
-                            Cómo aprendemos con el programa Vitaschool?
+                            ¿Cómo aprendemos con el programa Vitaschool?
                         </h2>
 
                         
@@ -580,11 +580,11 @@
                                 Vitaschool
                             </h2>
                             <div class="d-flex flex-column flex-md-row align-items-baseline align-items-md-unset z-index-9" data-aos="zoom-in-up" data-aos-duration="1000">
-                                <p>
+                                <p style="text-align:justify; font-size:.9rem" class="pr-5">
 En Vitaschool hemos creado un programa por proyectos por bloques, para que nuestros hijos puedan aprender de una forma natural y a su ritmo, incluyen  todas las áreas integradas, sin dejar de lado todos los contenidos que la curricula peruana nos exige.
-<br>En <a href="https://www.youtube.com/watch?v=J5TZLpD7QpU">este video</a> puedes ver en resumen cómo trabajar un proyecto de primaria.  
+<br>En <a href="https://www.youtube.com/watch?v=aF4gzcG1iw8">este video</a> puedes ver en resumen cómo trabajar un proyecto de primaria.  
 <br>¿Cómo se trabaja por proyectos?
-<br>Podrás elegir 4 o más proyectos al año (uno a la vez) en nuestra página web ; tendrás un usuario.
+<br>Podrás elegir 4 o más proyectos al año (uno a la vez) en nuestra página web; tendrás un usuario.
   </p>
                             </div>
                         </div>
