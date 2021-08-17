@@ -18,12 +18,18 @@
 
                 <md-tab-body>
                     
-        <div layout="row" layout-xs="column" layout-padding>
+        <div layout="column" layout-padding>
 
             <md-input-container flex="100">
                 <md-icon>short_text</md-icon>
                 <label>Nombre</label>
                 <input ng-required="true" name="nombre" autocomplete="off" type="text" ng-model="registro_info.nombre">
+            </md-input-container>
+
+            <md-input-container flex="100">
+                <md-icon>bookmarks</md-icon>
+                <label>Máx. libros</label>
+                <input ng-required="true" name="maximo_libros" autocomplete="off" type="number" ng-model="registro_info.maximo_libros">
             </md-input-container>
            
         </div>

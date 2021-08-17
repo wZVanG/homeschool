@@ -79,6 +79,7 @@ angular.module('app').controller("PeriodosCtrl", ["$scope", "API", "WAIUtils", "
 					html: data
 				});
 			}, "class": "cell-export"},
+			"maximo_libros":			{"class": "cell-export", "visible": true},
 			"descripcion":				{"class": "cell-export", "visible": false},
 			"foto":						{"class": "cell-export", "visible": false},
 			"fecha_registro":			{"class": "cell-export", "visible": true},

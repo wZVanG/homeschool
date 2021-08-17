@@ -88,9 +88,6 @@ angular.module('app').config(["$stateProvider", "$locationProvider", "MODULE_CON
         return re.test(dateString);
       };
 
-
-
-
 }]).run(["$rootScope", "$compile", "$http", "$templateCache", "WAI", "Usuario", "$state", "Callbacks", function ($rootScope, $compile, $http, $templateCache, WAI, Usuario, $state, Callbacks) {
 
     var blankScope = $rootScope.$new();

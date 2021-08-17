@@ -25,8 +25,13 @@ class Periodos_model extends MY_Model {
 			'title' => 'Foto'
 		],
 		[
-			'db' => 'estado',
+			'db' => 'maximo_libros',
 			'dt' => 3,
+			'title' => 'Max. libros'
+		],
+		[
+			'db' => 'estado',
+			'dt' => 4,
 			'title' => ''
 		]
 	];
